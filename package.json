@@ -1,0 +1,21 @@
+{
+  "name": "devlens",
+  "version": "1.0.0",
+  "description": "Full-stack developer platform that visualizes code relationships, performs impact analysis, and enables AI-powered repository understanding.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ragamaie-Nagineni/DeVLens.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Ragamaie-Nagineni/DeVLens/issues"
+  },
+  "homepage": "https://github.com/Ragamaie-Nagineni/DeVLens#readme"
+}
