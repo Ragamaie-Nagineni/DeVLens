@@ -1,14 +1,14 @@
 import express from "express";
+import cors from "cors";
+
 const app=express();
+app.use(cors());
 const port=3000;
 
-app.use(express.static());
-
-
 app.get("/",(req,res)=>{
-   res.redirect();
+    res.json({message:"hello from backend"});
 })
 
 app.listen(port,()=>{
-    console.log(`app is running on ${port}`);
-});
+    console.log(`app is listening to port ${port}`);
+})
