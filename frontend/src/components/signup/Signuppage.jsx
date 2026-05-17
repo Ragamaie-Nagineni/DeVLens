@@ -1,17 +1,21 @@
 import react from "react";
 import Form from "./Form";
 import Sociallogins from "./Sociallogins";
+import "./Signup.css"
 
 function Signuppage() {
     return (
-        <div>
+        <div className="signup-container">
+            <div className="logo">
+                <h2>De<span>V</span>Lens</h2>
+            </div>
             <h2>Create Account</h2>
-            <h4>Start understanding your code base today</h4>
-            <div>
+            <p className="subtitle">Start understanding your code base today</p>
+            <div className="signup-card">
                 <Form />
                 <Sociallogins />
             </div>
-            <div>
+            <div className="login-text">
             <p>Alredy have an account?</p>
             <a>Login</a>
             </div>
