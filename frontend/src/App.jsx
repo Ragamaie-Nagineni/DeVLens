@@ -1,10 +1,12 @@
 import react from "react";
 import reactDom from "react-dom"
+import Signuppage from "./components/signup/Signuppage";
 
 import Test from "./components/test"
-function app(){
+function App(){
   return (<div>
   <Test/>
+  <Signuppage/>
   </div>);
 }
-export default app;
+export default App;
