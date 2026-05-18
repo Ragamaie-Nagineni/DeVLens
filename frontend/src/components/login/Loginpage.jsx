@@ -1,14 +1,3 @@
-/*import react from "react";
-
-function Loginpage(){
-    return(
-        <div>
-            <p>hello</p>
-        </div>
-    )
-}
-export default Loginpage;*/
-
 import React from "react";
 import AuthForm from "../Global/AuthForm";
 import Sociallogins from "../signup/Sociallogins";
