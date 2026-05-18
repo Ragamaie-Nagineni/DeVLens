@@ -1,5 +1,6 @@
 import react from "react";
 import "./Signup.css"
+import { FaGithub, FaGoogle } from "react-icons/fa";
 
 function Sociallogins() {
   return (
@@ -9,8 +10,15 @@ function Sociallogins() {
         <p>or continue with</p>
         <hr></hr>
       </div>
-      <button className="social-btn">Github</button>
-      <button className="social-btn">Google</button>
+      <button className="social-btn">
+        <FaGithub />
+        Github
+      </button>
+
+      <button className="social-btn">
+        <FaGoogle />
+        Google
+      </button>
     </div>
   )
 }
