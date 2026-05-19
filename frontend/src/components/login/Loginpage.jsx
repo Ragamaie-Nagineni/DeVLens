@@ -2,6 +2,7 @@ import React from "react";
 import AuthForm from "../Global/AuthForm";
 import Sociallogins from "../signup/Sociallogins";
 import "./Login.css";
+import { Link } from "react-router-dom";
 
 function Loginpage() {
 
@@ -44,7 +45,7 @@ function Loginpage() {
 
       <div className="login-text">
         <p>Don't have an account?</p>
-        <a href="#">Sign Up</a>
+        <Link to="/signup">Sign Up</Link>
       </div>
 
     </div>
