@@ -48,6 +48,7 @@ body {
   border-radius: 8px;
   color: white;
   font-size: 15px;
+  margin-bottom: 14px;
 }
 
 .form input:focus {
