@@ -1,6 +1,7 @@
 import react from "react";
-import "./Signup.css"
+import "../signup/Signup.css"
 import { FaGithub, FaGoogle } from "react-icons/fa";
+import "./Sociallogins.css";
 
 function Sociallogins() {
   return (

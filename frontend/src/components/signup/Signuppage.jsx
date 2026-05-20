@@ -1,11 +1,16 @@
 import React from "react";
 import AuthForm from "../Global/AuthForm";
-import Sociallogins from "./Sociallogins";
+import Sociallogins from "../Global/Sociallogins";
 import "./Signup.css";
+import { Link } from "react-router-dom";
 
 function Signuppage() {
 
   const signupFields = [
+    {
+      type:"text",
+      placeholder:"name"
+    },
     {
       type: "email",
       placeholder: "Email*"
@@ -48,7 +53,7 @@ function Signuppage() {
 
       <div className="login-text">
         <p>Already have an account?</p>
-        <a href="#">Login</a>
+        <Link to="/login">Login</Link>
       </div>
 
     </div>
