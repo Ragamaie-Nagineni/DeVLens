@@ -8,6 +8,10 @@ function Signuppage() {
 
   const signupFields = [
     {
+      type:"text",
+      placeholder:"name"
+    },
+    {
       type: "email",
       placeholder: "Email*"
     },
