@@ -2,6 +2,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Loginpage from "./components/login/Loginpage";
 import Signuppage from "./components/signup/Signuppage";
+import Sidebar from "./components/Sidebar/Sidebar";
+
 
 function App() {
   return (
@@ -19,10 +21,15 @@ function App() {
           element={<Signuppage />}
         />
 
-        <Route
+        {/* <Route
           path="/"
           element={<Signuppage />}
-        />
+        /> */}
+
+        <Route
+          path="/"
+          element={<Sidebar />}
+        /> 
 
       </Routes>
 
