@@ -10,7 +10,6 @@
 
     padding: 10px 16px; */
     width: 260px;
-  /* expanded width by default */
   position: fixed;
   top: 6rem;
   left: 1rem;
@@ -24,8 +23,30 @@
   box-sizing: border-box;
   border-radius: 1rem;
   color: white;
+
+  transition: all 0.3s ease;
+    overflow: hidden;
 }
 
+.sidebar.collapsed{
+    width: 90px;
+    padding: 1rem 0.9rem;
+}
+
+.sidebar.collapsed li{
+  justify-content: center;
+    padding: 20px;
+}
+
+.sidebar.collapsed .logout{
+    justify-content: center;
+    padding: 18px;
+}
+.sidebar.collapsed .close-btn{
+    justify-self: center;
+    margin-left: auto;
+    margin-bottom: 2rem;
+}
 .sidebar ul{
     list-style: none;
     padding: 0;
@@ -37,7 +58,7 @@
     align-items: center;
     gap: 14px;
 
-    padding: 25px;
+    padding: 22px;
     margin-bottom: 10px;
 
     border-radius: 14px;
@@ -46,6 +67,15 @@
     cursor: pointer;
 
     transition: 0.3s;
+}
+
+.close-btn{
+    margin-left: auto;
+    margin-bottom: 1rem;
+}
+
+.close-btn:hover{
+   color: #B06CFF;
 }
 
 .sidebar li:hover{
