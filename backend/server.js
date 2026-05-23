@@ -3,24 +3,16 @@ import cors from "cors";
 import {Pool} from "pg";
 import dotenv from "dotenv";
 dotenv.config();
+import authRoutes from "./routes/authRoutes.js"
+import pool from "./db/db.js";
 
 const app=express();
 const port=3000;
 app.use(cors());
+app.use(express.json());
+app.use("/api/auth",authRoutes);
 
-const pool=new Pool(
-    {
-        connectionString:process.env.DATABASE_URL,
-        ssl:{
-           rejectUnauthorized:false,
-        }
-    }
-)
 
-pool.query("SELECT NOW()",(err,res)=>{
-     if(err){console.log("DB connection failed!");console.error(err);}
-     else{console.log("DB Connected!");console.log(res.rows);}
-})
 
 app.get("/",(req,res)=>{
     res.json({message:"hello from backend"});
