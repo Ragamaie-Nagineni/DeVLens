@@ -7,23 +7,27 @@ import { Link } from "react-router-dom";
 function Signuppage() {
 
   const signupFields = [
-    {
-      type:"text",
-      placeholder:"name"
-    },
-    {
-      type: "email",
-      placeholder: "Email*"
-    },
-    {
-      type: "password",
-      placeholder: "Password*"
-    },
-    {
-      type: "password",
-      placeholder: "Confirm Password*"
-    }
-  ];
+  {
+    name: "username",
+    type: "text",
+    placeholder: "Name"
+  },
+  {
+    name: "email",
+    type: "email",
+    placeholder: "Email*"
+  },
+  {
+    name: "password",
+    type: "password",
+    placeholder: "Password*"
+  },
+  {
+    name: "confirmPassword",
+    type: "password",
+    placeholder: "Confirm Password*"
+  }
+];
 
   return (
     <div className="signup-container">

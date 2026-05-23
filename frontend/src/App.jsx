@@ -21,13 +21,13 @@ function App() {
           element={<Signuppage />}
         />
 
-        {/* <Route
-          path="/"
-          element={<Signuppage />}
-        /> */}
-
         <Route
           path="/"
+          element={<Signuppage />}
+        /> 
+
+        <Route
+          path="/sidebar"
           element={<Sidebar />}
         /> 
 

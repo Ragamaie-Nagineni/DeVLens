@@ -7,15 +7,17 @@ import { Link } from "react-router-dom";
 function Loginpage() {
 
   const loginFields = [
-    {
-      type: "email",
-      placeholder: "Email*"
-    },
-    {
-      type: "password",
-      placeholder: "Password*"
-    }
-  ];
+  {
+    name: "email",
+    type: "email",
+    placeholder: "Email*"
+  },
+  {
+    name: "password",
+    type: "password",
+    placeholder: "Password*"
+  }
+];
 
   return (
     <div className="Login-container">
