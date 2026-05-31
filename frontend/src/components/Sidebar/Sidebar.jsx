@@ -16,8 +16,8 @@ import {
    Menu
 } from "lucide-react";
 
-function Sidebar() {
-   const [collapsed, setcollapsed] = useState("");
+function Sidebar({collapsed,setcollapsed}) {
+
    const navigate = useNavigate();
 
    function handleCollapse() {
@@ -56,9 +56,7 @@ function Sidebar() {
                {!collapsed && <span>Log Out</span>}
             </div>
          </div>
-         {/* <div className={collapsed ? "container collapsed" : "container"}>
-           
-         </div> */}
+      
       </div>
 
    )
