@@ -56,9 +56,9 @@ function Sidebar() {
                {!collapsed && <span>Log Out</span>}
             </div>
          </div>
-         <div className={collapsed ? "container collapsed" : "container"}>
+         {/* <div className={collapsed ? "container collapsed" : "container"}>
            
-         </div>
+         </div> */}
       </div>
 
    )

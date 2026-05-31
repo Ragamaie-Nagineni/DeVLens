@@ -1,0 +1,137 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.dashboard {
+  display: flex;
+  min-height: 100vh;
+  background: #070b2d;
+  color: white;
+}
+
+.dashboard-content {
+  flex: 1;
+  padding: 40px;
+}
+
+.dashboard-text {
+  margin-bottom: 20px;
+  color: #cfcff5;
+}
+
+.connect-repo-card {
+  background: #1b2147;
+  border-radius: 12px;
+  padding: 24px;
+  width: 100%;
+}
+
+.connect-repo-card h3 {
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  
+}
+
+/* Input + Button Row */
+.repo-input-container {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.repo-input-container input {
+  flex: 1;
+  height: 50px;
+  background: #030a32;
+  border: 1px solid #2c356b;
+  border-radius: 6px;
+  padding: 0 14px;
+  color: white;
+  font-size: 15px;
+  outline: none;
+}
+
+.repo-input-container input::placeholder {
+  color: #6f7697;
+}
+
+.repo-input-container button {
+  width: 110px;
+  height: 50px;
+  border: none;
+  border-radius: 4px;
+  background: #a855f7;
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.repo-input-container button:hover {
+  background: #9333ea;
+}
+
+/* Divider */
+.or-divider {
+  display: flex;
+  align-items: center;
+  margin: 28px 0;
+}
+
+.or-divider::before,
+.or-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #31375f;
+}
+
+.or-divider span {
+  color: #9ca3af;
+  margin: 0 14px;
+  font-size: 14px;
+}
+
+/* Upload Box */
+.upload-box {
+  height: 190px;
+  border: 2px dashed #4b5278;
+  border-radius: 10px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.upload-box:hover {
+  border-color: #a855f7;
+}
+
+.upload-content {
+  text-align: center;
+}
+
+.upload-icon {
+  font-size: 42px;
+  color: #9ca3af;
+  margin-bottom: 12px;
+}
+
+.upload-content h3 {
+  color: white;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.upload-content p {
+  color: #7f88a8;
+  font-size: 15px;
+}

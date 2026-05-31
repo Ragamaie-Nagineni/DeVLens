@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Loginpage from "./pages/login/Loginpage";
 import Signuppage from "./pages/signup/Signuppage";
 import Sidebar from "./components/Sidebar/Sidebar";
+import Dashboard from "./pages/Dashboard/Dashboard";
 
 
 function App() {
@@ -23,7 +24,7 @@ function App() {
 
         <Route
           path="/"
-          element={<Signuppage />}
+          element={<Dashboard />}
         /> 
 
         <Route
