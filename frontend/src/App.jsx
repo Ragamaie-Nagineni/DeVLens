@@ -3,7 +3,6 @@ import Header from "./components/Header/Header";
 import Loginpage from "./components/login/Loginpage";
 import Signuppage from "./components/signup/Signuppage";
 import Sidebar from "./components/Sidebar/Sidebar";
-import Icon from "./components/Icon/Icon.jsx";
 
 
 function App() {
@@ -24,7 +23,7 @@ function App() {
 
         <Route
           path="/"
-          element={<Header/>}
+          element={<Signuppage/>}
         /> 
 
         <Route
