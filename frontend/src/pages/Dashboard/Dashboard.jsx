@@ -3,14 +3,19 @@ import { useState, useEffect } from "React";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import "./Dashboard.css"
 import { FaUpload } from "react-icons/fa";
+import Header from "../../components/Header/Header";
 
 function Dashboard() {
     const [collapsed, setcollapsed] = useState(false);
     return (
+        <div>
+            <Header/>
         <div className="dashboard">
+            
             <Sidebar
                 collapsed={collapsed}
                 setcollapsed={setcollapsed} />
+            
             <div className={collapsed ? "dashboard-content collapsed" : "dashboard-content"}>
 
                 <p className="dashboard-text">Connect a repository to get started with AI-powered code analysis</p>
@@ -18,7 +23,7 @@ function Dashboard() {
 
                     <h3>Connect Repository</h3>
                     <div className="repo-input-container">
-                        <input type="link" placeholder="https://github.com/usename/repository"></input>
+                        <input type="url" placeholder="https://github.com/usename/repository"></input>
                         <button>ANALYSE</button>
                     </div>
                     <div className="or-divider">
@@ -33,6 +38,7 @@ function Dashboard() {
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     )
 }
