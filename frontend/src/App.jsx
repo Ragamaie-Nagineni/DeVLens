@@ -23,7 +23,7 @@ function App() {
 
         <Route
           path="/"
-          element={<Signuppage/>}
+          element={<Header/>}
         /> 
 
         <Route
