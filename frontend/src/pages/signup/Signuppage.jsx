@@ -1,6 +1,6 @@
 import React from "react";
 import AuthForm from "../../components/Global/AuthForm";
-import Sociallogins from "../../compoonents/Global/Sociallogins";
+import Sociallogins from "../../components/Global/Sociallogins";
 import "./Signup.css";
 import { Link } from "react-router-dom";
 

@@ -105,3 +105,21 @@
     background: #2B1C6B;
     color: #B06CFF;
 }
+.container {
+    margin-left: 290px;
+    margin-top: 6rem;
+
+    width: calc(100% - 320px);
+    min-height: calc(100vh - 7rem);
+
+    padding: 2rem;
+    box-sizing: border-box;
+    /* background-color: #B7BCD6;
+    border-radius: 1rem; */
+    transition: all 0.3s ease;
+}
+
+.container.collapsed {
+    margin-left: 120px;
+    width: calc(100% - 150px);
+}

@@ -1,8 +1,9 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Header from "./components/Header/Header";
-import Loginpage from "./components/login/Loginpage";
-import Signuppage from "./components/signup/Signuppage";
+
+import Loginpage from "./pages/login/Loginpage";
+import Signuppage from "./pages/signup/Signuppage";
 import Sidebar from "./components/Sidebar/Sidebar";
+import Dashboard from "./pages/Dashboard/Dashboard";
 
 
 function App() {
@@ -23,7 +24,7 @@ function App() {
 
         <Route
           path="/"
-          element={<Header/>}
+          element={<Dashboard />}
         /> 
 
         <Route

@@ -8,7 +8,7 @@
   width: 100%;
   height: 70px;
   background: #161d4a;
-
+  position:fixed;
   display: flex;
   align-items: center;
   justify-content: space-between;
