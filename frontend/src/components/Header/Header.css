@@ -22,7 +22,7 @@
 .logo-section {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 
 .logo {
@@ -33,9 +33,9 @@
 }
 
 .logo-section h2 {
-  
   color: white;
-  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 600;
 }
 
 .accent {
@@ -52,13 +52,15 @@
 
 /* Welcome */
 
-.welcome-section h3 {
+.welcome-section h1 {
   color: white;
+  font-size: 1.4rem;
   margin-bottom: 4px;
 }
 
 .welcome-section p {
   color: #a8b3cf;
+  font-size: 0.9rem;
 }
 
 /* Search */
@@ -170,56 +172,3 @@
 
   cursor: pointer;
 }
-
-/* ================== TABLET ================== */
-
-@media (max-width: 1024px) {
-
-  .welcome-section p {
-    display: none;
-  }
-
-  .search-bar {
-    width: 220px;
-  }
-
-  .header-right {
-    gap: 12px;
-  }
-
-  .streak {
-    font-size: 14px;
-    padding: 0 10px;
-  }
-}
-
-
-/* ================== MOBILE ================== */
-
-@media (max-width: 768px) {
-
-  .header {
-    padding: 0 15px;
-  }
-
-  .welcome-section {
-    display: none;
-  }
-
-  .search-bar {
-    width: 180px;
-  }
-
-  .header-right {
-    gap: 10px;
-  }
-
-  .streak {
-    display: none;
-  }
-
-  .logo-section h2 {
-    font-size: 1.4rem;
-  }
-}
-
