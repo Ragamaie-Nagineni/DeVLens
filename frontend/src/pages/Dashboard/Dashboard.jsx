@@ -9,7 +9,7 @@ function Dashboard() {
     const [collapsed, setcollapsed] = useState(false);
     return (
         <div>
-            <Header/>
+        <Header/>
         <div className="dashboard">
             
             <Sidebar
