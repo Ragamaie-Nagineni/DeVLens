@@ -16,17 +16,15 @@
 /* Main Content */
 .dashboard-content {
   flex: 1;
-  margin-left: 240px;
-   margin-top: 4rem; 
+  margin-top: 4rem; 
   padding: 2rem;
   display: flex;
   flex-direction: column;
-  width: 100%;
 }
 
-.dashboard-content.collapsed {
+/* .dashboard-content.collapsed {
     margin-left: 70px;
-}
+} */
 
 .dashboard-text {
   margin-bottom: 1.5rem;
@@ -37,6 +35,7 @@
 /* Card */
 .connect-repo-card {
   width: 100%;
+  max-width: none;
   background: #1b2147;
   border-radius: 16px;
   padding: 2rem;
@@ -50,26 +49,32 @@
 }
 
 /* Input + Button */
-.repo-input-container {
+ .repo-input-container {
   display: flex;
   gap: 1rem;
   align-items: stretch;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
 
 .repo-input-container input {
   flex: 1 1 300px;
   min-width: 0;
-
   padding: 1rem;
   background: #030a32;
   border: 1px solid #2c356b;
   border-radius: 8px;
-
   color: white;
   font-size: 1rem;
   outline: none;
-}
+} 
+ /* .repo-input-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: nowrap; 
+} */
+
+
 
 .repo-input-container input::placeholder {
   color: #6f7697;
@@ -80,16 +85,12 @@
 }
 
 .repo-input-container button {
-  padding: 0 2rem;
+  padding: 1rem 2rem;
   border: none;
   border-radius: 8px;
 
-  background: linear-gradient(
-    90deg,
-    #9d4edd,
-    #c77dff
-  );
-
+  background: #9d4edd;
+  flex-shrink: 0;
   color: white;
   font-weight: 600;
   font-size: 1rem;
@@ -158,7 +159,7 @@
 }
 
 .upload-content h3 {
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
   font-size: clamp(1.2rem, 2vw, 1.8rem);
 }
 

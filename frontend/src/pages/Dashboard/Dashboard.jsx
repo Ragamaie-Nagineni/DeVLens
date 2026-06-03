@@ -32,7 +32,7 @@ function Dashboard() {
                     <div className="upload-box">
                         <div className="upload-content ">
                             <div className="upload-icon"><FaUpload /></div>
-                            <h3>Upload ZIP File</h3>
+                            <h4>Upload ZIP File</h4>
                             <p>Drag and drop or cick to browse</p>
                         </div>
                     </div>
