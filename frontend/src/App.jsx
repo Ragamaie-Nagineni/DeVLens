@@ -24,9 +24,12 @@ function App() {
 
         <Route
           path="/"
-          element={<Dashboard />}
+          element={<Signuppage/>}
         /> 
-
+         <Route
+          path="/dashboard"
+          element={<Dashboard/>}
+        /> 
         <Route
           path="/sidebar"
           element={<Sidebar />}

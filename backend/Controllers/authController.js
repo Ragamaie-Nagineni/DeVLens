@@ -16,6 +16,7 @@ export const registerUser = async (req, res) => {
         res.json({
             message: "user registered!",
             user: result.rows[0]
+
         })
     } catch (err) {
         console.error(err);
@@ -52,6 +53,12 @@ export const loginUser = async (req, res) => {
         res.json({
             message: "Login successful",
             token,
+            user: {
+                id: user.id,
+                username: user.username,
+                email: user.email
+            }
+
         });
     } catch (err) {
         console.error(err);
@@ -60,11 +67,11 @@ export const loginUser = async (req, res) => {
         });
     }
 }
-export const logoutUser=async(req,res)=>{
-    try{
-        res.status(200).json({message:"logout successful!"});
-    }catch(err){
-      console.error(err);
-      res.status(500).json({message:"logout failed!"})
+export const logoutUser = async (req, res) => {
+    try {
+        res.status(200).json({ message: "logout successful!" });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: "logout failed!" })
     }
 }

@@ -26,8 +26,10 @@ function AuthForm({ fields, buttonText }) {
       const data = await response.json();
       if (!response.ok) { alert(data.message); return; }
       if (data.token) { localStorage.setItem("token", data.token); }
+      console.log(localStorage.getItem("user"));
+      if (data.user) {localStorage.setItem("user", JSON.stringify(data.user));}
       alert(buttonText + " successful");
-      navigate("/sidebar");
+      navigate("/dashboard");
     } catch (err) {
 
       console.error(err);
