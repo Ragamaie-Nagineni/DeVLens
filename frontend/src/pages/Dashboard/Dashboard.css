@@ -6,10 +6,10 @@
 
 .dashboard {
   display: flex;
-  min-height: 100vh;
+  min-height: 100%;
   background: #03092d;
   color: white;
-  width: 100%;
+  width: 100vw;
 }
 
 
@@ -20,11 +20,12 @@
   padding: 2rem;
   display: flex;
   flex-direction: column;
+   margin-left: 260px;
 }
 
-/* .dashboard-content.collapsed {
+ .dashboard-content.collapsed {
     margin-left: 70px;
-} */
+} 
 
 .dashboard-text {
   margin-bottom: 1.5rem;
@@ -35,7 +36,7 @@
 /* Card */
 .connect-repo-card {
   width: 100%;
-  max-width: none;
+  /* max-width: none; */
   background: #1b2147;
   border-radius: 16px;
   padding: 2rem;

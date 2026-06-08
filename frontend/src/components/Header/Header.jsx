@@ -13,13 +13,14 @@ function Header() {
         <h2>
           De<span className="accent">V</span>Lens
         </h2>
+        
       </div>
 
       <div className="header-right">
+        
         <div className="welcome-section">
-          <p>Welcome back, {username}!</p>
+          <h6>Welcome back, {username}!</h6>
         </div>
-
         <div className="search-bar">
           <FiSearch />
           <input type="text" placeholder="Search..." />
