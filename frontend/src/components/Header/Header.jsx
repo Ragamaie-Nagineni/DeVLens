@@ -4,6 +4,8 @@ import "./Header.css"
 import { FiSearch, FiBell } from "react-icons/fi";
 
 function Header() {
+  const user = JSON.parse(localStorage.getItem("user"));
+  const username = user?.username || "User";
   return (
     <div className="header">
       <div className="logo-section">
@@ -11,13 +13,14 @@ function Header() {
         <h2>
           De<span className="accent">V</span>Lens
         </h2>
+        
       </div>
 
       <div className="header-right">
+        
         <div className="welcome-section">
-          <p>Welcome back, John!</p>
+          <h6>Welcome back, {username}!</h6>
         </div>
-
         <div className="search-bar">
           <FiSearch />
           <input type="text" placeholder="Search..." />
@@ -34,7 +37,13 @@ function Header() {
         </div>
 
         <div className="profile">
-          <div className="avatar">JD</div>
+          <div className="avatar">
+            {username
+              .split(" ")
+              .map(word => word[0])
+              .join("")
+              .toUpperCase()}
+          </div>
         </div>
       </div>
     </div>
