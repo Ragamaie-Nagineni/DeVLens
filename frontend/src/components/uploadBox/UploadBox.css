@@ -1,0 +1,134 @@
+.connect-repo-card {
+  width: 100%;
+  /* max-width: none; */
+  background: #1b2147;
+  border-radius: 16px;
+  padding: 2rem;
+}
+
+/* Title */
+.connect-repo-card h3 {
+  font-size: clamp(1.2rem, 2vw, 1.8rem);
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+/* Input + Button */
+ .repo-input-container {
+  display: flex;
+  gap: 1rem;
+  align-items: stretch;
+  flex-wrap: nowrap;
+}
+
+.repo-input-container input {
+  flex: 1 1 300px;
+  min-width: 0;
+  padding: 1rem;
+  background: #030a32;
+  border: 1px solid #2c356b;
+  border-radius: 8px;
+  color: white;
+  font-size: 1rem;
+  outline: none;
+} 
+ /* .repo-input-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: nowrap; 
+} */
+
+
+
+.repo-input-container input::placeholder {
+  color: #6f7697;
+}
+
+.repo-input-container input:focus {
+  border-color: #a855f7;
+}
+
+.repo-input-container button {
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 8px;
+
+  background: #9d4edd;
+  flex-shrink: 0;
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.repo-input-container button:hover {
+  opacity: 0.9;
+}
+
+/* OR Divider */
+.or-divider {
+  display: flex;
+  align-items: center;
+  margin: 2rem 0;
+}
+
+.or-divider::before,
+.or-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #38406c;
+}
+
+.or-divider span {
+  padding: 0 1rem;
+  color: #b2b8d6;
+  font-size: 0.95rem;
+}
+
+/* Upload Area */
+.upload-box {
+  border: 2px dashed #4d557e;
+  border-radius: 12px;
+
+  min-height: 260px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 2rem;
+  text-align: center;
+
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.upload-box:hover {
+  border-color: #a855f7;
+}
+
+.upload-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.upload-icon {
+  font-size: 3rem;
+  color: #9ca3af;
+  margin-bottom: 1rem;
+}
+
+.upload-content h3 {
+  margin-bottom: 1rem;
+  font-size: clamp(1.2rem, 2vw, 1.8rem);
+}
+
+.upload-content p {
+  color: #8c95bc;
+  font-size: 1rem;
+}
