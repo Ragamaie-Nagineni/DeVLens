@@ -1,5 +1,5 @@
-import react from "React";
-import { useState, useEffect } from "React";
+import react from "react";
+import { useState, useEffect } from "react";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import "./Dashboard.css"
 

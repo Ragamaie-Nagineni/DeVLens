@@ -2,8 +2,11 @@ import react from "react";
 import { FaUpload } from "react-icons/fa";
 import { useRef,useState } from "react";
 import "./UploadBox.css"
+import axios from "axios";
 
 function UploadBox() {
+
+    const [repoUrl, setRepoUrl] = useState("");
     const [file,setFile]=useState(null);
     const fileInputRef=useRef(null);
 
@@ -12,14 +15,23 @@ function UploadBox() {
        if(selectedFile){ console.log("Selected file:", selectedFile);setFile(selectedFile);}
     }
 
+    const handleRepoAnalysis= async()=>{
+        try{
+            const response=await axios.post("http://localhost:3000/api/repository",{repoUrl});
+            console.log(response.data);
+        }catch(e){
+            console.error(e);
+        }
+    }
+
     return (
         <div>
             <div className="connect-repo-card">
 
                 <h3>Connect Repository</h3>
                 <div className="repo-input-container">
-                    <input type="url" placeholder="https://github.com/usename/repository"></input>
-                    <button>ANALYSE</button>
+                    <input type="url" value={repoUrl} onChange={(e)=>setRepoUrl(e.target.value)} placeholder="https://github.com/usename/repository"></input>
+                    <button onClick={handleRepoAnalysis}>ANALYSE</button>
                 </div>
                 <div className="or-divider">
                     <span>OR</span>
