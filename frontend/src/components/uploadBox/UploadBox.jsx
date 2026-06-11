@@ -9,6 +9,7 @@ function UploadBox() {
     const [repoUrl, setRepoUrl] = useState("");
     const [file,setFile]=useState(null);
     const fileInputRef=useRef(null);
+    const [isDragging, setIsDragging] = useState(false);
 
     const handleFileChange =(e)=>{
        const selectedFile=e.target.files[0];
@@ -21,6 +22,19 @@ function UploadBox() {
             console.log(response.data);
         }catch(e){
             console.error(e);
+        }
+    }
+
+    const handleDragOver=(e)=>{e.preventDefault();}
+    const handleDragEnter=(e)=>{e.preventDefault();setIsDragging(true);}
+    const handleDragLeave=(e)=>{e.preventDefault();setIsDragging(false);}
+    const handleDrop=(e)=>{
+        e.preventDefault();
+        setIsDragging(false);
+        const droppedFile=e.dataTransfer.files[0];
+        if(droppedFile){
+            console.log("drpped file:",droppedFile);
+            setFile(droppedFile);
         }
     }
 
@@ -43,11 +57,19 @@ function UploadBox() {
                     onChange={handleFileChange}
                     style={{ display: "none" }}
                 />
-                <div className="upload-box" onClick={() => fileInputRef.current.click()}>
+                <div 
+                   className={`upload-box ${isDragging?"dragging":""}`}
+                   onClick={() => fileInputRef.current.click()}
+                   onDragOver={handleDragOver}
+                   onDragEnter={handleDragEnter}
+                   onDragLeave={handleDragLeave}
+                   onDrop={handleDrop}
+
+                >
                     <div className="upload-content ">
                         <div className="upload-icon"><FaUpload /></div>
                         <h4>Upload ZIP File</h4>
-                        <p>Drag and drop or cick to browse</p>
+                        <p>{file? file.name:"Drag and drop or click to browse"}</p>
                     </div>
                 </div>
             </div>

@@ -104,9 +104,14 @@
   text-align: center;
 
   cursor: pointer;
-  transition: 0.3s ease;
+  transition: all 0.3s ease;
 }
 
+.upload-box.dragging {
+    border: 2px solid #a855f7;
+    transform: scale(1.01);
+    background: rgba(168, 85, 247, 0.08);
+}
 .upload-box:hover {
   border-color: #a855f7;
 }
@@ -123,9 +128,9 @@
   margin-bottom: 1rem;
 }
 
-.upload-content h3 {
+.upload-content h4 {
   margin-bottom: 1rem;
-  font-size: clamp(1.2rem, 2vw, 1.8rem);
+  font-size: clamp(1.2rem, 1vw, 1.8rem);
 }
 
 .upload-content p {
