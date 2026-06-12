@@ -1,18 +1,19 @@
 import express from "express";
 import cors from "cors";
-import {Pool} from "pg";
 import dotenv from "dotenv";
 dotenv.config();
 import authRoutes from "./routes/authRoutes.js"
 import pool from "./db/db.js";
+import uploadRoutes from "./routes/uploadRoute.js";
+import repositoryroutes from "./routes/repositoryRoute.js";
 
 const app=express();
-const port=3000;
+const port = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 app.use("/api/auth",authRoutes);
-
-
+app.use("/api/upload",uploadRoutes);
+app.use("/api/repository",repositoryroutes);
 
 app.get("/",(req,res)=>{
     res.json({message:"hello from backend"});
