@@ -10,13 +10,18 @@ function UploadBox() {
     const [file,setFile]=useState(null);
     const fileInputRef=useRef(null);
     const [isDragging, setIsDragging] = useState(false);
+    const [error, setError] = useState("");
 
     const handleFileChange =(e)=>{
        const selectedFile=e.target.files[0];
+       if(!selectedFile){return;}
+       if(!validateZipFile(selectedFile)){alert("only zip files are allowed");return;}
        if(selectedFile){ console.log("Selected file:", selectedFile);setFile(selectedFile);}
     }
 
     const handleRepoAnalysis= async()=>{
+        if(!repoUrl.trim()){alert("please enter a repo url");return;}
+        if(!validateGithubUrl(repoUrl)){alert("please enter a valid github repository url");return;}
         try{
             const response=await axios.post("http://localhost:3000/api/repository",{repoUrl});
             console.log(response.data);
@@ -32,10 +37,26 @@ function UploadBox() {
         e.preventDefault();
         setIsDragging(false);
         const droppedFile=e.dataTransfer.files[0];
+        if(!droppedFile){return;}
+        if(!validateZipFile(droppedFile)){alert("only zip files are allowed");return;}
         if(droppedFile){
             console.log("drpped file:",droppedFile);
             setFile(droppedFile);
         }
+    }
+
+    const validateGithubUrl=(url)=>{
+        try{
+            const parsedUrl=new URL(url);
+            return(
+                parsedUrl.hostname==="github.com" && parsedUrl.pathname.split("/").length >=3
+            );
+        }catch{return false;}
+    }
+    const validateZipFile=(file)=>{
+        if(!file){return false;}
+        const filename=file.name.toLowerCase();
+        return filename.endsWith(".zip");
     }
 
     return (
