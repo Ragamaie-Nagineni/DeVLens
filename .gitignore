@@ -9,6 +9,9 @@ venv/
 # Environment Variables
 .env
 
+# Temporary cloned repositories
+backend/temp/repositories/
+
 # Build Files
 dist/
 build/
