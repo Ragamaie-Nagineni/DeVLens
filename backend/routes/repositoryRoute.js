@@ -1,5 +1,6 @@
 import { Router } from "express";
 import cloneRepository from "../services/cloneRepository.js";
+import walkDirectory from "../services/fileWalker.js";
 
 const router = Router();
 
@@ -14,6 +15,10 @@ router.post("/", async (req, res) => {
         }
         console.log("repository url:", repoUrl);
         const result = await cloneRepository(repoUrl);
+        console.log(result);
+        const files = await walkDirectory(result.clonePath);
+         console.log("Files found:");
+         console.log(files);
         res.json({
             success: true,
             message:"repository clones successfully",

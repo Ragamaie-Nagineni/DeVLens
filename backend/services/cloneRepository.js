@@ -6,13 +6,13 @@ import crypto from "crypto";
 const git=simpleGit();
 
 async function cloneRepository(repoUrl) {
-    const jobID=crypto.randomUUID();
+    const jobId=crypto.randomUUID();
     const clonePath=path.join(
-        process.cwd(),"temp","repositories",jobID
+        process.cwd(),"temp","repositories",jobId
     )
     await fs.mkdir(clonePath,{recursive:true});
     await git.clone(repoUrl,clonePath);
-    return(jobID,clonePath);
+    return {jobId,clonePath};
 }
 
 export default cloneRepository;
