@@ -2,6 +2,7 @@ import { Router } from "express";
 import cloneRepository from "../services/cloneRepository.js";
 import walkDirectory from "../services/fileWalker.js";
 import parseJavaScriptFile from "../services/parserService.js"
+import buildGraph from "../services/graphBuilder.js";
 import path from "path"
 
 const router = Router();
@@ -31,6 +32,8 @@ router.post("/", async (req, res) => {
             });
             console.log(repositoryAnalysis);
         }
+        const graph = buildGraph(repositoryAnalysis);
+        console.log(graph);
         res.json({
             success: true,
             message: "repository clones successfully",
