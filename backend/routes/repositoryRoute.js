@@ -1,6 +1,8 @@
 import { Router } from "express";
 import cloneRepository from "../services/cloneRepository.js";
 import walkDirectory from "../services/fileWalker.js";
+import parseJavaScriptFile from "../services/parserService.js"
+import path from "path"
 
 const router = Router();
 
@@ -17,17 +19,27 @@ router.post("/", async (req, res) => {
         const result = await cloneRepository(repoUrl);
         console.log(result);
         const files = await walkDirectory(result.clonePath);
-         console.log("Files found:");
-         console.log(files);
+        const repositoryAnalysis = [];
+        console.log("Files found:");
+        console.log(files);
+        for (const file of files) {
+            const fullPath = path.join(result.clonePath, file);
+            const parsed = await parseJavaScriptFile(fullPath);
+            repositoryAnalysis.push({
+                file,
+                ...parsed
+            });
+            console.log(repositoryAnalysis);
+        }
         res.json({
             success: true,
-            message:"repository clones successfully",
-            jobId:result.jobId,
-            localPath:result.clonePath
+            message: "repository clones successfully",
+            jobId: result.jobId,
+            localPath: result.clonePath
         });
-    }catch(e){
+    } catch (e) {
         console.error(e);
-        return res.status(500).json({success:false,message:"failed to clone repository"})
+        return res.status(500).json({ success: false, message: "failed to clone repository" })
     }
 });
 
