@@ -27,19 +27,20 @@ const SUPPORTED_EXTENSIONS = new Set([
     ".rs"
 ])
 
-async function walkDirectory(dirPath, files = []) {
+async function walkDirectory(dirPath, files = [],rootPath = dirPath) {
     const entries = await fs.readdir(dirPath, { withFileTypes: true });
 
     for (const entry of entries) {
         const fullPath = path.join(dirPath, entry.name);
         if (entry.isDirectory()) {
             if (!IGNORED_DIRECTORIES.has(entry.name)) {
-              await walkDirectory(fullPath, files);
+              await walkDirectory(fullPath, files,rootPath);
             }
         } else {
             const ext = path.extname(entry.name);
             if (SUPPORTED_EXTENSIONS.has(ext)) {
-                files.push(fullPath);
+                const relativePath=path.relative(rootPath,fullPath).replace(/\\/g,"/");
+                files.push(relativePath);
             }
         }
     }
