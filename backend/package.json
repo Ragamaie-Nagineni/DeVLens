@@ -12,6 +12,8 @@
   "license": "ISC",
   "type": "module",
   "dependencies": {
+    "@babel/parser": "^7.29.7",
+    "@babel/traverse": "^7.29.7",
     "bcrypt": "^6.0.0",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
@@ -20,6 +22,7 @@
     "multer": "^2.1.1",
     "nodemon": "^3.1.14",
     "pg": "^8.21.0",
+    "simple-git": "^3.36.0",
     "unzipper": "^0.12.3"
   }
 }

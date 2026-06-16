@@ -1,0 +1,55 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.repository{
+  display: flex;
+  min-height: 100%;
+  background: #03092d;
+  color: white;
+  width: 100vw;
+}
+
+
+/* Main Content */
+.repository-content {
+  flex: 1;
+  margin-top: 4rem; 
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+   margin-left: 250px;
+}
+
+ .repository-content.collapsed {
+    margin-left: 80px;
+} 
+
+.repository-text {
+  margin-bottom: 1.5rem;
+  color: #d4d7f5;
+  font-size: 1rem;
+}
+
+/* Card */
+
+
+/* Tablet */
+@media (max-width: 768px) {
+  .repository-content {
+    padding: 1rem;
+  }
+
+  
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .repository-content {
+    padding: 0.75rem;
+  }
+
+  
+}

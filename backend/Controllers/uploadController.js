@@ -7,8 +7,8 @@ const storage=multer.diskStorage({
 });
 
 const upload=multer({storage,fileFilter:(req,file,cb)=>{
-    if(mimetype=="application/zip" || file.originalname.endsWith(".zip")){cb(null,true);}
-    else{cb(new error("only zip files are allowed"))};
+    if(mimetype==="application/zip" || file.originalname.endsWith(".zip")){cb(null,true);}
+    else{cb(new Error("only zip files are allowed"))};
 }})
 
 export default upload;

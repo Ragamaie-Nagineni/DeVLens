@@ -1,7 +1,7 @@
 import react from "react";
 import { useState, useEffect } from "react";
 import "./Sidebar.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import {
    Home,
    FolderGit2,
@@ -16,9 +16,10 @@ import {
    Menu
 } from "lucide-react";
 
-function Sidebar({collapsed,setcollapsed}) {
+function Sidebar({ collapsed, setcollapsed }) {
 
    const navigate = useNavigate();
+   const location = useLocation();
 
    function handleCollapse() {
       setcollapsed(!collapsed);
@@ -44,8 +45,14 @@ function Sidebar({collapsed,setcollapsed}) {
          <div className={collapsed ? "sidebar collapsed" : "sidebar"}>
             <div className="close-btn" onClick={handleCollapse}><Menu /></div>
             <ul>
-               <li className="active"> <Home />{!collapsed && <span>Dashboard</span>}</li>
-               <li><FolderGit2 />{!collapsed && <span>Repositories</span>}</li>
+               <li
+                  className={location.pathname === "/dashboard" ? "active" : ""}
+                  onClick={() => navigate("/dashboard")}
+               > <Home />{!collapsed && <span>Dashboard</span>}</li>
+               <li
+                  className={location.pathname === "/repository" ? "active" : ""}
+                  onClick={() => navigate("/repository")}
+               ><FolderGit2 />{!collapsed && <span>Repositories</span>}</li>
                <li><MessageSquare />{!collapsed && <span>AI Chat</span>}</li>
                <li><Search />{!collapsed && <span>Search</span>}</li>
                <li><BookOpen />{!collapsed && <span>Blogs</span>}</li>
@@ -56,7 +63,7 @@ function Sidebar({collapsed,setcollapsed}) {
                {!collapsed && <span>Log Out</span>}
             </div>
          </div>
-      
+
       </div>
 
    )

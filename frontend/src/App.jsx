@@ -4,6 +4,7 @@ import Loginpage from "./pages/login/Loginpage";
 import Signuppage from "./pages/signup/Signuppage";
 import Sidebar from "./components/Sidebar/Sidebar";
 import Dashboard from "./pages/Dashboard/Dashboard";
+import Repository from "./pages/Repositoy/Repository";
 
 
 function App() {
@@ -26,13 +27,13 @@ function App() {
           path="/"
           element={<Signuppage/>}
         /> 
-         <Route
+        <Route
           path="/dashboard"
           element={<Dashboard/>}
         /> 
         <Route
-          path="/sidebar"
-          element={<Sidebar />}
+          path="/repository"
+          element={<Repository/>}
         /> 
 
       </Routes>
