@@ -1,101 +1,273 @@
-# DeVLens
-Full-stack developer platform that visualizes code relationships, performs impact analysis, and enables AI-powered repository understanding.
+````markdown
+# DevLens 🚀
 
-## AI-Powered Developer Intelligence Platform
+> **AI-Powered Developer Intelligence Platform**  
+> *Google Maps + ChatGPT for Software Repositories.*
 
-DevLens is a full-stack AI-powered platform that helps developers understand, analyze, and navigate large codebases efficiently through dependency graphs, semantic search, and intelligent repository analysis.
+DevLens is a full-stack platform that helps developers understand large codebases by automatically analyzing repositories, extracting relationships between files and code entities, building dependency graphs, and enabling AI-powered repository understanding.
 
----
-
-## Features
-
-- AI-powered repository chat
-- Dependency graph visualization
-- Semantic code search
-- Repository analysis engine
-- Impact analysis system
-- Authentication and GitHub integration
-- Interactive dashboard
-- Real-time developer insights
+Instead of manually exploring hundreds of files, developers can upload a GitHub repository or ZIP file and instantly visualize its architecture, dependencies, and internal structure.
 
 ---
 
-## Tech Stack
+## ✨ Vision
 
-### Frontend
+Modern codebases are becoming increasingly complex. DevLens aims to simplify code understanding by combining:
+
+- 🕸️ Dependency Graphs
+- 🤖 AI-Powered Repository Chat
+- 🔍 Semantic Code Search
+- 📊 Impact Analysis
+- 📁 Interactive File Explorer
+- 🧠 Intelligent Code Navigation
+
+The goal is to become **"Google Maps + ChatGPT for software repositories."**
+
+---
+
+# 🏗️ Repository Analysis Pipeline
+
+When a repository is uploaded, DevLens performs the following steps:
+
+```text
+GitHub URL / ZIP Upload
+            │
+            ▼
+ Clone or Extract Repository
+            │
+            ▼
+  Recursive File Traversal
+            │
+            ▼
+      AST Parsing
+            │
+            ▼
+ Extract Imports, Exports,
+ Functions & Classes
+            │
+            ▼
+ Build Dependency Graph
+            │
+            ▼
+ Store & Visualize Graph
+            │
+            ▼
+ AI Chat • Search • Impact Analysis
+```
+
+---
+
+# 🚀 Features
+
+## ✅ Currently Implemented
+
+- User Authentication
+- GitHub Repository Upload
+- Local Repository Cloning
+- Recursive File Traversal
+- AST Parsing using Babel
+- Import Extraction
+- Export Extraction
+- Function Detection
+- Class Detection
+- File Dependency Graph Generation
+- Relative Path Resolution
+- Modular Analysis Pipeline
+
+---
+
+## 🚧 In Progress
+
+- Interactive Dependency Graph Visualization
+- Repository Explorer
+- Code Viewer
+- Neo4j Graph Storage
+- React Flow Integration
+
+---
+
+## 🔮 Planned Features
+
+- AI Repository Chat
+- Semantic Code Search
+- Function Call Graph
+- Class Inheritance Graph
+- Impact Analysis
+- Multi-language Support
+- Embedding-based Retrieval
+- Architecture Summarization
+- Automatic Documentation Generation
+
+---
+
+# 🛠️ Tech Stack
+
+## Frontend
+
 - React
 - Vite
-- JavaScript / TypeScript
-- Tailwind CSS
+- JavaScript
+- CSS / Tailwind CSS
+- React Flow (planned)
 
-### Backend
-- Python
-- FastAPI
-- Node.js (optional services)
+## Backend
 
-### Databases
+- Node.js
+- Express.js
+- Postgresql
+
+## Repository Analysis
+
+- simple-git
+- @babel/parser
+- @babel/traverse
+
+## Databases
+
 - PostgreSQL
-- Neo4j
-- Qdrant
+- Neo4j (planned)
 
-### AI & Search
-- LangChain
-- OpenAI API
-- Vector Embeddings
+## Future AI Stack
 
-### DevOps
-- Docker
-- GitHub Actions
-- Vercel
+- Embedding Models
+- Vector Search
+- Large Language Models (LLMs)
 
 ---
 
-## Project Structure
+# 📂 Project Structure
 
-```bash
+```text
 devlens/
 │
 ├── frontend/
+│   ├── src/
+│   ├── components/
+│   └── pages/
+│
 ├── backend/
+│   ├── controllers/
+│   ├── routes/
+│   ├── services/
+│   ├── middleware/
+│   └── temp/
+│
 ├── docs/
-├── docker/
 ├── README.md
 └── .gitignore
 ```
 
 ---
 
-## Core Modules
+# 🧠 Current Architecture
 
-### Repository Parsing
-Analyzes repository structure, imports, dependencies, classes, and functions.
-
-### Dependency Graph
-Visualizes relationships between files, APIs, and services using graph databases.
-
-### AI Repository Chat
-Allows developers to ask natural language questions about repositories.
-
-### Semantic Search
-Enables intelligent codebase searching using vector embeddings.
-
-### Impact Analysis
-Predicts affected modules and dependency risks before code modifications.
+```
+Repository
+     │
+     ▼
+Clone Repository
+     │
+     ▼
+Walk Files
+     │
+     ▼
+Parse AST
+     │
+     ▼
+Extract Metadata
+     │
+     ▼
+Build Import Graph
+     │
+     ▼
+Visualize Repository
+```
 
 ---
 
-## Installation
+# 🕸️ Dependency Graph
 
-### Clone Repository
+Each file is represented as a **node**, and each import relationship becomes an **edge**.
+
+Example:
+
+```text
+App.jsx
+    │
+    ▼
+Dashboard.jsx
+    │
+    ▼
+UploadForm.jsx
+```
+
+This graph serves as the foundation for visualization, navigation, and future AI reasoning.
+
+---
+
+# 🔍 Future Graph Model
+
+DevLens will evolve beyond file-level relationships to include functions and classes.
+
+### Node Types
+
+- File
+- Function
+- Class
+- Module
+
+### Relationship Types
+
+- IMPORTS
+- CONTAINS
+- CALLS
+- EXTENDS
+- IMPLEMENTS
+
+Example:
+
+```text
+(File) App.jsx
+      │ CONTAINS
+      ▼
+(Function) App()
+
+(Function) App()
+      │ CALLS
+      ▼
+(Function) fetchData()
+
+(File) App.jsx
+      │ IMPORTS
+      ▼
+(File) Dashboard.jsx
+```
+
+---
+
+# 🎯 Planned User Experience
+
+Developers will be able to ask questions like:
+
+- Where is authentication implemented?
+- Explain the login flow.
+- Which files depend on this module?
+- Which components use Redis?
+- What is the impact of changing this file?
+- Summarize this repository.
+
+---
+
+# ⚙️ Getting Started
+
+## Clone the Repository
 
 ```bash
 git clone https://github.com/your-username/devlens.git
 cd devlens
 ```
 
----
-
-## Frontend Setup
+## Frontend
 
 ```bash
 cd frontend
@@ -103,86 +275,48 @@ npm install
 npm run dev
 ```
 
----
-
-## Backend Setup
+## Backend
 
 ```bash
 cd backend
-pip install -r requirements.txt
-uvicorn app.main:app --reload
+npm install
+npm start
 ```
 
 ---
 
-## Environment Variables
+# 📌 Current Development Status
 
-Create `.env` files inside frontend and backend folders.
-
-Example:
-
-```env
-OPENAI_API_KEY=your_api_key
-DATABASE_URL=your_database_url
-NEO4J_URI=your_neo4j_uri
-```
-
----
-
-## Development Phases
-
-### Phase 1
-- Landing page
-- Authentication
-- Dashboard UI
-
-### Phase 2
-- Repository upload
-- Repository parsing
-- Dependency graph
-
-### Phase 3
-- AI repository chat
-- Semantic search
-- Impact analysis
-
-### Phase 4
-- Deployment
-- Optimization
-- Real-time features
+- ✅ Authentication
+- ✅ Repository Upload
+- ✅ GitHub Repository Cloning
+- ✅ Recursive File Traversal
+- ✅ AST Parsing
+- ✅ Import Graph Generation
+- 🚧 Graph Visualization
+- 🚧 Neo4j Integration
+- ⏳ AI Chat
+- ⏳ Semantic Search
+- ⏳ Impact Analysis
 
 ---
 
-## Future Enhancements
+# 🌟 Project Goal
 
-- Multi-language repository support
-- Advanced architecture analysis
-- AI-generated documentation
-- Team collaboration tools
-- CI/CD integration
-- Cloud deployment automation
+DevLens aims to reduce the time developers spend understanding unfamiliar codebases by transforming raw source code into an interactive knowledge graph powered by AI.
+
+Ultimately, it seeks to become the definitive platform for repository exploration, architecture visualization, and intelligent code understanding.
 
 ---
 
-## Screenshots
+## 👨‍💻 Contributors
 
-> Screenshots and architecture diagrams will be added soon.
-
----
-
-## Contributors
-
-- Nagineni Ragamaie
-- Vana Vamsi
+- **Nagineni Ragamaie**
+- **Vana Vamsi**
 
 ---
 
-## License
+## 📄 License
 
 This project is licensed under the MIT License.
-
----
-
-## Project Vision
-
-DevLens aims to simplify large-scale codebase understanding using AI, graph databases, and modern developer tooling to improve software engineering productivity.
+````
