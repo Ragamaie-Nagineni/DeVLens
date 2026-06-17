@@ -1,4 +1,3 @@
-````markdown
 # DevLens 🚀
 
 > **AI-Powered Developer Intelligence Platform**  
@@ -161,7 +160,7 @@ devlens/
 
 # 🧠 Current Architecture
 
-```
+```text
 Repository
      │
      ▼
@@ -319,4 +318,3 @@ Ultimately, it seeks to become the definitive platform for repository exploratio
 ## 📄 License
 
 This project is licensed under the MIT License.
-````
