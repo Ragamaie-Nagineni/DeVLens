@@ -24,7 +24,16 @@ async function parseJavaScriptFile(filePath) {
 
     traverse(ast,{
         ImportDeclaration(path){result.imports.push(path.node.source.value);},
-        FunctionDeclaration(path){result.functions.push(path.node.id.name);},
+        FunctionDeclaration(path){result.functions.push({
+            name:path.node.id?.name || "ananymous"
+        });},
+        VariableDeclarator(path){
+            if(path.node.init && (path.node.init.type=="ArrowFunctionExpression" || path.node.init.type=="FunctionExpression")){
+                result.functions.push({
+                    name:path.node.id.name
+                })
+            }
+        },
         ClassDeclaration(path){result.classes.push(path.node.id.name);},
         ExportNamedDeclaration(path){
             if (path.node.declaration?.id?.name) {result.exports.push(path.node.declaration.id.name);}

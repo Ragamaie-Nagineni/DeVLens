@@ -30,7 +30,9 @@ router.post("/", async (req, res) => {
                 file,
                 ...parsed
             });
-            console.log(repositoryAnalysis);
+            //console.log(repositoryAnalysis);
+            console.log(JSON.stringify(repositoryAnalysis, null, 2));
+            //JSON.stringify(value, replacer, space)
         }
         const graph = buildGraph(repositoryAnalysis);
         console.log(graph);
