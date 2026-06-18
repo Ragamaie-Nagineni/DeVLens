@@ -31,16 +31,17 @@ router.post("/", async (req, res) => {
                 ...parsed
             });
             //console.log(repositoryAnalysis);
-            console.log(JSON.stringify(repositoryAnalysis, null, 2));
+            //console.log(JSON.stringify(repositoryAnalysis, null, 2));
             //JSON.stringify(value, replacer, space)
         }
         const graph = buildGraph(repositoryAnalysis);
         console.log(graph);
         res.json({
             success: true,
-            message: "repository clones successfully",
+            message: "Repository analyzed successfully",
             jobId: result.jobId,
-            localPath: result.clonePath
+            graph,
+            repositoryAnalysis
         });
     } catch (e) {
         console.error(e);
