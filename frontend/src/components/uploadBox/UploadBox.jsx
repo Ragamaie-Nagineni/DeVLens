@@ -3,6 +3,7 @@ import { FaUpload } from "react-icons/fa";
 import { useRef,useState } from "react";
 import "./UploadBox.css"
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function UploadBox() {
 
@@ -11,6 +12,7 @@ function UploadBox() {
     const fileInputRef=useRef(null);
     const [isDragging, setIsDragging] = useState(false);
     const [error, setError] = useState("");
+    const navigate = useNavigate();
 
     const handleFileChange =(e)=>{
        const selectedFile=e.target.files[0];
@@ -24,7 +26,11 @@ function UploadBox() {
         if(!validateGithubUrl(repoUrl)){alert("please enter a valid github repository url");return;}
         try{
             const response=await axios.post("http://localhost:3000/api/repository",{repoUrl});
-            console.log(response.data);
+            //console.log(response.data);
+            navigate("/repository",{
+                state:{graph:response.data.graph},
+
+            })
         }catch(e){
             console.error(e);
         }
