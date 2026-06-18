@@ -32,7 +32,16 @@ async function parseJavaScriptFile(filePath) {
                 name: path.node.id?.name || "anonymous",
                 calls: []
             };
-            path.traverse({
+            path.get("body").traverse({
+                FunctionDeclaration(inner) {
+                    inner.skip(); // don't enter nested functions
+                },
+                FunctionExpression(inner) {
+                    inner.skip();
+                },
+                ArrowFunctionExpression(inner) {
+                    inner.skip();
+                },
                 CallExpression(callPath) {
                     if (callPath.node.callee.type === "Identifier") {
                         fn.calls.push(callPath.node.callee.name);
@@ -42,7 +51,7 @@ async function parseJavaScriptFile(filePath) {
             result.functions.push(fn);
         },
         VariableDeclarator(path) {
-            if (path.node.init && (path.node.init.type == "ArrowFunctionExpression" || path.node.init.type == "FunctionExpression")) {
+            if (path.node.init && (path.node.init.type === "ArrowFunctionExpression" || path.node.init.type == "FunctionExpression")) {
                 /* result.functions.push({
                     name: path.node.id.name
                 }) */
@@ -50,7 +59,9 @@ async function parseJavaScriptFile(filePath) {
                     name: path.node.id.name || "anonymous",
                     calls: []
                 };
-                path.traverse({
+                const bodyPath = path.get("init");
+                bodyPath.traverse({
+                    
                     CallExpression(callPath) {
                         if (callPath.node.callee.type === "Identifier") {
                             fn.calls.push(callPath.node.callee.name);
