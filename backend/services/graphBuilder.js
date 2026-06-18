@@ -10,6 +10,18 @@ function buildGraph(repositoryAnalysis) {
             id: analysis.file,
             type: "file"
         })
+        for(const fn of analysis.functions){
+            const functionId=`${analysis.file}:${fn.name}`;
+            nodes.push({
+                id:functionId,
+                type:"function"
+            })
+            edges.push({
+                from:analysis.file,
+                to:functionId,
+                type:"CONTAINS"
+            })
+        }
         for (const imported of analysis.imports) {
             if (!imported.startsWith("./") && !imported.startsWith("../")) { continue; }
             //const currentDir=path.posix.join(currentDir,imported);
