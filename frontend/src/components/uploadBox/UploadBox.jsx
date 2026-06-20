@@ -28,7 +28,16 @@ function UploadBox() {
         if (!validateGithubUrl(repoUrl)) { alert("please enter a valid github repository url"); return; }
         try {
             setLoading(true);
-            const response = await axios.post("http://localhost:3000/api/repository", { repoUrl });
+            //const response = await axios.post("http://localhost:3000/api/repository", { repoUrl });
+            const user = JSON.parse(localStorage.getItem("user"));
+
+            const response = await axios.post(
+                "http://localhost:3000/api/repository",
+                {
+                    repoUrl,
+                    userId: user.id,
+                }
+            );
             //console.log(response.data);
             /*  navigate("/repository",{
                  state:{graph:response.data.graph},
@@ -73,39 +82,41 @@ function UploadBox() {
 
     return (
         <div>
-            <div className="connect-repo-card">
+            {!loading && !analysisResult && (
+                <div className="connect-repo-card">
 
-                <h3>Connect Repository</h3>
-                <div className="repo-input-container">
-                    <input type="url" value={repoUrl} onChange={(e) => setRepoUrl(e.target.value)} placeholder="https://github.com/usename/repository"></input>
-                    <button onClick={handleRepoAnalysis}>ANALYSE</button>
-                </div>
-                <div className="or-divider">
-                    <span>OR</span>
-                </div>
-                <input
-                    type="file"
-                    accept=".zip"
-                    ref={fileInputRef}
-                    onChange={handleFileChange}
-                    style={{ display: "none" }}
-                />
-                <div
-                    className={`upload-box ${isDragging ? "dragging" : ""}`}
-                    onClick={() => fileInputRef.current.click()}
-                    onDragOver={handleDragOver}
-                    onDragEnter={handleDragEnter}
-                    onDragLeave={handleDragLeave}
-                    onDrop={handleDrop}
+                    <h3>Connect Repository</h3>
+                    <div className="repo-input-container">
+                        <input type="url" value={repoUrl} onChange={(e) => setRepoUrl(e.target.value)} placeholder="https://github.com/usename/repository"></input>
+                        <button onClick={handleRepoAnalysis}>ANALYSE</button>
+                    </div>
+                    <div className="or-divider">
+                        <span>OR</span>
+                    </div>
+                    <input
+                        type="file"
+                        accept=".zip"
+                        ref={fileInputRef}
+                        onChange={handleFileChange}
+                        style={{ display: "none" }}
+                    />
+                    <div
+                        className={`upload-box ${isDragging ? "dragging" : ""}`}
+                        onClick={() => fileInputRef.current.click()}
+                        onDragOver={handleDragOver}
+                        onDragEnter={handleDragEnter}
+                        onDragLeave={handleDragLeave}
+                        onDrop={handleDrop}
 
-                >
-                    <div className="upload-content ">
-                        <div className="upload-icon"><FaUpload /></div>
-                        <h4>Upload ZIP File</h4>
-                        <p>{file ? file.name : "Drag and drop or click to browse"}</p>
+                    >
+                        <div className="upload-content ">
+                            <div className="upload-icon"><FaUpload /></div>
+                            <h4>Upload ZIP File</h4>
+                            <p>{file ? file.name : "Drag and drop or click to browse"}</p>
+                        </div>
                     </div>
                 </div>
-            </div>
+            )}
             {loading && (
                 <div className="analysis-progress">
                     <h3>🔍 Scanning repository structure...</h3>
@@ -121,7 +132,16 @@ function UploadBox() {
                     <div className="summary-status">
                         <span className="status-pill">✅ Analysis Complete</span>
                     </div>
-
+                    <button
+                        className="new-analysis-btn"
+                        onClick={() => {
+                            setAnalysisResult(null);
+                            setRepoUrl("");
+                            setFile(null);
+                        }}
+                    >
+                        ↻ New Analysis
+                    </button>
                     <div className="metrics-grid">
                         <div className="metric-card">
                             <h4>📁 Files</h4>

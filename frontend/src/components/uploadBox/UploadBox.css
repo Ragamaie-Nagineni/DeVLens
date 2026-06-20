@@ -262,6 +262,19 @@
   font-weight: 600;
   margin-bottom: 16px;
 }
+.new-analysis-btn {
+  background: transparent;
+  border: none;
+  color: #8c95bc;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 500;
+  transition: 0.2s;
+}
+
+.new-analysis-btn:hover {
+  color: white;
+}
 
 @keyframes loading {
   from {

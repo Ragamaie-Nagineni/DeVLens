@@ -3,13 +3,15 @@ import cloneRepository from "../services/cloneRepository.js";
 import walkDirectory from "../services/fileWalker.js";
 import parseJavaScriptFile from "../services/parserService.js"
 import buildGraph from "../services/graphBuilder.js";
-import path from "path"
+import path from "path";
+import pool from "../db/db.js";
 
 const router = Router();
 
 router.post("/", async (req, res) => {
     try {
-        const { repoUrl } = req.body;
+        //const { repoUrl } = req.body;
+        const { repoUrl, userId } = req.body;
         if (!repoUrl.startsWith("https://github.com/")) {
             return res.status(400).json({
                 success: false,
@@ -61,8 +63,24 @@ router.post("/", async (req, res) => {
                 0
             ),
         };
+        
         const graph = buildGraph(repositoryAnalysis);
-        console.log(graph);
+        console.log("Saving repository...");
+        await pool.query(`INSERT INTO repositories
+                         (user_id, repo_name, repo_url, summary, metrics, graph, repository_analysis)
+                          VALUES ($1, $2, $3, $4, $5, $6, $7)`,
+            [
+                userId,
+                repoName,
+                repoUrl,
+                metrics.repository.summary,
+                JSON.stringify(metrics),
+                JSON.stringify(graph),
+                JSON.stringify(repositoryAnalysis),
+            ]
+        );
+        console.log("Repository saved!");
+        //console.log(graph);
         res.json({
             success: true,
             message: "Repository analyzed successfully",
@@ -71,6 +89,7 @@ router.post("/", async (req, res) => {
             repositoryAnalysis,
             metrics
         });
+        
     } catch (e) {
         console.error(e);
         return res.status(500).json({ success: false, message: "failed to clone repository" })
