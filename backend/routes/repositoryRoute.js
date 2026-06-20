@@ -30,10 +30,37 @@ router.post("/", async (req, res) => {
                 file,
                 ...parsed
             });
+
+
             //console.log(repositoryAnalysis);
             //console.log(JSON.stringify(repositoryAnalysis, null, 2));
             //JSON.stringify(value, replacer, space)
         }
+        const repoName = repoUrl.split("/").filter(Boolean).pop();
+        const metrics = {
+            repository: {
+                name: repoName,
+                summary: `Successfully analyzed ${repoName}.
+                 DevLens extracted source files, functions, classes, and dependency relationships to build an interactive repository knowledge graph.`,
+            },
+            files: repositoryAnalysis.length,
+            functions: repositoryAnalysis.reduce(
+                (s, f) => s + (f.functions?.length || 0),
+                0
+            ),
+            classes: repositoryAnalysis.reduce(
+                (s, f) => s + (f.classes?.length || 0),
+                0
+            ),
+            imports: repositoryAnalysis.reduce(
+                (s, f) => s + (f.imports?.length || 0),
+                0
+            ),
+            exports: repositoryAnalysis.reduce(
+                (s, f) => s + (f.exports?.length || 0),
+                0
+            ),
+        };
         const graph = buildGraph(repositoryAnalysis);
         console.log(graph);
         res.json({
@@ -41,7 +68,8 @@ router.post("/", async (req, res) => {
             message: "Repository analyzed successfully",
             jobId: result.jobId,
             graph,
-            repositoryAnalysis
+            repositoryAnalysis,
+            metrics
         });
     } catch (e) {
         console.error(e);
