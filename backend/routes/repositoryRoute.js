@@ -63,7 +63,7 @@ router.post("/", async (req, res) => {
                 0
             ),
         };
-        
+
         const graph = buildGraph(repositoryAnalysis);
         console.log("Saving repository...");
         await pool.query(`INSERT INTO repositories
@@ -74,9 +74,9 @@ router.post("/", async (req, res) => {
                 repoName,
                 repoUrl,
                 metrics.repository.summary,
-                JSON.stringify(metrics),
-                JSON.stringify(graph),
-                JSON.stringify(repositoryAnalysis),
+                metrics,              // no JSON.stringify needed with pg + jsonb
+                graph,
+                repositoryAnalysis,
             ]
         );
         console.log("Repository saved!");
@@ -89,11 +89,37 @@ router.post("/", async (req, res) => {
             repositoryAnalysis,
             metrics
         });
-        
+
     } catch (e) {
         console.error(e);
         return res.status(500).json({ success: false, message: "failed to clone repository" })
     }
 });
+router.get("/latest/:userId", async (req, res) => {
+    try {
+        const { userId } = req.params;
 
+        const result = await pool.query(
+            `
+            SELECT *
+            FROM repositories
+            WHERE user_id = $1
+            ORDER BY created_at DESC
+            LIMIT 1
+            `,
+            [userId]
+        );
+
+        if (result.rows.length === 0) {
+            return res.json(null);
+        }
+
+        res.json(result.rows[0]);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({
+            message: "Failed to fetch repository",
+        });
+    }
+});
 export default router;

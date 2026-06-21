@@ -1,6 +1,6 @@
 import react from "react";
 import { FaUpload } from "react-icons/fa";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import "./UploadBox.css"
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -12,7 +12,11 @@ function UploadBox() {
     const fileInputRef = useRef(null);
     const [isDragging, setIsDragging] = useState(false);
     const [error, setError] = useState("");
-    const [analysisResult, setAnalysisResult] = useState(null);
+    //const [analysisResult, setAnalysisResult] = useState(null);
+    const [analysisResult, setAnalysisResult] = useState(() => {
+        const saved = localStorage.getItem("lastAnalysis");
+        return saved ? JSON.parse(saved) : null;
+    });
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
@@ -44,6 +48,10 @@ function UploadBox() {
  
              }) */
             setAnalysisResult(response.data);
+            localStorage.setItem(
+                "lastAnalysis",
+                JSON.stringify(response.data)
+            );
         } catch (e) {
             console.error(e);
         } finally {
@@ -79,6 +87,32 @@ function UploadBox() {
         const filename = file.name.toLowerCase();
         return filename.endsWith(".zip");
     }
+
+    useEffect(() => {
+        const fetchLatestRepo = async () => {
+            const user = JSON.parse(localStorage.getItem("user"));
+
+            if (!user) return;
+
+            try {
+                const res = await axios.get(
+                    `http://localhost:3000/api/repository/latest/${user.id}`
+                );
+
+                if (res.data) {
+                    setAnalysisResult({
+                        graph: res.data.graph,
+                        metrics: res.data.metrics,
+                        repositoryAnalysis: res.data.repository_analysis,
+                    });
+                }
+            } catch (err) {
+                console.error(err);
+            }
+        };
+
+        fetchLatestRepo();
+    }, []);
 
     return (
         <div>
@@ -135,6 +169,7 @@ function UploadBox() {
                     <button
                         className="new-analysis-btn"
                         onClick={() => {
+                            localStorage.removeItem("lastAnalysis");
                             setAnalysisResult(null);
                             setRepoUrl("");
                             setFile(null);
