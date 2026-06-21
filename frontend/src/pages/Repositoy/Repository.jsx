@@ -50,9 +50,26 @@ function Repository() {
                 <div className={collapsed ? "repository-content collapsed" : "repository-content"}>
 
                     {/* content */}
-                   <LatestAnalysisCard/>
 
-                    {graph ? (<Graph graph={graph} />) : (<p>No repository analyzed yet.</p>)}
+                    <LatestAnalysisCard />
+                    {/* {graph ? (<Graph graph={graph} />) : (<p>No repository analyzed yet.</p>)} */}
+                    <div className="graph-section">
+                        <div className="graph-header">
+                            <h2>🌐 Repository Knowledge Graph</h2>
+                            <p>
+                                Explore relationships between files, functions, and
+                                imports.
+                            </p>
+                        </div>
+
+                        <div className="graph-card">
+                            {graph ? (
+                                <Graph graph={graph} />
+                            ) : (
+                                <p>No repository analyzed yet.</p>
+                            )}
+                        </div>
+                    </div>
 
                 </div>
             </div>
