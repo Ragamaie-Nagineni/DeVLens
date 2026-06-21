@@ -5,7 +5,6 @@ import "./Dashboard.css"
 import Header from "../../components/Header/Header";
 import UploadBox from "../../components/uploadBox/UploadBox.jsx"
 import RecentRepositories from "../../components/RecentRepositories/RecentRepositories.jsx";
-
 function Dashboard() {
     const [collapsed, setcollapsed] = useState(false);
 

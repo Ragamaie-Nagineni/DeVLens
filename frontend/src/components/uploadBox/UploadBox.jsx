@@ -13,10 +13,6 @@ function UploadBox() {
     const [isDragging, setIsDragging] = useState(false);
     const [error, setError] = useState("");
     //const [analysisResult, setAnalysisResult] = useState(null);
-    const [analysisResult, setAnalysisResult] = useState(() => {
-        const saved = localStorage.getItem("lastAnalysis");
-        return saved ? JSON.parse(saved) : null;
-    });
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
@@ -47,11 +43,16 @@ function UploadBox() {
                  state:{graph:response.data.graph},
  
              }) */
-            setAnalysisResult(response.data);
-            localStorage.setItem(
-                "lastAnalysis",
-                JSON.stringify(response.data)
-            );
+            //setAnalysisResult(response.data);
+            /*  localStorage.setItem(
+                 "lastAnalysis",
+                 JSON.stringify(response.data)
+             ); */
+            navigate("/repository", {
+                state: {
+                    graph: response.data.graph,
+                },
+            });
         } catch (e) {
             console.error(e);
         } finally {
@@ -88,36 +89,11 @@ function UploadBox() {
         return filename.endsWith(".zip");
     }
 
-    //latest repo
-    useEffect(() => {
-        const fetchLatestRepo = async () => {
-            const user = JSON.parse(localStorage.getItem("user"));
 
-            if (!user) return;
-
-            try {
-                const res = await axios.get(
-                    `http://localhost:3000/api/repository/latest/${user.id}`
-                );
-
-                if (res.data) {
-                    setAnalysisResult({
-                        graph: res.data.graph,
-                        metrics: res.data.metrics,
-                        repositoryAnalysis: res.data.repository_analysis,
-                    });
-                }
-            } catch (err) {
-                console.error(err);
-            }
-        };
-
-        fetchLatestRepo();
-    }, []);
 
     return (
         <div>
-            {!loading && !analysisResult && (
+            {!loading && (
                 <div className="connect-repo-card">
 
                     <h3>Connect Repository</h3>
@@ -161,61 +137,7 @@ function UploadBox() {
                     <p>Parsing files • Building graph • Extracting symbols</p>
                 </div>
             )}
-            {analysisResult && (
-                <div className="repository-summary-card">
-                    <h2>📦 {analysisResult.metrics?.repository?.name}</h2>
-                    <div className="summary-status">
-                        <span className="status-pill">✅ Analysis Complete</span>
-                    </div>
-                    <button
-                        className="new-analysis-btn"
-                        onClick={() => {
-                            localStorage.removeItem("lastAnalysis");
-                            setAnalysisResult(null);
-                            setRepoUrl("");
-                            setFile(null);
-                        }}
-                    >
-                        ↻ New Analysis
-                    </button>
-                    <div className="metrics-grid">
-                        <div className="metric-card">
-                            <h4>📁 Files</h4>
-                            <span>{analysisResult.metrics?.files}</span>
-                        </div>
 
-                        <div className="metric-card">
-                            <h4>⚙️ Functions</h4>
-                            <span>{analysisResult.metrics?.functions}</span>
-                        </div>
-
-                        <div className="metric-card">
-                            <h4>🔗 Imports</h4>
-                            <span>{analysisResult.metrics?.imports}</span>
-                        </div>
-
-                        <div className="metric-card">
-                            <h4>🏗️ Classes</h4>
-                            <span>{analysisResult.metrics?.classes}</span>
-                        </div>
-                    </div>
-
-                    <p className="summary">
-                        {analysisResult.metrics?.repository?.summary}
-                    </p>
-                    <button className="explore-btn"
-                        onClick={() =>
-                            navigate("/repository", {
-                                state: {
-                                    graph: analysisResult.graph
-                                }
-                            })
-                        }
-                    >
-                        🚀 Explore Repository
-                    </button>
-                </div>
-            )}
         </div>
     )
 }

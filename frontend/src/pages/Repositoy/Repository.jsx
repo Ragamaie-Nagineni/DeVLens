@@ -5,6 +5,7 @@ import Header from "../../components/Header/Header";
 import Graph from "../../components/Graph/Graph";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
+import LatestAnalysisCard from "../../components/LatestAnalysisCard/LatestAnalysisCard";
 
 
 function Repository() {
@@ -49,6 +50,7 @@ function Repository() {
                 <div className={collapsed ? "repository-content collapsed" : "repository-content"}>
 
                     {/* content */}
+                   <LatestAnalysisCard/>
 
                     {graph ? (<Graph graph={graph} />) : (<p>No repository analyzed yet.</p>)}
 
