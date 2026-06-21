@@ -1,0 +1,97 @@
+/* ===========================
+   Recent Repositories
+=========================== */
+
+.recent-repositories {
+  margin-top: 32px;
+  width: 100%;
+}
+
+.recent-repositories h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 20px;
+}
+
+/* Repository Card */
+
+.recent-repo-card {
+  background: linear-gradient(135deg, #1b2147, #171d3d);
+  border: 1px solid rgba(168, 85, 247, 0.25);
+  border-radius: 20px;
+  padding: 24px;
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+}
+
+.recent-repo-card:hover {
+  transform: translateY(-3px);
+  border-color: #a855f7;
+  box-shadow: 0 8px 24px rgba(168, 85, 247, 0.15);
+}
+
+.recent-repo-card h3 {
+  color: #ffffff;
+  font-size: 1.5rem;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.recent-repo-card p {
+  color: #9ea7cf;
+  line-height: 1.6;
+  margin-bottom: 18px;
+}
+
+.recent-repo-card small {
+  display: block;
+  color: #8c95bc;
+  margin-top: 8px;
+  margin-bottom: 18px;
+  font-size: 0.9rem;
+}
+
+/* Metrics */
+
+.repo-metrics {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.metric-pill {
+  background: radial-gradient(
+    circle at top,
+    rgba(168, 85, 247, 0.12),
+    #10163a
+  );
+  border: 1px solid rgba(168, 85, 247, 0.2);
+  border-radius: 999px;
+  padding: 8px 14px;
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+/* Explore Button */
+
+.explore-btn {
+  margin-top: 8px;
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 14px;
+  background: linear-gradient(90deg, #8b5cf6, #a855f7, #6366f1);
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.explore-btn:hover {
+  transform: translateY(-2px);
+  opacity: 0.95;
+}

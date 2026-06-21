@@ -18,7 +18,24 @@ router.post("/", async (req, res) => {
                 message: "Invalid GitHub URL"
             });
         }
-        console.log("repository url:", repoUrl);
+         console.log("repository url:", repoUrl);
+        const normalizedRepoUrl = repoUrl.trim().replace(/\.git$/, "").replace(/\/$/, "").toLowerCase();
+        const existingRepo = await pool.query(`SELECT * FROM repositories WHERE LOWER(repo_url) = $1 LIMIT 1`,
+            [ normalizedRepoUrl]
+        );
+
+        if (existingRepo.rows.length > 0) {
+            console.log("Repository already analyzed. Returning cached result.");
+
+            return res.json({
+                success: true,
+                cached: true,
+                graph: existingRepo.rows[0].graph,
+                repositoryAnalysis: existingRepo.rows[0].repository_analysis,
+                metrics: existingRepo.rows[0].metrics,
+            });
+        }
+       
         const result = await cloneRepository(repoUrl);
         console.log(result);
         const files = await walkDirectory(result.clonePath);
@@ -65,7 +82,12 @@ router.post("/", async (req, res) => {
         };
 
         const graph = buildGraph(repositoryAnalysis);
+        //check
+        console.log(JSON.stringify(repositoryAnalysis, null, 2));
         console.log("Saving repository...");
+        //console.log(typeof metrics);
+       
+
         await pool.query(`INSERT INTO repositories
                          (user_id, repo_name, repo_url, summary, metrics, graph, repository_analysis)
                           VALUES ($1, $2, $3, $4, $5, $6, $7)`,
@@ -74,9 +96,9 @@ router.post("/", async (req, res) => {
                 repoName,
                 repoUrl,
                 metrics.repository.summary,
-                metrics,              // no JSON.stringify needed with pg + jsonb
+                metrics,              
                 graph,
-                repositoryAnalysis,
+                JSON.stringify(repositoryAnalysis)
             ]
         );
         console.log("Repository saved!");
@@ -120,6 +142,27 @@ router.get("/latest/:userId", async (req, res) => {
         res.status(500).json({
             message: "Failed to fetch repository",
         });
+    }
+});
+router.get("/recent/:userId", async (req, res) => {
+    const { userId } = req.params;
+
+    try {
+        const result = await pool.query(
+            `
+            SELECT *
+            FROM repositories
+            WHERE user_id = $1
+            ORDER BY created_at DESC
+            LIMIT 3
+            `,
+            [userId]
+        );
+
+        res.json(result.rows);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Failed to fetch repositories" });
     }
 });
 export default router;
