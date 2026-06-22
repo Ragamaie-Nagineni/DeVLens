@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./RecentRepositories.css";
 
 function RecentRepositories() {
     const [repositories, setRepositories] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchRepositories = async () => {
@@ -26,35 +28,38 @@ function RecentRepositories() {
 
     return (
         <div className="recent-repositories">
-            <h2>Recent Repositories</h2>
+            <h2>🕘 Recent Repositories</h2>
 
             {repositories.map((repo) => (
                 <div className="recent-repo-card" key={repo.id}>
-                    <h3>{repo.repo_name}</h3>
+                    <div className="repo-left">
+                        <div className="repo-icon">📦</div>
 
-                    <p>{repo.summary}</p>
+                        <div className="repo-details">
+                            <h3>{repo.repo_name}</h3>
 
-                    <div className="repo-metrics">
-                        <span className="metric-pill">
-                            📁 {repo.metrics?.files} Files
-                        </span>
-
-                        <span className="metric-pill">
-                            ⚙️ {repo.metrics?.functions} Functions
-                        </span>
-
-                        <span className="metric-pill">
-                            🏗️ {repo.metrics?.classes} Classes
-                        </span>
+                            <div className="repo-metrics">
+                                <span>📁 {repo.metrics?.files} files</span>
+                                <span>⚙️ {repo.metrics?.functions} functions</span>
+                                <span>🏗️ {repo.metrics?.classes} classes</span>
+                                <span>
+                                    {new Date(repo.created_at).toLocaleDateString()}
+                                </span>
+                            </div>
+                        </div>
                     </div>
 
-                    <small>
-                        Analyzed on{" "}
-                        {new Date(repo.created_at).toLocaleDateString()}
-                    </small>
-
-                    <button className="explore-btn">
-                        🚀 Explore Repository
+                    <button
+                        className="explore-btn"
+                        onClick={() =>
+                            navigate("/repository", {
+                                state: {
+                                    repositoryId: repo.id,
+                                },
+                            })
+                        }
+                    >
+                        →
                     </button>
                 </div>
             ))}
