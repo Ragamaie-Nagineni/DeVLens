@@ -1,35 +1,75 @@
+/* ===========================
+   Recent Repositories Container
+=========================== */
+
 .recent-repositories {
   width: 100%;
-  background: #1b2147;
-  border-radius: 20px;
-  padding: 24px;
-  border: 1px solid rgba(168, 85, 247, 0.2);
+  padding: 28px;
+  border-radius: 24px;
+
+ background: #10173A;
+
+  border: 1px solid rgba(168, 85, 247, 0.18);
+
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.02),
+    0 20px 50px rgba(0, 0, 0, 0.35);
+
 }
 
+/* ===========================
+   Section Title
+=========================== */
+
 .recent-repositories h2 {
-  color: #fff;
-  font-size: 2rem;
-  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  color: #ffffff;
+  font-size: 1.5rem;
+  font-weight: 500;
+
+  margin-bottom: 24px;
 }
+
+/* ===========================
+   Repository Card
+=========================== */
 
 .recent-repo-card {
   display: flex;
   justify-content: space-between;
   align-items: center;
 
-  background: #030a32;
-  border-radius: 16px;
-  padding: 20px 24px;
-  margin-bottom: 16px;
+  padding: 22px 24px;
+  margin-bottom: 18px;
 
-  border: 1px solid transparent;
+  border-radius: 20px;
+
+  background: #040b30;
+
+  border: 1px solid rgba(255, 255, 255, 0.04);
+
   transition: all 0.25s ease;
 }
 
-.recent-repo-card:hover {
-  border-color: #a855f7;
-  transform: translateY(-2px);
+.recent-repo-card:last-child {
+  margin-bottom: 0;
 }
+
+.recent-repo-card:hover {
+  transform: translateY(-2px);
+
+  border-color: rgba(168, 85, 247, 0.35);
+
+  box-shadow:
+    0 12px 28px rgba(0, 0, 0, 0.3);
+}
+
+/* ===========================
+   Left Section
+=========================== */
 
 .repo-left {
   display: flex;
@@ -37,61 +77,158 @@
   gap: 18px;
 }
 
+/* ===========================
+   Repository Icon
+=========================== */
+
 .repo-icon {
-  width: 56px;
-  height: 56px;
-  border-radius: 14px;
-
+  width: 50px;
+  height: 50px;
+  border-radius: 16px;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  background: linear-gradient(
+    135deg,
+    rgba(107, 70, 193, 0.35),
+    rgba(55, 30, 110, 0.9)
+  );
+  border: 1px solid rgba(168, 85, 247, 0.25);
+  flex-shrink: 0;
+}
 
-  font-size: 1.5rem;
+/* ===========================
+   Repository Details
+=========================== */
 
-  background: rgba(168, 85, 247, 0.12);
-  border: 1px solid rgba(168, 85, 247, 0.3);
+.repo-details {
+  display: flex;
+  flex-direction: column;
 }
 
 .repo-details h3 {
-  color: white;
-  font-size: 1.4rem;
-  margin-bottom: 10px;
+  color: #ffffff;
+  font-size: 1.2rem;
+  font-weight: 300;
+
+  margin: 0 0 8px;
 }
+
+/* ===========================
+   Metrics
+=========================== */
 
 .repo-metrics {
   display: flex;
-  gap: 18px;
   flex-wrap: wrap;
-
-  color: #9ea7cf;
+  gap: 15px;
+  color: #9ca4c8;
   font-size: 0.95rem;
 }
 
-.repo-metrics span {
+/* .repo-metrics span {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 5px;
+} */
+ .repo-metrics span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
-.explore-btn {
-  width: 46px;
-  height: 46px;
+/* .repo-metrics svg {
+  font-size: 0.9rem;
+  color: #a855f7;
+} */
 
+/* .repo-icon svg {
+  font-size: 1.4rem;
+  color: #c084fc;
+} */
+/*clock*/
+.recent-repositories h2 svg {
+  color: #a855f7;
+}
+
+.explore-btn svg {
+  font-size: 1rem;
+}
+
+/* ===========================
+   Explore Button
+=========================== */
+
+.explore-btn {
+  width: 48px;
+  height: 48px;
   border: none;
   border-radius: 50%;
-
-  background: rgba(168, 85, 247, 0.15);
-  color: #a855f7;
-
-  font-size: 1.5rem;
-  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(168, 85, 247, 0.12);
+  color: #b56dff;
+  font-size: 1.4rem;
   cursor: pointer;
-
-  transition: all 0.2s ease;
+  transition: all 0.25s ease;
+  flex-shrink: 0;
 }
 
 .explore-btn:hover {
-  background: #a855f7;
-  color: white;
-  transform: scale(1.08);
+  background: rgba(168, 85, 247, 0.22);
+  color: #ffffff;
+  transform: translateX(4px);
+}
+
+/* ===========================
+   Scrollbar (optional)
+=========================== */
+
+.recent-repositories::-webkit-scrollbar {
+  width: 6px;
+}
+
+.recent-repositories::-webkit-scrollbar-thumb {
+  background: rgba(168, 85, 247, 0.4);
+  border-radius: 10px;
+}
+
+/* ===========================
+   Responsive
+=========================== */
+
+@media (max-width: 768px) {
+  .recent-repositories {
+    padding: 18px;
+  }
+
+  .recent-repositories h2 {
+    font-size: 1.5rem;
+  }
+
+  .recent-repo-card {
+    padding: 18px;
+  }
+
+  .repo-details h3 {
+    font-size: 1.2rem;
+  }
+
+  .repo-metrics {
+    gap: 10px;
+    font-size: 0.85rem;
+  }
+
+  .repo-icon {
+    width: 52px;
+    height: 52px;
+    font-size: 1.3rem;
+  }
+
+  .explore-btn {
+    width: 42px;
+    height: 42px;
+  }
 }

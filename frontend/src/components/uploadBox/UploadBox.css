@@ -1,76 +1,149 @@
+/* ===========================
+   Connect Repository Card
+=========================== */
+
 .connect-repo-card {
   width: 100%;
-  /* max-width: none; */
-  background: #1b2147;
-  border-radius: 16px;
-  padding: 2rem;
+  padding: 2.5rem;
+  border-radius: 24px;
+
+  /* background: linear-gradient(
+    135deg,
+    rgba(78, 44, 180, 0.18),
+    rgba(25, 30, 75, 0.95)
+  ); */
+  background: #10173A;
+
+  border: 1px solid rgba(168, 85, 247, 0.18);
+
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.02),
+    0 20px 50px rgba(0, 0, 0, 0.35);
+
+  position: relative;
+  overflow: hidden;
 }
 
-/* Title */
+/* subtle grid overlay */
+.connect-repo-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+
+  background-image:
+    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+
+  background-size: 55px 55px;
+}
+
+/* ===========================
+   Heading
+=========================== */
+
 .connect-repo-card h3 {
-  font-size: clamp(1.2rem, 2vw, 1.8rem);
-  font-weight: 600;
-  margin-bottom: 1.5rem;
+  position: relative;
+  z-index: 1;
+
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: white;
+  margin-bottom: 0.4rem;
+}
+/*github icon*/
+.connect-repo-card h3 svg{
+  color: #a855f7;
 }
 
-/* Input + Button */
- .repo-input-container {
+.repo-subtitle {
+  position: relative;
+  z-index: 1;
+
+  color: #98a2d1;
+  font-size: 1.02rem;
+  margin-bottom: 2rem;
+}
+
+/* ===========================
+   Input + Button
+=========================== */
+
+.repo-input-container {
+  position: relative;
+  z-index: 1;
+
   display: flex;
   gap: 1rem;
   align-items: stretch;
-  flex-wrap: nowrap;
 }
 
 .repo-input-container input {
-  flex: 1 1 300px;
-  min-width: 0;
-  padding: 1rem;
-  background: #030a32;
-  border: 1px solid #2c356b;
-  border-radius: 8px;
+  flex: 1;
+
+  padding: 1rem 1.2rem;
+
+  background: rgba(5, 10, 40, 0.9);
+
+  border: 1px solid rgba(255,255,255,0.08);
+
+  border-radius: 14px;
+
   color: white;
   font-size: 1rem;
+
   outline: none;
-} 
- /* .repo-input-container {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  flex-wrap: nowrap; 
-} */
-
-
+  transition: all 0.25s ease;
+}
 
 .repo-input-container input::placeholder {
   color: #6f7697;
 }
 
 .repo-input-container input:focus {
-  border-color: #a855f7;
+  border-color: #b066ff;
+
+  box-shadow:
+    0 0 0 3px rgba(168,85,247,.15),
+    0 0 20px rgba(168,85,247,.18);
 }
 
 .repo-input-container button {
-  padding: 1rem 2rem;
-  border: none;
-  border-radius: 8px;
+  padding: 0 2rem;
 
-  background: #9d4edd;
-  flex-shrink: 0;
-  color: white;
-  font-weight: 600;
-  font-size: 1rem;
+  border: none;
+  border-radius: 14px;
 
   cursor: pointer;
-  transition: 0.3s ease;
+
+  color: white;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+
+  background:  #a045dd;
+
+  transition: all 0.25s ease;
+
+  box-shadow:
+    0 8px 24px rgba(168,85,247,.35);
 }
 
 .repo-input-container button:hover {
-   background: #9239db;
-  opacity: 0.9;
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 14px 30px rgba(168,85,247,.45);
 }
 
-/* OR Divider */
+/* ===========================
+   OR Divider
+=========================== */
+
 .or-divider {
+  position: relative;
+  z-index: 1;
+
   display: flex;
   align-items: center;
   margin: 2rem 0;
@@ -81,115 +154,131 @@
   content: "";
   flex: 1;
   height: 1px;
-  background: #38406c;
+  background: rgba(255,255,255,0.1);
 }
 
 .or-divider span {
   padding: 0 1rem;
-  color: #b2b8d6;
-  font-size: 0.95rem;
+  color: #7d86b5;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
 }
 
-/* Upload Area */
+/* ===========================
+   Upload Area
+=========================== */
+
 .upload-box {
-  border: 2px dashed #4d557e;
-  border-radius: 12px;
-
-  min-height: 260px;
-
+  position: relative;
+  z-index: 1;
+  min-height: 200px;
   display: flex;
   justify-content: center;
   align-items: center;
-
-  padding: 2rem;
-  text-align: center;
-
+  border-radius: 18px;
+  border: 2px dashed rgba(255,255,255,0.14);
+  background: rgba(255,255,255,0.015);
   cursor: pointer;
   transition: all 0.3s ease;
+  padding: 2rem;
+}
+
+.upload-box:hover {
+  border-color: #a855f7;
+  background: rgba(168,85,247,.05);
 }
 
 .upload-box.dragging {
-    border: 2px solid #a855f7;
-    transform: scale(1.01);
-    background: rgba(168, 85, 247, 0.08);
-}
-.upload-box:hover {
-  border-color: #a855f7;
+  border-color: #b066ff;
+  background: rgba(168,85,247,.08);
+  transform: scale(1.01);
 }
 
+/* ===========================
+   Upload Content
+=========================== */
+
 .upload-content {
+  text-align: center;
+
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 .upload-icon {
-  font-size: 3rem;
-  color: #9ca3af;
+  font-size: 2.3rem;
+  color: #b066ff;
   margin-bottom: 1rem;
 }
 
 .upload-content h4 {
-  margin-bottom: 1rem;
-  font-size: clamp(1.2rem, 1vw, 1.8rem);
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 0.8rem;
 }
 
 .upload-content p {
-  color: #8c95bc;
+  color: #96a0cb;
   font-size: 1rem;
+  margin-bottom: 0.5rem;
 }
 
-/**/
+.upload-content p span {
+  color: #b066ff;
+}
 
+.upload-content small {
+  color: #6f7697;
+  font-size: 0.9rem;
+}
 
+/* ===========================
+   Loading
+=========================== */
 
-
-/***/
 .analysis-progress {
-  margin-top: 24px;
-  padding: 24px;
-  border-radius: 20px;
-  background: #1b2147;
+  padding: 2rem;
+  border-radius: 22px;
+
+  background: linear-gradient(
+    135deg,
+    rgba(78, 44, 180, 0.18),
+    rgba(25, 30, 75, 0.95)
+  );
+
+  border: 1px solid rgba(168,85,247,.15);
+}
+
+.analysis-progress h3 {
+  margin-bottom: 1.2rem;
 }
 
 .progress-bar {
   width: 100%;
   height: 10px;
-  background: #2a2f5a;
+
   border-radius: 999px;
   overflow: hidden;
-  margin: 20px 0;
+
+  background: rgba(255,255,255,0.08);
+
+  margin: 1rem 0 1.2rem;
 }
 
 .progress-fill {
-  height: 100%;
   width: 100%;
-  background: linear-gradient(90deg, #8b5cf6, #a855f7);
-  animation: loading 2s infinite linear;
-}
+  height: 100%;
 
-.status-pill {
-  display: inline-block;
-  padding: 6px 12px;
-  border-radius: 999px;
-  background: rgba(34, 197, 94, 0.15);
-  color: #22c55e;
-  font-size: 0.9rem;
-  font-weight: 600;
-  margin-bottom: 16px;
-}
-.new-analysis-btn {
-  background: transparent;
-  border: none;
-  color: #8c95bc;
-  cursor: pointer;
-  font-size: 15px;
-  font-weight: 500;
-  transition: 0.2s;
-}
+  background: linear-gradient(
+    90deg,
+    #8b5cf6,
+    #b84dff
+  );
 
-.new-analysis-btn:hover {
-  color: white;
+  animation: loading 1.8s linear infinite;
 }
 
 @keyframes loading {
@@ -198,5 +287,33 @@
   }
   to {
     transform: translateX(100%);
+  }
+}
+
+/* ===========================
+   Responsive
+=========================== */
+
+@media (max-width: 768px) {
+
+  .connect-repo-card {
+    padding: 1.5rem;
+  }
+
+  .repo-input-container {
+    flex-direction: column;
+  }
+
+  .repo-input-container button {
+    width: 100%;
+    padding: 1rem;
+  }
+
+  .upload-box {
+    min-height: 200px;
+  }
+
+  .connect-repo-card h3 {
+    font-size: 1.7rem;
   }
 }

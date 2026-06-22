@@ -1,5 +1,5 @@
 import react from "react";
-import { FaUpload } from "react-icons/fa";
+import { FaUpload, FaGithub } from "react-icons/fa";
 import { useRef, useState, useEffect } from "react";
 import "./UploadBox.css"
 import axios from "axios";
@@ -96,7 +96,10 @@ function UploadBox() {
             {!loading && (
                 <div className="connect-repo-card">
 
-                    <h3>Connect Repository</h3>
+                    <h3> <FaGithub/> Analyze a Repository</h3>
+                    <p className="repo-subtitle">
+                        Paste a GitHub URL or upload a ZIP to get started
+                    </p>
                     <div className="repo-input-container">
                         <input type="url" value={repoUrl} onChange={(e) => setRepoUrl(e.target.value)} placeholder="https://github.com/usename/repository"></input>
                         <button onClick={handleRepoAnalysis}>ANALYSE</button>
@@ -124,6 +127,7 @@ function UploadBox() {
                             <div className="upload-icon"><FaUpload /></div>
                             <h4>Upload ZIP File</h4>
                             <p>{file ? file.name : "Drag and drop or click to browse"}</p>
+                            <small>Supports .zip repositories</small>
                         </div>
                     </div>
                 </div>

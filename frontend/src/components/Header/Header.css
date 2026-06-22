@@ -12,7 +12,14 @@
   height: 80px;
   z-index: 1000;
   /* background: #161d4a; */
-  background: #1b2147;
+  /* background: #1b2147; */
+  /* background: linear-gradient(
+    135deg,
+    rgba(78, 44, 180, 0.18),
+    rgba(25, 30, 75, 0.95)
+  ); */
+   background: #10173A;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
   position:fixed;
   display: flex;
   align-items: center;
