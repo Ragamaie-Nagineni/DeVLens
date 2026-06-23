@@ -5,7 +5,14 @@
   left: 0;
   height: calc(100vh - 5rem);
   /* background: #141B4D; */
-  background: #1b2147;
+  /*background: #1b2147;*/
+  /* background: linear-gradient(
+    135deg,
+    rgba(78, 44, 180, 0.18),
+    rgba(25, 30, 75, 0.95)
+  ); */
+   background: #10173A;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
   display: flex;
   flex-direction: column;
   justify-content: flex-start;

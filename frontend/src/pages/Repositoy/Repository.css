@@ -21,6 +21,7 @@
   display: flex;
   flex-direction: column;
    margin-left: 250px;
+   gap: 1rem;
 }
 
  .repository-content.collapsed {
@@ -34,7 +35,33 @@
 }
 
 /* Card */
+/*graph*/
 
+
+.graph-section {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.graph-header h2 {
+    color: white;
+    font-size: 1.8rem;
+    margin-bottom: 6px;
+}
+
+.graph-header p {
+    color: #9ea7cf;
+    font-size: 0.95rem;
+}
+
+.graph-card {
+    background: #1b2147;
+    border: 1px solid rgba(168, 85, 247, 0.2);
+    border-radius: 20px;
+    padding: 16px;
+    overflow: hidden;
+}
 
 /* Tablet */
 @media (max-width: 768px) {

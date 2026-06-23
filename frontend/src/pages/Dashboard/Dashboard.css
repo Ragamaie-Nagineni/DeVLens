@@ -20,7 +20,8 @@
   padding: 2rem;
   display: flex;
   flex-direction: column;
-   margin-left: 250px;
+  margin-left: 260px;
+  gap:1rem;
 }
 
  .dashboard-content.collapsed {
