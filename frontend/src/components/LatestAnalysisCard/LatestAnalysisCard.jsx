@@ -1,11 +1,21 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+//import { useNavigate } from "react-router-dom";
 import "./LatestAnalysisCard.css"
+import {
+    FaCube,
+    FaFolder,
+    FaCode,
+    FaArrowRight,
+    FaLayerGroup,
+    FaCheckCircle,
+    FaFileImport,
+    FaCodeBranch
+} from "react-icons/fa";
 
 function LatestAnalysisCard() {
     const [repository, setRepository] = useState(null);
-    const navigate = useNavigate();
+    //const navigate = useNavigate();
 
     useEffect(() => {
         const fetchLatestRepo = async () => {
@@ -33,39 +43,43 @@ function LatestAnalysisCard() {
 
     return (
         <div className="repository-summary-card">
-            <h2>📦 {repository.metrics?.repository?.name}</h2>
+            <div className="summary-header">
+                <div>
+                    <h2><FaCodeBranch/> <span>{repository.metrics?.repository?.name}</span></h2>
 
-            <div className="summary-status">
+                    <p className="summary">
+                        {repository.metrics?.repository?.summary}
+                    </p>
+                </div>
+
                 <span className="status-pill">
-                    ✅ Analysis Complete
+                    <FaCheckCircle />
+                    Analysis Complete
                 </span>
             </div>
 
             <div className="metrics-grid">
                 <div className="metric-card">
-                    <h4>📁 Files</h4>
+                    <h4><FaFolder /> Files</h4>
                     <span>{repository.metrics?.files}</span>
                 </div>
 
                 <div className="metric-card">
-                    <h4>⚙️ Functions</h4>
+                    <h4><FaCode /> Functions</h4>
                     <span>{repository.metrics?.functions}</span>
                 </div>
 
                 <div className="metric-card">
-                    <h4>🔗 Imports</h4>
+                    <h4>< FaFileImport/> Imports</h4>
                     <span>{repository.metrics?.imports}</span>
                 </div>
 
                 <div className="metric-card">
-                    <h4>🏗️ Classes</h4>
+                    <h4><FaLayerGroup /> Classes</h4>
                     <span>{repository.metrics?.classes}</span>
                 </div>
             </div>
 
-            <p className="summary">
-                {repository.metrics?.repository?.summary}
-            </p>
 
             {/* <button
                 className="explore-btn"

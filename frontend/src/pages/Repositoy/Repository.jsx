@@ -6,6 +6,7 @@ import Graph from "../../components/Graph/Graph";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import LatestAnalysisCard from "../../components/LatestAnalysisCard/LatestAnalysisCard";
+import { FaGlobe} from "react-icons/fa";
 
 
 function Repository() {
@@ -55,7 +56,7 @@ function Repository() {
                     {/* {graph ? (<Graph graph={graph} />) : (<p>No repository analyzed yet.</p>)} */}
                     <div className="graph-section">
                         <div className="graph-header">
-                            <h2>🌐 Repository Knowledge Graph</h2>
+                            <h2><FaGlobe/> <span>Repository Knowledge Graph</span></h2>
                             <p>
                                 Explore relationships between files, functions, and
                                 imports.
