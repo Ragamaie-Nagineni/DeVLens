@@ -8,12 +8,15 @@ import axios from "axios";
 import LatestAnalysisCard from "../../components/LatestAnalysisCard/LatestAnalysisCard";
 import { FaGlobe } from "react-icons/fa";
 import FileExplorer from "../../components/FileExplorer/FileExplorer";
+import CodeViewer from "../../components/FileExplorer/CodeViewer";
 
 function Repository() {
     const [collapsed, setcollapsed] = useState(false);
     const location = useLocation();
     const [repository, setRepository] = useState(location.state?.repository || null);
     const [graph, setGraph] = useState(location.state?.graph || null);
+    const [selectedFile, setSelectedFile] = useState(null);
+    const [code, setCode] = useState("");
 
     useEffect(() => {
         if (graph) return;
@@ -74,7 +77,6 @@ function Repository() {
                     {/* content */}
 
                     <LatestAnalysisCard repository={repository} />
-                    {/* {graph ? (<Graph graph={graph} />) : (<p>No repository analyzed yet.</p>)} */}
                     <div className="graph-section">
                         <div className="graph-header">
                             <h2><FaGlobe /> <span>Repository Knowledge Graph</span></h2>
@@ -92,9 +94,29 @@ function Repository() {
                             )}
                         </div>
 
-                        <div>
-                            <FileExplorer files={repository?.repository_analysis} />
-                        </div>
+
+                    </div>
+                    <div className="explorer-viewer">
+                        <FileExplorer
+                            files={repository?.repository_analysis}
+                            onFileClick={async (file) => {
+                                setSelectedFile(file);
+
+                                const res = await axios.get(
+                                    `http://localhost:3000/api/repository/${repository.id}/file`,
+                                    {
+                                        params: { filePath: file },
+                                    }
+                                );
+
+                                setCode(res.data.content);
+                            }}
+                        />
+
+                        <CodeViewer
+                            code={code}
+                            selectedFile={selectedFile}
+                        />
                     </div>
 
                 </div>

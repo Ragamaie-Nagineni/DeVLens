@@ -120,22 +120,72 @@
   padding: 3rem 0;
   font-size: 1rem;
 }
+/* explorer*/
 
 
-/* Tablet */
-@media (max-width: 768px) {
-  .repository-content {
-    padding: 1rem;
-  }
-
-  
+.explorer-viewer {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+  min-height: 650px;
 }
 
-/* Mobile */
-@media (max-width: 480px) {
-  .repository-content {
-    padding: 0.75rem;
+/* Left */
+
+.file-explorer {
+  width: 300px;
+  flex-shrink: 0;
+  background: #10173a;
+  border: 1px solid rgba(168, 85, 247, 0.2);
+  border-radius: 18px;
+  padding: 16px;
+  overflow-y: auto;
+}
+
+/* Right */
+
+.code-viewer {
+  flex: 1;
+  background: #10173a;
+  border: 1px solid rgba(168, 85, 247, 0.2);
+  border-radius: 18px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.code-header {
+  padding: 14px 18px;
+  border-bottom: 1px solid #2c3568;
+  font-weight: 600;
+  background: #0d1330;
+}
+
+.code-viewer pre {
+  flex: 1;
+  overflow: auto;
+  margin: 0;
+  padding: 20px;
+}
+
+.code-viewer code {
+  font-family: "Fira Code", Consolas, monospace;
+  font-size: 14px;
+  line-height: 1.6;
+  white-space: pre;
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+  .explorer-viewer {
+    flex-direction: column;
   }
 
-  
+  .file-explorer {
+    width: 100%;
+  }
+
+  .code-viewer {
+    min-height: 500px;
+  }
 }

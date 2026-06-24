@@ -3,6 +3,7 @@ import cloneRepository from "../services/cloneRepository.js";
 import walkDirectory from "../services/fileWalker.js";
 import parseJavaScriptFile from "../services/parserService.js"
 import buildGraph from "../services/graphBuilder.js";
+import fs from "fs/promises";
 import path from "path";
 import pool from "../db/db.js";
 
@@ -18,10 +19,10 @@ router.post("/", async (req, res) => {
                 message: "Invalid GitHub URL"
             });
         }
-         console.log("repository url:", repoUrl);
-        const normalizedRepoUrl = repoUrl.trim().replace(/\.git$/, "").replace(/\/$/, "").toLowerCase();
+        console.log("repository url:", repoUrl);
+       /*  const normalizedRepoUrl = repoUrl.trim().replace(/\.git$/, "").replace(/\/$/, "").toLowerCase();
         const existingRepo = await pool.query(`SELECT * FROM repositories WHERE LOWER(repo_url) = $1 LIMIT 1`,
-            [ normalizedRepoUrl]
+            [normalizedRepoUrl]
         );
 
         if (existingRepo.rows.length > 0) {
@@ -33,9 +34,9 @@ router.post("/", async (req, res) => {
                 graph: existingRepo.rows[0].graph,
                 repositoryAnalysis: existingRepo.rows[0].repository_analysis,
                 metrics: existingRepo.rows[0].metrics,
-            });
-        }
-       
+            }); 
+        }*/
+
         const result = await cloneRepository(repoUrl);
         console.log(result);
         const files = await walkDirectory(result.clonePath);
@@ -86,19 +87,20 @@ router.post("/", async (req, res) => {
         console.log(JSON.stringify(repositoryAnalysis, null, 2));
         console.log("Saving repository...");
         //console.log(typeof metrics);
-       
+
 
         await pool.query(`INSERT INTO repositories
-                         (user_id, repo_name, repo_url, summary, metrics, graph, repository_analysis)
-                          VALUES ($1, $2, $3, $4, $5, $6, $7)`,
+                         (user_id, repo_name, repo_url, summary, metrics, graph, repository_analysis, clone_path)
+                          VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`,
             [
                 userId,
                 repoName,
                 repoUrl,
                 metrics.repository.summary,
-                metrics,              
+                metrics,
                 graph,
-                JSON.stringify(repositoryAnalysis)
+                JSON.stringify(repositoryAnalysis),
+                result.clonePath
             ]
         );
         console.log("Repository saved!");
@@ -165,4 +167,23 @@ router.get("/recent/:userId", async (req, res) => {
         res.status(500).json({ error: "Failed to fetch repositories" });
     }
 });
+router.get("/:repoId/file", async (req, res) => {
+    try {
+        const { repoId } = req.params;
+        const { filePath } = req.query;
+
+       const result = await pool.query(`SELECT clone_path FROM repositories WHERE id = $1`,[repoId]);
+        if (result.rows.length === 0) {
+            return res.status(404).json({ message: "Repository not found" });
+        }
+        const clonePath = result.rows[0].clone_path;
+        const fullPath = path.join(clonePath, filePath);
+        const content = await fs.readFile(fullPath, "utf-8");
+        res.json({ content });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: "Failed to read file" });
+    }
+})
+
 export default router;
