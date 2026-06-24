@@ -13,34 +13,9 @@ import {
     FaCodeBranch
 } from "react-icons/fa";
 
-function LatestAnalysisCard() {
-    const [repository, setRepository] = useState(null);
-    //const navigate = useNavigate();
-
-    useEffect(() => {
-        const fetchLatestRepo = async () => {
-            try {
-                const user = JSON.parse(localStorage.getItem("user"));
-
-                if (!user) return;
-
-                const res = await axios.get(
-                    `http://localhost:3000/api/repository/latest/${user.id}`
-                );
-
-                setRepository(res.data);
-            } catch (err) {
-                console.error(err);
-            }
-        };
-
-        fetchLatestRepo();
-    }, []);
-
-    if (!repository) {
-        return null;
-    }
-
+function LatestAnalysisCard({ repository }) {
+  if (!repository) return null;
+   
     return (
         <div className="repository-summary-card">
             <div className="summary-header">
