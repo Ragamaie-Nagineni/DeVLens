@@ -175,17 +175,29 @@
   white-space: pre;
 }
 
-/* Tablet */
+@media (max-width: 1100px) {
+  .repository-content {
+    padding: 1rem;
+  }
+}
+
 @media (max-width: 900px) {
   .explorer-viewer {
     flex-direction: column;
   }
 
-  .file-explorer {
-    width: 100%;
+  .repository-content {
+    margin-left: 80px;
+  }
+}
+
+@media (max-width: 600px) {
+  .repository-content {
+    margin-left: 0;
+    padding: 0.75rem;
   }
 
-  .code-viewer {
-    min-height: 500px;
+  .graph-header h2 {
+    font-size: 1.25rem;
   }
 }
