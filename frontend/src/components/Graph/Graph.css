@@ -1,6 +1,52 @@
 .graph-container {
-    width: 100%;
-    height: 500px;
-    border-radius: 16px;
-    overflow: hidden;
+  width: 100%;
+  height: 500px;
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+}
+
+.graph-banner {
+  position: absolute;
+  top: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+
+  padding: 10px 18px;
+
+  background: rgba(168, 85, 247, 0.95);
+  color: white;
+
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.graph-toolbar {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  z-index: 20;
+}
+
+.graph-btn {
+  border: none;
+  outline: none;
+  cursor: pointer;
+
+  padding: 8px 14px;
+
+  border-radius: 8px;
+
+  background: #7c3aed;
+  color: white;
+
+  font-weight: 600;
+}
+
+.graph-btn:hover {
+  background: #6d28d9;
 }
