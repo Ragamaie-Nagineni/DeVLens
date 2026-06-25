@@ -1,5 +1,5 @@
-import React,{useState,useEffect,useMemo} from "react";
-import{
+import React, { useState, useEffect, useMemo } from "react";
+import {
     ReactFlow,
     Background,
     Controls,
@@ -7,68 +7,77 @@ import{
 } from "reactflow";
 import "reactflow/dist/style.css"
 import "./Graph.css"
-function Graph({graph}){
-   const [locked, setLocked] = useState(true);
+import { FaLock,FaLockOpen } from "react-icons/fa";
+function Graph({ graph }) {
+    const [locked, setLocked] = useState(true);
+    const [isFullscreen, setIsFullscreen] = useState(false);
 
-   const nodes=useMemo(()=>{
-    if(!graph) return [];
+    const nodes = useMemo(() => {
+        if (!graph) return [];
 
-    return graph.nodes.map((node,index)=>({
-        id:node.id,
-        data:{label:node.id.split("/").pop()},
-        position:{
-            x: (index %5)*250,
-            y:Math.floor(index/5)*150
-        }
-    }))
-   },[graph])
+        return graph.nodes.map((node, index) => ({
+            id: node.id,
+            data: { label: node.id.split("/").pop() },
+            position: {
+                x: (index % 5) * 250,
+                y: Math.floor(index / 5) * 150
+            }
+        }))
+    }, [graph])
 
-    const edges=useMemo(()=>{
-        if(!graph) return [];
-        return graph.edges.map((edge,index)=>({
-            id:`edge-${index}`,
-            source:edge.from,
-            target:edge.to,
-            label:edge.type
+    const edges = useMemo(() => {
+        if (!graph) return [];
+        return graph.edges.map((edge, index) => ({
+            id: `edge-${index}`,
+            source: edge.from,
+            target: edge.to,
+            label: edge.type
         }))
 
-    },[graph]);
+    }, [graph]);
 
-    return(
-        
-    <div className="graph-container">
-      {locked && (
-        <div className="graph-banner">
-          🔒 Graph is locked. Click <strong>Unlock</strong> to pan, zoom and
-          explore.
-        </div>
-      )}
+    return (
+        <>
+            {locked && (
+                <div className="graph-banner">
+                    🔒 Graph is locked. Click <strong>Unlock</strong> to pan, zoom and
+                    explore.
+                </div>
+            )}
+            <div className={`graph-container ${isFullscreen ? "graph-fullscreen" : ""}`}>
 
-      <div className="graph-toolbar">
-        <button
-          className="graph-btn"
-          onClick={() => setLocked((prev) => !prev)}
-        >
-          {locked ? "🔓 Unlock Graph" : "🔒 Lock Graph"}
-        </button>
-      </div>
+                <div className="graph-toolbar">
+                    <button
+                        className="graph-btn"
+                        onClick={() => setLocked((prev) => !prev)}
+                    >
+                        {locked ?  <FaLockOpen/>  : <FaLock/>}
+                    </button>
+                    <button
+                        className="graph-btn"
+                        onClick={() => setIsFullscreen((prev) => !prev)}
+                    >
+                        {isFullscreen ? "Exit" : "⛶ "}
+                    </button>
+                </div>
 
-      <ReactFlow
-        nodes={nodes}
-        edges={edges}
-        fitView
-        zoomOnScroll={!locked}
-        panOnScroll={!locked}
-        panOnDrag={!locked}
-        nodesDraggable={!locked}
-        elementsSelectable={!locked}
-        preventScrolling={false} 
-      >
-        <Controls />
-      {/*   <MiniMap /> */}
-        <Background />
-      </ReactFlow>
-    </div>
+                <ReactFlow
+                    nodes={nodes}
+                    edges={edges}
+                    fitView
+                    zoomOnScroll={!locked}
+                    panOnScroll={!locked}
+                    panOnDrag={!locked}
+                    nodesDraggable={!locked}
+                    elementsSelectable={!locked}
+                    preventScrolling={false}
+                >
+                    {/*  <Controls /> */}
+                    {/*   <MiniMap /> */}
+                    <Background />
+                </ReactFlow>
+            </div>
+        </>
     )
 }
 
