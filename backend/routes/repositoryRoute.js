@@ -89,8 +89,8 @@ router.post("/", async (req, res) => {
         //console.log(typeof metrics);
 
 
-      const repoInsert = await pool.query(
-  `
+        const repoInsert = await pool.query(
+            `
   INSERT INTO repositories
   (
     user_id,
@@ -105,16 +105,16 @@ router.post("/", async (req, res) => {
   VALUES ($1, $2, $3, $4, $5, $6, NOW(), $7)
   RETURNING id
   `,
-  [
-    userId,
-    repoName,
-    "github",
-    repoUrl,
-    "JavaScript",
-    "ready",
-    result.clonePath,   
-  ]
-);
+            [
+                userId,
+                repoName,
+                "github",
+                repoUrl,
+                "JavaScript",
+                "ready",
+                result.clonePath,
+            ]
+        );
         const repositoryId = repoInsert.rows[0].id;
         console.log("saved into repository table");
         await pool.query(
@@ -162,8 +162,8 @@ router.get("/latest/:userId", async (req, res) => {
     try {
         const { userId } = req.params;
 
-       const result = await pool.query(
-  `
+        const result = await pool.query(
+            `
   SELECT
       r.*,
       s.graph,
@@ -181,8 +181,8 @@ router.get("/latest/:userId", async (req, res) => {
   ORDER BY r.created_at DESC
   LIMIT 1
   `,
-  [userId]
-);
+            [userId]
+        );
 
         if (result.rows.length === 0) {
             return res.json(null);
@@ -201,7 +201,7 @@ router.get("/recent/:userId", async (req, res) => {
 
     try {
         const result = await pool.query(
-  `
+            `
   SELECT
       r.*,
       s.metrics,
@@ -219,8 +219,8 @@ router.get("/recent/:userId", async (req, res) => {
   ORDER BY r.created_at DESC
   LIMIT 3
   `,
-  [userId]
-);
+            [userId]
+        );
 
         res.json(result.rows);
     } catch (err) {
