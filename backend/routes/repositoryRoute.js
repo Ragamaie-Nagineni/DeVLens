@@ -82,7 +82,7 @@ router.post("/", async (req, res) => {
             ),
         };
 
-        const graph = buildGraph(repositoryAnalysis);
+        const graph = buildGraph(repositoryAnalysis,repoName);
         //check
         console.log(JSON.stringify(repositoryAnalysis, null, 2));
         console.log("Saving repository...");

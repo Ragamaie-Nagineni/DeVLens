@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo } from "react";
+import { getLayoutedElements } from "../../utils/layoutGraph";
 import {
     ReactFlow,
     Background,
@@ -7,40 +8,50 @@ import {
 } from "reactflow";
 import "reactflow/dist/style.css"
 import "./Graph.css"
-import { FaLock,FaLockOpen } from "react-icons/fa";
+import { FaLock, FaLockOpen } from "react-icons/fa";
 function Graph({ graph }) {
     const [locked, setLocked] = useState(true);
     const [isFullscreen, setIsFullscreen] = useState(false);
 
-    const nodes = useMemo(() => {
-        if (!graph) return [];
+    const layouted = useMemo(() => {
+        if (!graph) {
+            return { nodes: [], edges: [] };
+        }
 
-        return graph.nodes.map((node, index) => ({
+        const nodes = graph.nodes.map((node) => ({
             id: node.id,
-            data: { label: node.id.split("/").pop() },
-            position: {
-                x: (index % 5) * 250,
-                y: Math.floor(index / 5) * 150
-            }
-        }))
-    }, [graph])
+            data: {
+                label:
+                    node.id === "__ROOT__"
+                        ? `${node.label}`
+                        : node.id.split("/").pop()
+            },
+            style: {
+                background: "#141B4D",
+                color: "#ffffff",
+                border: "1px solid rgba(168, 85, 247, 0.3)",
+                borderRadius: "10px",
+                padding: "6px",
+                fontSize: "13px",
+                fontWeight: 500,
+            },
+        }));
 
-    const edges = useMemo(() => {
-        if (!graph) return [];
-        return graph.edges.map((edge, index) => ({
+        const edges = graph.edges.map((edge, index) => ({
             id: `edge-${index}`,
             source: edge.from,
             target: edge.to,
-            label: edge.type
-        }))
+            animated: true,
+        }));
 
+        return getLayoutedElements(nodes, edges);
     }, [graph]);
 
     return (
         <>
             {locked && (
                 <div className="graph-banner">
-                    🔒 Graph is locked. Click <strong>Unlock</strong> to pan, zoom and
+                    Graph is locked. Click <strong>Unlock</strong> to pan, zoom and
                     explore.
                 </div>
             )}
@@ -51,7 +62,7 @@ function Graph({ graph }) {
                         className="graph-btn"
                         onClick={() => setLocked((prev) => !prev)}
                     >
-                        {locked ?  <FaLockOpen/>  : <FaLock/>}
+                        {locked ? <FaLockOpen /> : <FaLock />}
                     </button>
                     <button
                         className="graph-btn"
@@ -62,8 +73,8 @@ function Graph({ graph }) {
                 </div>
 
                 <ReactFlow
-                    nodes={nodes}
-                    edges={edges}
+                    nodes={layouted.nodes}
+                    edges={layouted.edges}
                     fitView
                     zoomOnScroll={!locked}
                     panOnScroll={!locked}
