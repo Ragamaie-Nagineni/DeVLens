@@ -31,10 +31,14 @@ function Graph({ graph }) {
                 color: "#ffffff",
                 border: "1px solid rgba(168, 85, 247, 0.3)",
                 borderRadius: "10px",
-                padding: "6px",
+                padding: "8px 12px",
+                minWidth: "120px",
+                maxWidth: "250px",
+                whiteSpace: "normal",
+                wordBreak: "break-word",
                 fontSize: "13px",
                 fontWeight: 500,
-            },
+            }
         }));
 
         const edges = graph.edges.map((edge, index) => ({
@@ -42,6 +46,9 @@ function Graph({ graph }) {
             source: edge.from,
             target: edge.to,
             animated: true,
+            markerEnd: {
+                type: "arrowclosed",
+            },
         }));
 
         return getLayoutedElements(nodes, edges);

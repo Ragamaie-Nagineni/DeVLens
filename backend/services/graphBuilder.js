@@ -9,7 +9,14 @@ function buildGraph(repositoryAnalysis, repoName) {
         label: repoName,
     });
     const projectFiles = new Set(repositoryAnalysis.map(file => file.file));
-
+    const ignoredFiles = new Set([
+  "vite.config.js",
+  "eslint.config.js",
+  "tailwind.config.js",
+  "postcss.config.js",
+  "package.json",
+  "package-lock.json",
+]);
     for (const analysis of repositoryAnalysis) {
         nodes.push({
             id: analysis.file,
@@ -28,7 +35,9 @@ function buildGraph(repositoryAnalysis, repoName) {
             })
         } */
         const fileName = path.posix.basename(analysis.file);
-
+        if (ignoredFiles.has(fileName)) {
+  continue;
+}
         if (
             fileName === "main.jsx" ||
             fileName === "main.js" ||
