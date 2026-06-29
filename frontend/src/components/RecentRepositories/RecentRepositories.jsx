@@ -68,7 +68,8 @@ function RecentRepositories() {
                             onClick={() =>
                                 navigate("/repository", {
                                     state: {
-                                        repositoryId: repo,
+                                        repository: repo,
+                                        graph: repo.graph,
                                     },
                                 })
                             }
