@@ -217,7 +217,6 @@ router.get("/recent/:userId", async (req, res) => {
   ) s ON TRUE
   WHERE r.user_id = $1
   ORDER BY r.created_at DESC
-  LIMIT 3
   `,
             [userId]
         );
