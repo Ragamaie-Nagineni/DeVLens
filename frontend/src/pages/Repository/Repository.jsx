@@ -62,7 +62,22 @@ function Repository() {
 
         fetchRepository();
     }, [repository]);
+    const handleFileSelect = async (file) => {
+    try {
+        setSelectedFile(file);
 
+        const res = await axios.get(
+            `http://localhost:3000/api/repository/${repository.id}/file`,
+            {
+                params: { filePath: file },
+            }
+        );
+
+        setCode(res.data.content);
+    } catch (err) {
+        console.error(err);
+    }
+};
     return (
         <div>
             <Header />
@@ -88,7 +103,9 @@ function Repository() {
 
                         <div className="graph-card">
                             {graph ? (
-                                <Graph graph={graph} />
+                                <Graph graph={graph}
+                                 onNodeClick={handleFileSelect}
+                                />
                             ) : (
                                 <p>No repository analyzed yet.</p>
                             )}
@@ -99,18 +116,7 @@ function Repository() {
                     <div className="explorer-viewer">
                         <FileExplorer
                             files={repository?.repository_analysis}
-                            onFileClick={async (file) => {
-                                setSelectedFile(file);
-
-                                const res = await axios.get(
-                                    `http://localhost:3000/api/repository/${repository.id}/file`,
-                                    {
-                                        params: { filePath: file },
-                                    }
-                                );
-
-                                setCode(res.data.content);
-                            }}
+                            onFileClick={handleFileSelect}
                         />
 
                         <CodeViewer

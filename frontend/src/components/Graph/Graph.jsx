@@ -9,10 +9,10 @@ import {
 import "reactflow/dist/style.css"
 import "./Graph.css"
 import { FaLock, FaLockOpen } from "react-icons/fa";
-function Graph({ graph }) {
+function Graph({ graph, onNodeClick }) {
     const [locked, setLocked] = useState(true);
     const [isFullscreen, setIsFullscreen] = useState(false);
-
+    console.log(onNodeClick);
     const layouted = useMemo(() => {
         if (!graph) {
             return { nodes: [], edges: [] };
@@ -89,6 +89,9 @@ function Graph({ graph }) {
                     nodesDraggable={!locked}
                     elementsSelectable={!locked}
                     preventScrolling={false}
+                    onNodeClick={(event, node) => {
+                        onNodeClick(node.id);
+                    }}
                 >
                     {/*  <Controls /> */}
                     {/*   <MiniMap /> */}
