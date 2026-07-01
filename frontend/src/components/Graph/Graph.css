@@ -1,6 +1,80 @@
 .graph-container {
-    width: 100%;
-    height: 500px;
-    border-radius: 16px;
-    overflow: hidden;
+  width: 100%;
+  height: 500px;
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* .graph-banner {
+  position: absolute;
+  top: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+
+  padding: 10px 18px;
+
+  background: rgba(168, 85, 247, 0.95);
+  color: white;
+
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+} */
+.graph-banner {
+  margin-bottom: 12px;
+  padding: 12px 18px;
+  text-align: center;
+  
+   background: rgba(168, 94, 237, 0.85);
+  color: white;
+
+  border-radius: 12px;
+  font-weight: 600;
+}
+
+.graph-toolbar {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  z-index: 20;
+  display: flex;
+  gap: 10px;
+}
+
+.graph-btn {
+  border: none;
+  outline: none;
+  cursor: pointer;
+
+  padding: 8px 14px;
+
+  border-radius: 8px;
+
+  background: #a958f4;
+  color: white;
+
+  font-weight: 600;
+}
+
+.graph-btn:hover {
+   background: #8033c8;
+}
+
+
+.graph-fullscreen {
+  position: fixed;
+  inset: 0;
+
+  width: 100vw;
+  height: 100vh;
+
+  z-index: 9999;
+
+  border-radius: 0;
+
+  background: #0b1020;
 }

@@ -4,7 +4,7 @@ import Loginpage from "./pages/login/Loginpage";
 import Signuppage from "./pages/signup/Signuppage";
 import Sidebar from "./components/Sidebar/Sidebar";
 import Dashboard from "./pages/Dashboard/Dashboard";
-import Repository from "./pages/Repositoy/Repository";
+import Repository from "./pages/Repository/Repository";
 
 
 function App() {

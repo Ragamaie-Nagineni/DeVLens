@@ -1,0 +1,83 @@
+.code-viewer {
+  flex: 1;
+  min-width: 0;
+  height: 700px;
+
+  display: flex;
+  flex-direction: column;
+
+  background: linear-gradient(
+    135deg,
+    rgba(78, 44, 180, 0.12),
+    #10173a
+  );
+
+  border: 1px solid rgba(168, 85, 247, 0.15);
+  border-radius: 18px;
+
+  overflow: hidden;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.03),
+    0 20px 40px rgba(0, 0, 0, 0.25);
+}
+
+.code-header {
+  flex-shrink: 0;
+
+  padding: 16px 20px;
+
+  font-size: 16px;
+  font-weight: 600;
+
+  color: #ffffff;
+
+  background: rgba(255, 255, 255, 0.03);
+
+  border-bottom: 1px solid rgba(168, 85, 247, 0.15);
+}
+
+.code-viewer pre {
+  flex: 1;
+
+  margin: 0;
+  padding: 24px;
+
+  overflow: auto;
+
+  font-family:
+    "JetBrains Mono",
+    "Fira Code",
+    Consolas,
+    monospace;
+
+  font-size: 14px;
+  line-height: 1.8;
+
+  color: #e2e8f0;
+}
+
+.code-viewer code {
+  white-space: pre;
+}
+
+.code-viewer pre::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.code-viewer pre::-webkit-scrollbar-thumb {
+  background: rgba(168, 85, 247, 0.45);
+  border-radius: 10px;
+}
+
+.code-viewer pre::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+@media (max-width: 900px) {
+  .code-viewer {
+    width: 100%;
+    height: 500px;
+  }
+}
