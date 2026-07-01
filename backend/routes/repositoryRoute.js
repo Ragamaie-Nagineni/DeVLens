@@ -150,7 +150,8 @@ router.post("/", async (req, res) => {
         id: repositoryId,
         name: repoName,
     },
-    graph
+    graph,
+    repositoryAnalysis
 );
         res.json({
             success: true,
