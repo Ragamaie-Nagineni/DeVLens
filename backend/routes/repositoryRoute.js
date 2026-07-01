@@ -3,6 +3,7 @@ import cloneRepository from "../services/cloneRepository.js";
 import walkDirectory from "../services/fileWalker.js";
 import parseJavaScriptFile from "../services/parserService.js"
 import buildGraph from "../services/graphBuilder.js";
+import { saveGraph } from "../services/neo4jService.js";
 import fs from "fs/promises";
 import path from "path";
 import pool from "../db/db.js";
@@ -144,6 +145,13 @@ router.post("/", async (req, res) => {
         console.log("saved into analysis_snapshots table");
         console.log("Repository saved!");
         //console.log(graph);
+        await saveGraph(
+    {
+        id: repositoryId,
+        name: repoName,
+    },
+    graph
+);
         res.json({
             success: true,
             message: "Repository analyzed successfully",
@@ -157,6 +165,7 @@ router.post("/", async (req, res) => {
         console.error(e);
         return res.status(500).json({ success: false, message: "failed to clone repository" })
     }
+    
 });
 router.get("/latest/:userId", async (req, res) => {
     try {
