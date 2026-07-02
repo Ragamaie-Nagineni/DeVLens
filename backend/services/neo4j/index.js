@@ -3,6 +3,7 @@ import driver from "../../db/neo4j.js";
 import {
     saveRepositoryNode,
     saveFileNodes,
+    saveFolderNodes
 } from "./nodes.js";
 
 import {
@@ -17,6 +18,7 @@ export async function saveGraph(repository, graph, repositoryAnalysis) {
 
     try {
         await saveRepositoryNode(session, repository);
+        await saveFolderNodes(session,repositoryAnalysis,repository);
         await saveFileNodes(session, repository, graph);
         await saveImportRelationships(session, repositoryAnalysis);
         await saveFunctionNodes(session, repositoryAnalysis);
