@@ -3,7 +3,7 @@ import cloneRepository from "../services/cloneRepository.js";
 import walkDirectory from "../services/fileWalker.js";
 import parseJavaScriptFile from "../services/parserService.js"
 import buildGraph from "../services/graphBuilder.js";
-import { saveGraph } from "../services/neo4jService.js";
+import { saveGraph } from "../services/neo4j/index.js";
 import fs from "fs/promises";
 import path from "path";
 import pool from "../db/db.js";
