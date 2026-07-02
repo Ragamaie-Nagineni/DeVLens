@@ -7,7 +7,8 @@ import {
 
 import {
     saveImportRelationships,
-    saveFunctionNodes
+    saveFunctionNodes,
+    saveCallRelationships,
 } from "./relationships.js";
 
 export async function saveGraph(repository, graph, repositoryAnalysis) {
@@ -19,6 +20,7 @@ export async function saveGraph(repository, graph, repositoryAnalysis) {
         await saveFileNodes(session, repository, graph);
         await saveImportRelationships(session, repositoryAnalysis);
         await saveFunctionNodes(session, repositoryAnalysis);
+        await saveCallRelationships(session,repositoryAnalysis);
         console.log("Neo4j graph saved.");
 
     } catch (err) {
