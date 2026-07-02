@@ -61,7 +61,7 @@ async function parseJavaScriptFile(filePath) {
                 };
                 const bodyPath = path.get("init");
                 bodyPath.traverse({
-                    
+
                     CallExpression(callPath) {
                         if (callPath.node.callee.type === "Identifier") {
                             fn.calls.push(callPath.node.callee.name);
@@ -73,10 +73,108 @@ async function parseJavaScriptFile(filePath) {
         },
         ClassDeclaration(path) { result.classes.push(path.node.id.name); },
         ExportNamedDeclaration(path) {
-            if (path.node.declaration?.id?.name) { result.exports.push(path.node.declaration.id.name); }
-            if (path.node.specifiers?.length) { for (const specifier of path.node.specifiers) { result.exports.push(specifier.exported.name); } }
+
+            const declaration = path.node.declaration;
+
+            if (declaration) {
+
+                if (declaration.type === "FunctionDeclaration") {
+
+                    result.exports.push({
+                        type: "named",
+                        kind: "function",
+                        name: declaration.id.name,
+                    });
+
+                }
+
+                else if (declaration.type === "ClassDeclaration") {
+
+                    result.exports.push({
+                        type: "named",
+                        kind: "class",
+                        name: declaration.id.name,
+                    });
+
+                } else if (declaration.type === "VariableDeclaration") {
+
+                    for (const variable of declaration.declarations) {
+
+                        result.exports.push({
+                            type: "named",
+                            kind: "function",
+                            name: variable.id.name,
+                        });
+
+                    }
+                }
+
+            }
+
+            for (const specifier of path.node.specifiers || []) {
+
+                const exportedName = specifier.exported.name;
+
+                const isFunction = result.functions.some(
+                    fn => fn.name === exportedName
+                );
+
+                const isClass = result.classes.includes(exportedName);
+
+                result.exports.push({
+                    type: "named",
+                    kind: isFunction
+                        ? "function"
+                        : isClass
+                            ? "class"
+                            : "unknown",
+                    name: exportedName,
+                });
+
+            }
+
         },
-        ExportDefaultDeclaration(path) { result.exports.push("default"); }
+        ExportDefaultDeclaration(path) {
+
+            const declaration = path.node.declaration;
+
+            if (declaration.type === "Identifier") {
+                const isFunction = result.functions.some(
+                    fn => fn.name === declaration.name
+                );
+                const isClass = result.classes.includes(declaration.name);
+                result.exports.push({
+                    type: "default",
+                    kind: isFunction
+                        ? "function"
+                        : isClass
+                            ? "class"
+                            : "unknown",
+                    name: declaration.name,
+                });
+            }
+
+            else if (declaration.type === "FunctionDeclaration") {
+
+                result.exports.push({
+                    type: "default",
+                    kind: "function",
+                    name: declaration.id?.name || "anonymous",
+                });
+
+            }
+
+            else if (declaration.type === "ClassDeclaration") {
+
+                result.exports.push({
+                    type: "default",
+                    kind: "class",
+                    name: declaration.id?.name || "anonymous",
+                });
+
+            }
+
+        },
     })
     return result;
 }

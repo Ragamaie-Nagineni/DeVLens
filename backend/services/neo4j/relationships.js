@@ -213,3 +213,55 @@ export async function saveCallRelationships(session, repositoryAnalysis) {
     }
     console.log("calls saved");
 }
+export async function saveExportRelationships(session, repositoryAnalysis) {
+
+    for (const file of repositoryAnalysis) {
+
+        for (const exp of file.exports) {
+
+            if (exp.kind === "function") {
+
+                await session.run(
+                    `
+                    MATCH (f:File {path:$file})
+
+                    MATCH (fn:Function {
+                        name:$name,
+                        file:$file
+                    })
+
+                    MERGE (f)-[:EXPORTS]->(fn)
+                    `,
+                    {
+                        file: file.file,
+                        name: exp.name,
+                    }
+                );
+            }
+
+            else if (exp.kind === "class") {
+
+                await session.run(
+                    `
+                    MATCH (f:File {path:$file})
+
+                    MATCH (c:Class {
+                        name:$name,
+                        file:$file
+                    })
+
+                    MERGE (f)-[:EXPORTS]->(c)
+                    `,
+                    {
+                        file: file.file,
+                        name: exp.name,
+                    }
+                );
+            }
+
+        }
+
+    }
+
+    console.log("EXPORTS relationships saved.");
+}
