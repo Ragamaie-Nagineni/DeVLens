@@ -21,10 +21,10 @@ export async function saveGraph(repository, graph, repositoryAnalysis) {
         await saveRepositoryNode(session, repository);
         await saveFolderNodes(session,repositoryAnalysis,repository);
         await saveFileNodes(session, repository, graph);
-        await saveImportRelationships(session, repositoryAnalysis);
-        await saveFunctionNodes(session, repositoryAnalysis);
-        await saveExportRelationships(session,repositoryAnalysis);
-        await saveCallRelationships(session,repositoryAnalysis);
+        await saveImportRelationships(session, repositoryAnalysis,repository);
+        await saveFunctionNodes(session, repositoryAnalysis,repository);
+        await saveExportRelationships(session,repositoryAnalysis,repository);
+        await saveCallRelationships(session,repositoryAnalysis,repository);
         console.log("Neo4j graph saved.");
 
     } catch (err) {

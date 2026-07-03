@@ -13,7 +13,7 @@ Class --EXTENDS--> Class
 */
 import path from "path";
 
-export async function saveImportRelationships(session, repositoryAnalysis) {
+export async function saveImportRelationships(session, repositoryAnalysis,repository) {
     const fileMap = new Set();
     for (const file of repositoryAnalysis) {
         fileMap.add(file.file);
@@ -54,12 +54,20 @@ export async function saveImportRelationships(session, repositoryAnalysis) {
 
             await session.run(
                 `
-                MATCH (from:File {path:$from})
-                MATCH (to:File {path:$to})
+               MATCH (from:File {
+               repositoryId:$repositoryId,
+               path:$from
+               })
+
+               MATCH (to:File {
+               repositoryId:$repositoryId,
+               path:$to
+               })
 
                 MERGE (from)-[:IMPORTS]->(to)
                 `,
                 {
+                    repositoryId: repository.id,
                     from: file.file,
                     to: resolved,
                 }
@@ -70,21 +78,26 @@ export async function saveImportRelationships(session, repositoryAnalysis) {
     console.log("IMPORTS relationships saved.");
 }
 
-export async function saveFunctionNodes(session, repositoryAnalysis) {
+export async function saveFunctionNodes(session, repositoryAnalysis,repository) {
     for (const file of repositoryAnalysis) {
         for (const func of file.functions) {
             await session.run(
                 `
-                MATCH (f:File {path:$file})
+                MATCH (f:File {
+                repositoryId:$repositoryId,
+                path:$file
+                })
 
                 MERGE (fn:Function {
-                    name:$name,
-                    file:$file
+                repositoryId:$repositoryId,
+                name:$name,
+                file:$file
                 })
 
                 MERGE (f)-[:DECLARES]->(fn)
                 `,
                 {
+                    repositoryId: repository.id,
                     file: file.file,
                     name: func.name,
                 }
@@ -95,7 +108,7 @@ export async function saveFunctionNodes(session, repositoryAnalysis) {
     }
     console.log("Function nodes saved.");
 }
-export async function saveCallRelationships(session, repositoryAnalysis) {
+export async function saveCallRelationships(session, repositoryAnalysis, repository) {
     // Function lookup
     const functionMap = new Map();
     for (const file of repositoryAnalysis) {
@@ -192,15 +205,18 @@ export async function saveCallRelationships(session, repositoryAnalysis) {
 
                 await session.run(
                     `MATCH (caller:Function {
-                    name:$callerName,
-                    file:$callerFile
-                    })
+                     repositoryId:$repositoryId,
+                     name:$callerName,
+                     file:$callerFile
+                     })
                     MATCH (callee:Function {
+                    repositoryId:$repositoryId,
                     name:$calleeName,
                     file:$calleeFile
                     })
                    MERGE (caller)-[:CALLS]->(callee)`,
                     {
+                        repositoryId: repository.id,
                         callerName: func.name,
                         callerFile: file.file,
 
@@ -213,7 +229,7 @@ export async function saveCallRelationships(session, repositoryAnalysis) {
     }
     console.log("calls saved");
 }
-export async function saveExportRelationships(session, repositoryAnalysis) {
+export async function saveExportRelationships(session, repositoryAnalysis, repository) {
 
     for (const file of repositoryAnalysis) {
 
@@ -223,7 +239,10 @@ export async function saveExportRelationships(session, repositoryAnalysis) {
 
                 await session.run(
                     `
-                    MATCH (f:File {path:$file})
+                   MATCH (f:File {
+                   repositoryId:$repositoryId,
+                   path:$file
+                   })
 
                     MATCH (fn:Function {
                         name:$name,
@@ -233,6 +252,7 @@ export async function saveExportRelationships(session, repositoryAnalysis) {
                     MERGE (f)-[:EXPORTS]->(fn)
                     `,
                     {
+                        repositoryId: repository.id,
                         file: file.file,
                         name: exp.name,
                     }
@@ -243,7 +263,10 @@ export async function saveExportRelationships(session, repositoryAnalysis) {
 
                 await session.run(
                     `
-                    MATCH (f:File {path:$file})
+                    MATCH (f:File {
+                    repositoryId:$repositoryId,
+                    path:$file
+                    })
 
                     MATCH (c:Class {
                         name:$name,
@@ -253,6 +276,7 @@ export async function saveExportRelationships(session, repositoryAnalysis) {
                     MERGE (f)-[:EXPORTS]->(c)
                     `,
                     {
+                        repositoryId: repository.id,
                         file: file.file,
                         name: exp.name,
                     }

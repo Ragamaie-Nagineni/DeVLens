@@ -25,7 +25,10 @@ export async function saveFileNodes(session, repository, graph) {
 
         await session.run(
             `
-            MERGE (f:File {path:$path})
+            MERGE (f:File {
+            repositoryId:$repositoryId,
+            path:$path
+            })
             SET f.name=$name
             `,
             {
@@ -61,10 +64,14 @@ export async function saveFolderNodes(session, repositoryAnalysis, repository) {
 
                 await session.run(
                     `
-                    MERGE (d:Directory {path:$path})
+                    MERGE (d:Directory {
+                    repositoryId:$repositoryId,
+                    path:$path
+                    })
                     SET d.name=$name
                     `,
                     {
+                        repositoryId: repository.id,
                         path: currentPath,
                         name: folder,
                     }
@@ -75,7 +82,10 @@ export async function saveFolderNodes(session, repositoryAnalysis, repository) {
                     await session.run(
                         `
                         MATCH (r:Repository {id:$repositoryId})
-                        MATCH (d:Directory {path:$directory})
+                        MATCH (d:Directory {
+                        repositoryId:$repositoryId,
+                        path:$directory
+                        })
 
                         MERGE (r)-[:CONTAINS]->(d)
                         `,
@@ -89,12 +99,20 @@ export async function saveFolderNodes(session, repositoryAnalysis, repository) {
 
                     await session.run(
                         `
-                        MATCH (parent:Directory {path:$parent})
-                        MATCH (child:Directory {path:$child})
+                        MATCH (parent:Directory {
+                        repositoryId:$repositoryId,
+                        path:$parent
+                        })
+
+                        MATCH (child:Directory {
+                        repositoryId:$repositoryId,
+                        path:$child
+                        })
 
                         MERGE (parent)-[:CONTAINS]->(child)
                         `,
                         {
+                            repositoryId: repository.id,
                             parent: parentPath,
                             child: currentPath,
                         }
@@ -112,12 +130,20 @@ export async function saveFolderNodes(session, repositoryAnalysis, repository) {
 
             await session.run(
                 `
-                MATCH (d:Directory {path:$directory})
-                MATCH (f:File {path:$file})
+                MATCH (d:Directory {
+                repositoryId:$repositoryId,
+                path:$directory
+                })
+
+               MATCH (f:File {
+               repositoryId:$repositoryId,
+               path:$file
+               })
 
                 MERGE (d)-[:CONTAINS]->(f)
                 `,
                 {
+                    repositoryId: repository.id,
                     directory: parentPath,
                     file: file.file,
                 }
