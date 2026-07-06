@@ -2,7 +2,8 @@ import {
     getFileGraphService,
     getFunctionGraphService,
     getDependenciesGraphService,
-    getImpactGraphService
+    getImpactGraphService,
+    getRepositoryGraphService
  } from "../services/graphService.js";
 
 export async function getFileGraph(req, res) {
@@ -111,6 +112,31 @@ export async function getImpactGraph(req, res) {
                 message: "File not found"
             });
         }
+
+        res.json(result);
+
+    } catch (err) {
+
+        console.error(err);
+
+        res.status(500).json({
+            message: "Internal Server Error"
+        });
+
+    }
+}
+export async function getRepositoryGraph(req, res) {
+    try {
+
+        const { repositoryId } = req.query;
+
+        if (!repositoryId) {
+            return res.status(400).json({
+                message: "repositoryId is required"
+            });
+        }
+
+        const result = await getRepositoryGraphService(repositoryId);
 
         res.json(result);
 

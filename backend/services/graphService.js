@@ -236,3 +236,85 @@ export async function getImpactGraphService(
     }
 
 }
+export async function getRepositoryGraphService(repositoryId) {
+
+    const session = driver.session();
+
+    try {
+
+        const result = await session.run(
+            `
+            MATCH (n {repositoryId:$repositoryId})
+
+            OPTIONAL MATCH (n)-[r]->(m)
+
+            RETURN
+                n,
+                r,
+                m
+            `,
+            {
+                repositoryId
+            }
+        );
+
+        const nodes = new Map();
+        const edges = [];
+
+        for (const record of result.records) {
+
+            const source = record.get("n");
+            const relationship = record.get("r");
+            const target = record.get("m");
+
+            if (source) {
+
+                nodes.set(
+                    source.elementId,
+                    {
+                        id: source.elementId,
+                        label: source.labels[0],
+                        ...source.properties
+                    }
+                );
+
+            }
+
+            if (target) {
+
+                nodes.set(
+                    target.elementId,
+                    {
+                        id: target.elementId,
+                        label: target.labels[0],
+                        ...target.properties
+                    }
+                );
+
+            }
+
+            if (relationship && source && target) {
+
+                edges.push({
+                    id: relationship.elementId,
+                    source: source.elementId,
+                    target: target.elementId,
+                    type: relationship.type
+                });
+
+            }
+
+        }
+
+        return {
+            nodes: [...nodes.values()],
+            edges
+        };
+
+    } finally {
+
+        await session.close();
+
+    }
+
+}
