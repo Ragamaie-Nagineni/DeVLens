@@ -154,8 +154,10 @@ export async function saveFolderNodes(session, repositoryAnalysis, repository) {
             await session.run(
                 `
                 MATCH (r:Repository {id:$repositoryId})
-                MATCH (f:File {path:$file})
-
+                MATCH (f:File {
+                repositoryId:$repositoryId,
+                path:$file
+                })
                 MERGE (r)-[:CONTAINS]->(f)
                 `,
                 {
