@@ -1,6 +1,8 @@
 import { 
     getFileGraphService,
-    getFunctionGraphService
+    getFunctionGraphService,
+    getDependenciesGraphService,
+    getImpactGraphService
  } from "../services/graphService.js";
 
 export async function getFileGraph(req, res) {
@@ -55,5 +57,70 @@ export async function getFunctionGraph(req, res) {
         res.status(500).json({
             message: "Internal Server Error"
         });
+    }
+}
+export async function getDependenciesGraph(req, res) {
+    try {
+        const { repositoryId, path } = req.query;
+
+        if (!repositoryId || !path) {
+            return res.status(400).json({
+                message: "repositoryId and path are required"
+            });
+        }
+
+        const result = await getDependenciesGraphService(
+            repositoryId,
+            path
+        );
+
+        if (!result) {
+            return res.status(404).json({
+                message: "File not found"
+            });
+        }
+
+        res.json(result);
+
+    } catch (err) {
+        console.error(err);
+
+        res.status(500).json({
+            message: "Internal Server Error"
+        });
+    }
+}
+export async function getImpactGraph(req, res) {
+    try {
+
+        const { repositoryId, path } = req.query;
+
+        if (!repositoryId || !path) {
+            return res.status(400).json({
+                message: "repositoryId and path are required"
+            });
+        }
+
+        const result = await getImpactGraphService(
+            repositoryId,
+            path
+        );
+
+        if (!result) {
+            return res.status(404).json({
+                message: "File not found"
+            });
+        }
+
+        res.json(result);
+
+    } catch (err) {
+
+        console.error(err);
+
+        res.status(500).json({
+            message: "Internal Server Error"
+        });
+
     }
 }

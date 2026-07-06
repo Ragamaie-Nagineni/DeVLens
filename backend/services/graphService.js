@@ -129,3 +129,110 @@ export async function getFunctionGraphService(
         await session.close();
     }
 }
+export async function getDependenciesGraphService(
+    repositoryId,
+    path
+) {
+
+    const session = driver.session();
+
+    try {
+
+        const result = await session.run(
+            `
+            MATCH (f:File {
+                repositoryId:$repositoryId,
+                path:$path
+            })
+
+            OPTIONAL MATCH (f)-[:IMPORTS]->(dep:File)
+
+            OPTIONAL MATCH (user:File)-[:IMPORTS]->(f)
+
+            RETURN
+                f,
+                collect(DISTINCT dep) AS dependsOn,
+                collect(DISTINCT user) AS usedBy
+            `,
+            {
+                repositoryId,
+                path
+            }
+        );
+
+        if (result.records.length === 0) {
+            return null;
+        }
+
+        const record = result.records[0];
+
+        return {
+            file: record.get("f").properties,
+
+            dependsOn: record
+                .get("dependsOn")
+                .filter(node => node)
+                .map(node => node.properties),
+
+            usedBy: record
+                .get("usedBy")
+                .filter(node => node)
+                .map(node => node.properties)
+        };
+
+    } finally {
+        await session.close();
+    }
+}
+export async function getImpactGraphService(
+    repositoryId,
+    path
+) {
+
+    const session = driver.session();
+
+    try {
+
+        const result = await session.run(
+            `
+            MATCH (f:File {
+                repositoryId:$repositoryId,
+                path:$path
+            })
+
+            OPTIONAL MATCH (affected:File)-[:IMPORTS*1..]->(f)
+
+            RETURN
+                f,
+                collect(DISTINCT affected) AS affectedFiles
+            `,
+            {
+                repositoryId,
+                path
+            }
+        );
+
+        if (result.records.length === 0) {
+            return null;
+        }
+
+        const record = result.records[0];
+
+        const affectedFiles = record
+            .get("affectedFiles")
+            .filter(node => node)
+            .map(node => node.properties);
+
+        return {
+            file: record.get("f").properties,
+            affectedFiles,
+            totalAffected: affectedFiles.length
+        };
+
+    } finally {
+
+        await session.close();
+
+    }
+
+}
