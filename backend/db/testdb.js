@@ -1,7 +1,8 @@
-import driver from "./neo4j.js";
+import { saveRepository } from "../services/neo4jService.js";
 
-const session = driver.session();
+await saveRepository({
+    id: 1,
+    name: "Test Repository",
+});
 
-await session.run("RETURN 'Hello Neo4j'");
-
-console.log("Connected");
+console.log("Done");

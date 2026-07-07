@@ -18,7 +18,7 @@ function Repository() {
     const [selectedFile, setSelectedFile] = useState(null);
     const [code, setCode] = useState("");
 
-    useEffect(() => {
+    /* useEffect(() => {
         if (graph) return;
 
         const fetchGraph = async () => {
@@ -41,7 +41,44 @@ function Repository() {
 
         fetchGraph();
     }, [graph]);
+ */
+    useEffect(() => {
+        if (graph) return;
 
+        const fetchGraph = async () => {
+            try {
+
+                const user = JSON.parse(localStorage.getItem("user"));
+
+                if (!user) return;
+
+                // Get latest repository
+                const repoRes = await axios.get(
+                    `http://localhost:3000/api/repository/latest/${user.id}`
+                );
+
+                if (!repoRes.data) return;
+
+                // Get live graph from Neo4j
+                const graphRes = await axios.get(
+                    "http://localhost:3000/api/graph/repository",
+                    {
+                        params: {
+                            repositoryId: repoRes.data.id
+                        }
+                    }
+                );
+
+                setGraph(graphRes.data);
+
+            } catch (err) {
+                console.error(err);
+            }
+        };
+
+        fetchGraph();
+
+    }, [graph]);
     useEffect(() => {
         if (repository) return;
 
@@ -63,21 +100,21 @@ function Repository() {
         fetchRepository();
     }, [repository]);
     const handleFileSelect = async (file) => {
-    try {
-        setSelectedFile(file);
+        try {
+            setSelectedFile(file);
 
-        const res = await axios.get(
-            `http://localhost:3000/api/repository/${repository.id}/file`,
-            {
-                params: { filePath: file },
-            }
-        );
+            const res = await axios.get(
+                `http://localhost:3000/api/repository/${repository.id}/file`,
+                {
+                    params: { filePath: file },
+                }
+            );
 
-        setCode(res.data.content);
-    } catch (err) {
-        console.error(err);
-    }
-};
+            setCode(res.data.content);
+        } catch (err) {
+            console.error(err);
+        }
+    };
     return (
         <div>
             <Header />
@@ -104,7 +141,7 @@ function Repository() {
                         <div className="graph-card">
                             {graph ? (
                                 <Graph graph={graph}
-                                 onNodeClick={handleFileSelect}
+                                    onNodeClick={handleFileSelect}
                                 />
                             ) : (
                                 <p>No repository analyzed yet.</p>
