@@ -1,0 +1,177 @@
+.blog-controls {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+
+    width: 100%;
+
+    margin: 2rem 0;
+
+    justify-content: space-between;
+}
+
+.blog-categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .8rem;
+
+    flex: 1;
+}
+
+/* Category Chips */
+
+.category-chip {
+  background: #1b2146;
+
+  border: 1px solid rgba(255,255,255,.08);
+
+  color: #aab2da;
+
+  padding: .72rem 1.15rem;
+
+  border-radius: 12px;
+
+  cursor: pointer;
+
+  font-size: .9rem;
+
+  transition: .25s;
+}
+
+.category-chip:hover {
+  border-color: rgba(168,85,247,.45);
+
+  color: white;
+}
+
+.category-chip.active {
+  background: linear-gradient(
+      135deg,
+      #9333ea,
+      #7c3aed
+  );
+
+  color: white;
+
+  border-color: transparent;
+
+  box-shadow:
+      0 10px 22px rgba(168,85,247,.35);
+}
+
+/* Sort */
+
+.sort-wrapper {
+    flex-shrink: 0;
+    position: relative;
+}
+
+.sort-btn {
+
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+
+  padding: .8rem 1rem;
+
+  background: #1b2146;
+
+  color: white;
+
+  border-radius: 14px;
+
+  border: 1px solid rgba(255,255,255,.08);
+
+  cursor: pointer;
+
+  transition: .25s;
+}
+
+.sort-btn:hover {
+
+  border-color: rgba(168,85,247,.45);
+
+}
+
+.sort-menu {
+
+  position: absolute;
+
+  top: calc(100% + 10px);
+
+  right: 0;
+
+  width: 210px;
+
+  background: #171d42;
+
+  border: 1px solid rgba(255,255,255,.08);
+
+  border-radius: 18px;
+
+  overflow: hidden;
+
+  box-shadow:
+      0 18px 40px rgba(0,0,0,.35);
+
+  z-index: 20;
+}
+
+.sort-item {
+
+  width: 100%;
+
+  background: transparent;
+
+  border: none;
+
+  color: #b4bcdf;
+
+  padding: 1rem 1.2rem;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition: .2s;
+}
+
+.sort-item:hover {
+
+  background: rgba(168,85,247,.12);
+
+  color: white;
+
+}
+
+.sort-item.selected {
+
+  background: rgba(168,85,247,.18);
+
+  color: white;
+
+}
+
+@media(max-width:900px){
+
+.blog-controls{
+
+flex-direction:column;
+align-items:flex-start;
+
+}
+
+.sort-wrapper{
+
+width:100%;
+
+}
+
+.sort-btn{
+
+width:100%;
+justify-content:center;
+
+}
+
+}

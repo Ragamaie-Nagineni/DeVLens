@@ -5,6 +5,7 @@ import Signuppage from "./pages/signup/Signuppage";
 import Sidebar from "./components/Sidebar/Sidebar";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import Repository from "./pages/Repository/Repository";
+import Blogs from "./pages/Blogs/Blogs";
 
 
 function App() {
@@ -34,6 +35,10 @@ function App() {
         <Route
           path="/repository"
           element={<Repository/>}
+        /> 
+        <Route
+          path="/blogs"
+          element={<Blogs/>}
         /> 
 
       </Routes>

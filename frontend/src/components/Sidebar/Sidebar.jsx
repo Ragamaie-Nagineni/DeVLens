@@ -55,7 +55,10 @@ function Sidebar({ collapsed, setcollapsed }) {
                ><FolderGit2 />{!collapsed && <span>Repositories</span>}</li>
                <li><MessageSquare />{!collapsed && <span>AI Chat</span>}</li>
                <li><Search />{!collapsed && <span>Search</span>}</li>
-               <li><BookOpen />{!collapsed && <span>Blogs</span>}</li>
+               <li
+                  className={location.pathname === "/blogs" ? "active" : ""}
+                  onClick={() => navigate("/blogs")}
+               ><BookOpen />{!collapsed && <span>Blogs</span>}</li>
                <li><Settings />{!collapsed && <span>Settings</span>}</li>
             </ul>
             <div className="logout" onClick={handleLogOut}>
