@@ -5,6 +5,7 @@ import BlogControls from "../../components/Blogs/BlogControls";
 import "./Blogs.css";
 import FeaturedBlog from "../../components/blogs/FeaturedBlog";
 import axios from "axios";
+import BlogList from "../../components/blogs/BlogList";
 
 function Blogs() {
   const [collapsed, setCollapsed] = useState(false);
@@ -59,8 +60,7 @@ function Blogs() {
 
           <BlogControls />
           <FeaturedBlog blog={blogs[0]} />
-
-          {/* Blog Grid */}
+          <BlogList blogs={blogs.slice(1)} />
 
         </div>
 

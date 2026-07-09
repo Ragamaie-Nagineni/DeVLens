@@ -1,0 +1,215 @@
+.blog-card{
+
+    background:#171d42;
+
+    border:1px solid rgba(255,255,255,.07);
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    cursor:pointer;
+
+    transition:.35s ease;
+
+    animation:cardAppear .6s ease forwards;
+
+    opacity:0;
+
+    transform:translateY(30px);
+
+}
+
+.blog-card:hover{
+
+    transform:translateY(-8px);
+
+    border-color:rgba(168,85,247,.35);
+
+    box-shadow:
+
+        0 22px 45px rgba(0,0,0,.35),
+
+        0 0 35px rgba(168,85,247,.12);
+
+}
+
+.blog-image-wrapper{
+
+    position:relative;
+
+    overflow:hidden;
+
+    height:220px;
+
+}
+
+.blog-image{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+    transition:transform .6s ease;
+
+}
+
+.blog-card:hover .blog-image{
+
+    transform:scale(1.08);
+
+}
+
+.blog-category{
+
+    position:absolute;
+
+    top:16px;
+
+    left:16px;
+
+    background:rgba(3,9,45,.85);
+
+    color:white;
+
+    padding:.45rem .9rem;
+
+    border-radius:999px;
+
+    font-size:.75rem;
+
+    backdrop-filter:blur(10px);
+
+}
+
+.blog-body{
+
+    padding:1.4rem;
+
+}
+
+.blog-body h3{
+
+    color:white;
+
+    font-size:1.35rem;
+
+    line-height:1.45;
+
+    margin-bottom:1rem;
+
+    transition:.3s;
+
+}
+
+.blog-card:hover h3{
+
+    color:#d7b5ff;
+
+}
+
+.blog-tags{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:.6rem;
+
+    margin-bottom:1.4rem;
+
+}
+
+.blog-tags span{
+
+    background:#202752;
+
+    color:#b8c2ef;
+
+    padding:.35rem .75rem;
+
+    border-radius:999px;
+
+    font-size:.75rem;
+
+}
+
+.blog-footer{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    color:#8d96bd;
+
+    margin-bottom:1.3rem;
+
+}
+
+.blog-stats{
+
+    display:flex;
+
+    gap:1rem;
+
+}
+
+.blog-stats span{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:.4rem;
+
+}
+
+.blog-stats svg{
+
+    color:#b066ff;
+
+}
+
+.blog-read{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:.6rem;
+
+    color:#c084fc;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+.blog-read svg{
+
+    transition:.3s;
+
+}
+
+.blog-card:hover .blog-read svg{
+
+    transform:translateX(6px);
+
+}
+
+@keyframes cardAppear{
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
