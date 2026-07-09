@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
+import BlogDetails from "./components/blogs/BlogDetails";
 import Loginpage from "./pages/login/Loginpage";
 import Signuppage from "./pages/signup/Signuppage";
 import Sidebar from "./components/Sidebar/Sidebar";
@@ -40,6 +40,8 @@ function App() {
           path="/blogs"
           element={<Blogs/>}
         /> 
+        <Route path="/blogs/:id" 
+        element={<BlogDetails />} />
 
       </Routes>
 

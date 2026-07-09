@@ -9,8 +9,8 @@ function FeaturedBlog({ blog }) {
 
   return (
     <div
-      className="featured-blog"
-      onClick={() => navigate(`/blogs/${blog.id}`)}
+    className="featured-blog"
+    onClick={() => navigate(`/blogs/${blog.id}`)}
     >
       <div className="featured-image-container">
         <img
