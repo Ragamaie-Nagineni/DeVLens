@@ -1,11 +1,31 @@
-import { useState } from "react";
+import { useState , useEffect} from "react";
 import Header from "../../components/Header/Header";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import BlogControls from "../../components/Blogs/BlogControls";
 import "./Blogs.css";
+import FeaturedBlog from "../../components/blogs/FeaturedBlog";
+import axios from "axios";
 
 function Blogs() {
   const [collapsed, setCollapsed] = useState(false);
+  const [blogs, setBlogs] = useState([]);
+   useEffect(() => {
+    fetchBlogs();
+  }, []);
+
+  const fetchBlogs = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:3000/api/blogs"
+      );
+
+      setBlogs(response.data);
+    } catch (error) {
+      console.error("Failed to fetch blogs:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div>
@@ -38,8 +58,7 @@ function Blogs() {
           </div>
 
           <BlogControls />
-
-          {/* Featured Blog */}
+          <FeaturedBlog blog={blogs[0]} />
 
           {/* Blog Grid */}
 
