@@ -9,6 +9,7 @@ import BlogList from "../../components/blogs/BlogList";
 
 function Blogs() {
   const [collapsed, setCollapsed] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [blogs, setBlogs] = useState([]);
    useEffect(() => {
     fetchBlogs();
