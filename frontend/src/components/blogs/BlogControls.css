@@ -2,19 +2,15 @@
     display: flex;
     align-items: center;
     gap: 1.5rem;
-
     width: 100%;
-
-    margin: 2rem 0;
-
+    margin: 0rem 0;
     justify-content: space-between;
 }
 
 .blog-categories {
     display: flex;
     flex-wrap: wrap;
-    gap: .8rem;
-
+    gap: .5rem;
     flex: 1;
 }
 
@@ -22,12 +18,10 @@
 
 .category-chip {
   background: #1b2146;
-
   border: 1px solid rgba(255,255,255,.08);
-
   color: #aab2da;
 
-  padding: .72rem 1.15rem;
+  padding: .7rem 1rem;
 
   border-radius: 12px;
 
@@ -72,7 +66,7 @@
   align-items: center;
   gap: .55rem;
 
-  padding: .8rem 1rem;
+  padding: .58rem 1.2rem;
 
   background: #1b2146;
 

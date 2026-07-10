@@ -19,18 +19,12 @@
 
 .blogs-content {
   flex: 1;
-
-  margin-top: 4rem;
-
+  margin-top: 3rem;
   margin-left: 260px;
-
   padding: 2rem;
-
   display: flex;
   flex-direction: column;
-
   gap: 2rem;
-
   transition: margin-left .3s ease;
 }
 
@@ -43,26 +37,23 @@
 ========================== */
 
 .blogs-header {
-    max-width: 760px;
+   /* max-width: 760px;*/
     display: flex;
     flex-direction: column;
-    gap: .9rem;
+    gap: .5rem;
 }
 
 .blogs-header h1 {
-  font-size: 2.3rem;
-  font-weight: 700;
+  font-size: 1.8rem;
+  font-weight: 600;
   color: #ffffff;
 }
 
 .blogs-header p {
-  max-width: 760px;
-
+ /*  max-width: 760px; */
   color: #98a2d1;
-
-  font-size: 1.05rem;
-
-  line-height: 1.7;
+  font-size: 1rem;
+  /* line-height: 1.7; */
 }
 
 /* ==========================

@@ -46,8 +46,8 @@ function BlogControls() {
           className="sort-btn"
           onClick={() => setOpen(!open)}
         >
-          <SlidersHorizontal size={16} />
-          <CalendarDays size={16} />
+          <SlidersHorizontal size={14} />
+          <CalendarDays size={14} />
           <span>{selectedSort}</span>
         </button>
 

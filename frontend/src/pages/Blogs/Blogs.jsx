@@ -47,16 +47,14 @@ function Blogs() {
           }
         >
 
-          <div className="blogs-header">
+          {/* <div className="blogs-header">
 
             <h1>DevLens Engineering Blog</h1>
-
             <p>
-              Deep dives into repository analysis, AI for software engineering,
-              developer productivity, and the architecture powering DevLens.
+              Deep dives into repository analysis, AI for software engineering,developer productivity, and the architecture powering DevLens.
             </p>
 
-          </div>
+          </div> */}
 
           <BlogControls />
           <FeaturedBlog blog={blogs[0]} />

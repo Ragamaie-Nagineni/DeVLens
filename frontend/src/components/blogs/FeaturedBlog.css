@@ -17,7 +17,7 @@
 
     animation: fadeUp .7s ease;
 
-    margin-bottom: 2.5rem;
+    margin-bottom: 1rem;
 }
 
 .featured-blog:hover{
@@ -36,7 +36,7 @@
 
     overflow: hidden;
 
-    min-height: 360px;
+    min-height: 300px;
 }
 
 .featured-image{
@@ -96,7 +96,7 @@
 
     color:white;
 
-    font-size:2.3rem;
+    font-size:1.5rem;
 
     line-height:1.25;
 
@@ -107,7 +107,7 @@
 
     color:#9ba6d6;
 
-    line-height:1.8;
+    line-height:1.5;
 
     margin-bottom:2rem;
 }
@@ -199,7 +199,7 @@ grid-template-columns:1fr;
 
 .featured-image-container{
 
-height:300px;
+height:200px;
 
 }
 
