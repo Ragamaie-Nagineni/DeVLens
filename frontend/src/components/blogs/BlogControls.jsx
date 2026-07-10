@@ -1,29 +1,48 @@
 import { useState } from "react";
-import { CalendarDays, SlidersHorizontal, Search } from "lucide-react";
 import "./BlogControls.css";
+import {
+  CalendarDays,
+  Heart,
+  Eye,
+  SlidersHorizontal,
+  Search,
+} from "lucide-react";
 
 const categories = [
   "All",
-  "Engineering",
-  "AI & ML",
-  "Best Practices",
-  "Technology",
-  "DevOps",
-  "Team Management",
+  "Software Architecture",
+  "Repository Analysis",
+  "Dependency Graphs",
+  "AST Parsing",
+  "AI for Software Engineering",
 ];
 
 const sortOptions = [
-  "Latest",
-  "Most Liked",
-  "Most Viewed",
+  {
+    label: "Latest",
+    icon: CalendarDays,
+  },
+  {
+    label: "Most Liked",
+    icon: Heart,
+  },
+  {
+    label: "Most Viewed",
+    icon: Eye,
+  },
 ];
 
-function BlogControls() {
-  const [selectedCategory, setSelectedCategory] = useState("All");
-  const [selectedSort, setSelectedSort] = useState("Latest");
-  const [searchQuery, setSearchQuery] = useState("");
-  const [open, setOpen] = useState(false);
+function BlogControls({
+  searchQuery,
+  setSearchQuery,
+  selectedCategory,
+  setSelectedCategory,
+  selectedSort,
+  setSelectedSort
+}) {
 
+  const [open, setOpen] = useState(false);
+  const SelectedIcon = selectedSort.icon;
   return (
     <div className="blog-controls">
       <div className="upper-part">
@@ -47,27 +66,32 @@ function BlogControls() {
             onClick={() => setOpen(!open)}
           >
             <SlidersHorizontal size={14} />
-            <CalendarDays size={14} />
-            <span>{selectedSort}</span>
+            <SelectedIcon size={14} />
+            <span>{selectedSort.label}</span>
           </button>
 
           {open && (
             <div className="sort-menu">
 
-              {sortOptions.map((option) => (
-                <button
-                  key={option}
-                  className={`sort-item ${selectedSort === option ? "selected" : ""
-                    }`}
-                  onClick={() => {
-                    setSelectedSort(option);
-                    setOpen(false);
-                  }}
-                >
-                  {option}
-                </button>
-              ))}
+              {sortOptions.map((option) => {
+  const Icon = option.icon;
 
+  return (
+    <button
+      key={option.label}
+      className={`sort-item ${
+        selectedSort.label === option.label ? "selected" : ""
+      }`}
+      onClick={() => {
+        setSelectedSort(option);
+        setOpen(false);
+      }}
+    >
+      <Icon size={16} />
+      <span>{option.label}</span>
+    </button>
+  );
+})}
             </div>
           )}
 

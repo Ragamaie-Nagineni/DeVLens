@@ -182,22 +182,30 @@
 }
 
 .sort-item {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
 
-  width: 100%;
+    width: 100%;
+    padding: 0.9rem 1.2rem;
 
-  background: transparent;
+    background: transparent;
+    border: none;
 
-  border: none;
+    color: #b4bcdf;
+    font-size: 0.92rem;
+    font-weight: 500;
 
-  color: #b4bcdf;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
 
-  padding: 1rem 1.2rem;
-
-  text-align: left;
-
-  cursor: pointer;
-
-  transition: .2s;
+.sort-item svg {
+    width: 17px;
+    height: 17px;
+    color: #8f98bf;
+    flex-shrink: 0;
 }
 
 .sort-item:hover {
@@ -206,6 +214,10 @@
 
   color: white;
 
+}
+
+.sort-item:hover svg {
+    color: #c084fc;
 }
 
 .sort-item.selected {
