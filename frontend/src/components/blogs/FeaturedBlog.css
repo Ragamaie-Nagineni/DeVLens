@@ -1,0 +1,218 @@
+.featured-blog {
+
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+
+    background: #171d42;
+
+    border: 1px solid rgba(168,85,247,.22);
+
+    border-radius: 22px;
+
+    overflow: hidden;
+
+    cursor: pointer;
+
+    transition: .35s ease;
+
+    animation: fadeUp .7s ease;
+
+    margin-bottom: 1rem;
+}
+
+.featured-blog:hover{
+
+    transform: translateY(-5px);
+
+    box-shadow:
+        0 18px 45px rgba(0,0,0,.35),
+        0 0 30px rgba(168,85,247,.12);
+
+}
+
+.featured-image-container{
+
+    position: relative;
+
+    overflow: hidden;
+
+    min-height: 300px;
+}
+
+.featured-image{
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    transition:transform .6s ease;
+}
+
+.featured-blog:hover .featured-image{
+
+    transform:scale(1.05);
+
+}
+
+.featured-badge{
+
+    position:absolute;
+
+    top:18px;
+    left:18px;
+
+    background:#a855f7;
+
+    color:white;
+
+    padding:.45rem .9rem;
+
+    border-radius:999px;
+
+    font-size:.8rem;
+
+    font-weight:600;
+}
+
+.featured-content{
+
+    padding:2.5rem;
+
+    display:flex;
+    flex-direction:column;
+}
+
+.featured-category{
+
+    color:#b76cff;
+
+    font-size:.95rem;
+
+    margin-bottom:1rem;
+}
+
+.featured-content h2{
+
+    color:white;
+
+    font-size:1.5rem;
+
+    line-height:1.25;
+
+    margin-bottom:1.4rem;
+}
+
+.featured-content p{
+
+    color:#9ba6d6;
+
+    line-height:1.5;
+
+    margin-bottom:2rem;
+}
+
+.featured-meta{
+
+    display:flex;
+
+    gap:1.5rem;
+
+    align-items:center;
+
+    color:#8e96bd;
+
+    margin-bottom:2rem;
+
+    flex-wrap:wrap;
+}
+
+.featured-meta div{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:.45rem;
+}
+
+.featured-meta svg{
+
+    color:#b76cff;
+}
+
+.featured-read{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:.7rem;
+
+    color:#c084fc;
+
+    font-weight:600;
+
+    margin-top:auto;
+
+    transition:.25s;
+}
+
+.featured-read svg{
+
+    transition:.25s;
+}
+
+.featured-blog:hover .featured-read svg{
+
+    transform:translateX(6px);
+
+}
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(25px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+@media(max-width:1000px){
+
+.featured-blog{
+
+grid-template-columns:1fr;
+
+}
+
+.featured-image-container{
+
+height:200px;
+
+}
+
+.featured-content{
+
+padding:2rem;
+
+}
+
+.featured-content h2{
+
+font-size:1.8rem;
+
+}
+
+}

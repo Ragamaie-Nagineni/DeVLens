@@ -1,10 +1,11 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
+import BlogDetails from "./components/blogs/BlogDetails";
 import Loginpage from "./pages/login/Loginpage";
 import Signuppage from "./pages/signup/Signuppage";
 import Sidebar from "./components/Sidebar/Sidebar";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import Repository from "./pages/Repository/Repository";
+import Blogs from "./pages/Blogs/Blogs";
 
 
 function App() {
@@ -35,6 +36,12 @@ function App() {
           path="/repository"
           element={<Repository/>}
         /> 
+        <Route
+          path="/blogs"
+          element={<Blogs/>}
+        /> 
+        <Route path="/blogs/:id" 
+        element={<BlogDetails />} />
 
       </Routes>
 

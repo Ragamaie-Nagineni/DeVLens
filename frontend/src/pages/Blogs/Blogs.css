@@ -1,0 +1,89 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.blogs {
+  display: flex;
+  min-height: 100%;
+  width: 100vw;
+
+  background: #03092d;
+  color: white;
+}
+
+/* ==========================
+   Main Content
+========================== */
+
+.blogs-content {
+  flex: 1;
+  margin-top: 3rem;
+  margin-left: 260px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  transition: margin-left .3s ease;
+}
+
+.blogs-content.collapsed {
+  margin-left: 80px;
+}
+
+/* ==========================
+   Hero
+========================== */
+
+.blogs-header {
+   /* max-width: 760px;*/
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.blogs-header h1 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.blogs-header p {
+ /*  max-width: 760px; */
+  color: #98a2d1;
+  font-size: 1rem;
+  /* line-height: 1.7; */
+}
+
+/* ==========================
+   Responsive
+========================== */
+
+@media (max-width: 768px) {
+
+  .blogs-content {
+    padding: 1rem;
+  }
+
+  .blogs-header h1 {
+    font-size: 1.9rem;
+  }
+
+  .blogs-header p {
+    font-size: .95rem;
+  }
+
+}
+
+@media (max-width: 480px) {
+
+  .blogs-content {
+    padding: .75rem;
+  }
+
+  .blogs-header h1 {
+    font-size: 1.6rem;
+  }
+
+}
