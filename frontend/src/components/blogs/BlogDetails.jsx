@@ -5,6 +5,8 @@ import "highlight.js/styles/github-dark.css";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
+import Sidebar from "../Sidebar/Sidebar";
+import Header from "../Header/Header";
 
 import {
   FaArrowLeft,
@@ -19,10 +21,10 @@ import "./BlogDetails.css";
 function BlogDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
-
+  const [collapsed, setcollapsed] = useState(false);
   const [blog, setBlog] = useState(null);
   const [loading, setLoading] = useState(true);
-
+  
   useEffect(() => {
     fetchBlog();
   }, [id]);
@@ -58,99 +60,105 @@ function BlogDetails() {
   }
 
   return (
-    <div className="blog-details">
+  <>
+    <Header />
 
-      <div className="blog-hero">
+    <div className="blog-page">
 
-        <img
-          src={blog.cover_image_url}
-          alt={blog.title}
-        />
+      <Sidebar
+        collapsed={collapsed}
+        setcollapsed={setcollapsed}
+      />
 
-        <div className="blog-overlay">
+      <div
+        className={
+          collapsed
+            ? "blog-content collapsed"
+            : "blog-content"
+        }
+      >
+        
+        <div className="blog-hero">
+            
+            <img
+              src={blog.cover_image_url}
+              alt={blog.title}
+            />
 
-          <button
-            className="back-btn"
-            onClick={() => navigate("/blogs")}
-          >
-            <FaArrowLeft />
-            Back to Blogs
-          </button>
+            <div className="blog-overlay">
+                <span className="blog-detail-category">
+              {blog.category}
+            </span>
+              <button
+                className="back-btn"
+                onClick={() => navigate("/blogs")}
+              >
+                <FaArrowLeft />
+                Back to Blogs
+              </button>
 
-        </div>
+            </div>
 
-      </div>
+          </div>
+        <div className="blog-details">
+          <h1>{blog.title}</h1> 
+          <div className="blog-container">
+              
 
-      <div className="blog-container">
+            <div className="blog-meta">
 
-        <span className="blog-category">
-          {blog.category}
-        </span>
+              <div>
+                <strong>{blog.author_name}</strong>
+              </div>
 
-        <h1>{blog.title}</h1>
+              <span>
+                <FaCalendarAlt />
+                {new Date(blog.published_at).toLocaleDateString()}
+              </span>
 
-        <div className="blog-meta">
+              <span>
+                <FaEye />
+                {blog.views}
+              </span>
 
-          <div>
+              <span>
+                <FaHeart />
+                {blog.likes_count}
+              </span>
 
-            <strong>{blog.author_name}</strong>
+            </div>
+
+            <div className="blog-tags">
+              {blog.tags?.map(tag => (
+                <span key={tag}>#{tag}</span>
+              ))}
+            </div>
+
+            <div className="blog-actions">
+              <button>
+                <FaBookmark />
+                Bookmark
+              </button>
+            </div>
+
+            <article className="markdown-body">
+              <ReactMarkdown
+                remarkPlugins={[remarkGfm]}
+                rehypePlugins={[rehypeHighlight]}
+              >
+                {blog.content}
+              </ReactMarkdown>
+            </article>
 
           </div>
 
-          <span>
-            <FaCalendarAlt />
-            {new Date(blog.published_at).toLocaleDateString()}
-          </span>
-
-          <span>
-            <FaEye />
-            {blog.views}
-          </span>
-
-          <span>
-            <FaHeart />
-            {blog.likes_count}
-          </span>
-
         </div>
-
-        <div className="blog-tags">
-
-          {blog.tags?.map(tag => (
-            <span key={tag}>
-              #{tag}
-            </span>
-          ))}
-
-        </div>
-
-        <div className="blog-actions">
-
-          <button>
-
-            <FaBookmark />
-
-            Bookmark
-
-          </button>
-
-        </div>
-
-        <article className="markdown-body">
-
-          <ReactMarkdown
-            remarkPlugins={[remarkGfm]}
-            rehypePlugins={[rehypeHighlight]}
-          >
-            {blog.content}
-          </ReactMarkdown>
-
-        </article>
 
       </div>
 
     </div>
-  );
+  </>
+);
 }
 
 export default BlogDetails;
