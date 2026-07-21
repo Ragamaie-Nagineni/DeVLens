@@ -6,6 +6,7 @@ import Sidebar from "./components/Sidebar/Sidebar";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import Repository from "./pages/Repository/Repository";
 import Blogs from "./pages/Blogs/Blogs";
+import Settings from "./pages/Settings/Settings";
 
 
 function App() {
@@ -40,8 +41,16 @@ function App() {
           path="/blogs"
           element={<Blogs/>}
         /> 
-        <Route path="/blogs/:id" 
-        element={<BlogDetails />} />
+
+        <Route
+          path="/blogs/:id" 
+          element={<BlogDetails />} 
+        />
+
+        <Route
+          path="/settings" 
+          element={<Settings />} 
+        />
 
       </Routes>
 

@@ -1,0 +1,48 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+.settings{
+    display:flex;
+    min-height:100vh;
+    width:100%;
+    background:#03092d;
+    color:white;
+}
+
+.settings-content{
+    flex:1;
+    margin-left:260px;
+    margin-top:64px;
+    padding:30px;
+    transition:.3s;
+}
+
+.settings-content.collapsed{
+    margin-left:80px;
+}
+
+.settings-header{
+    margin-bottom:30px;
+}
+
+.settings-header h1{
+    font-size:1.5rem;
+    margin-bottom:8px;
+}
+
+.settings-header p{
+    color:#9ea7d7;
+    font-size:15px;
+}
+
+@media(max-width:768px){
+
+.settings-content{
+    margin-left:80px;
+    padding:20px;
+}
+
+}

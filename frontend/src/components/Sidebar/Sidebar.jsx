@@ -59,7 +59,10 @@ function Sidebar({ collapsed, setcollapsed }) {
                   className={location.pathname === "/blogs" ? "active" : ""}
                   onClick={() => navigate("/blogs")}
                ><BookOpen />{!collapsed && <span>Blogs</span>}</li>
-               <li><Settings />{!collapsed && <span>Settings</span>}</li>
+               <li
+                  className={location.pathname === "/settings" ? "active" : ""}
+                  onClick={() => navigate("/settings")}
+               ><Settings />{!collapsed && <span>Settings</span>}</li>
             </ul>
             <div className="logout" onClick={handleLogOut}>
                <LogOut />
