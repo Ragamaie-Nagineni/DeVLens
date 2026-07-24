@@ -5,7 +5,7 @@ function ProfileAccount() {
 
     return (
 
-        <div className="profile-card">
+        <div className="profile-card" >
 
             <div className="card-title">
 
@@ -20,7 +20,7 @@ function ProfileAccount() {
 
             <div className="avatar-section">
 
-                <div className="avatar">
+                <div className="avatar-user">
 
                     AJ
 

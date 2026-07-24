@@ -1,6 +1,6 @@
 .profile-card{
 
-    max-width:900px;
+    max-width:1000px;
     background:#171d43;
     border:1px solid rgba(255,255,255,.08);
     border-radius:18px;
@@ -46,7 +46,7 @@
 
 }
 
-.avatar{
+.avatar-user{
 
     width:90px;
     height:90px;
