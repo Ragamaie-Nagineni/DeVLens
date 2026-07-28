@@ -4,7 +4,8 @@ import {
     FaGithub,
     FaBell
 } from "react-icons/fa";
-import "./ProfileAccount.css"
+import "./ProfileAccount.css";
+import "../SharedSettings.css";
 import { useEffect, useState } from "react";
 
 function ProfileAccount() {
@@ -76,10 +77,10 @@ function ProfileAccount() {
 
             {/* ================= Profile ================= */}
 
-            <div className="profile-card">
+            <div className="settings-card">
 
-                <div className="card-title">
-                    <FaUserCircle className="title-icon" />
+                <div className="settings-title">
+                    <FaUserCircle className="settings-icon" />
 
                     <div>
                         <h2>Profile Information</h2>
@@ -99,7 +100,7 @@ function ProfileAccount() {
 
                 </div>
 
-                <div className="form-group">
+                <div className="settings-form">
                     <label>Full Name</label>
 
                     <input
@@ -114,7 +115,7 @@ function ProfileAccount() {
                     />
                 </div>
 
-                <div className="form-group">
+                <div className="settings-form">
                     <label>Email Address</label>
 
                     <input
@@ -129,7 +130,7 @@ function ProfileAccount() {
                     />
                 </div>
 
-                <button className="save-btn" onClick={handleSave}>
+                <button className="settings-btn" onClick={handleSave}>
                     Save Changes
                 </button>
 
@@ -137,10 +138,10 @@ function ProfileAccount() {
 
             {/* ================= GitHub ================= */}
 
-            <div className="profile-card">
+            <div className="settings-card">
 
-                <div className="card-title">
-                    <FaGithub className="title-icon" />
+                <div className="settings-title">
+                    <FaGithub className="settings-icon" />
 
                     <div>
                         <h2>GitHub Integration</h2>
@@ -148,7 +149,7 @@ function ProfileAccount() {
                     </div>
                 </div>
 
-                <div className="form-group">
+                <div className="settings-form">
 
                     <label>GitHub Username</label>
 
@@ -192,11 +193,11 @@ function ProfileAccount() {
 
             {/* ================= Notifications ================= */}
 
-            <div className="profile-card">
+            <div className="settings-card">
 
-                <div className="card-title">
+                <div className="settings-title">
 
-                    <FaBell className="title-icon" />
+                    <FaBell className="settings-icon" />
 
                     <div>
                         <h2>Notifications</h2>
@@ -205,7 +206,7 @@ function ProfileAccount() {
 
                 </div>
 
-                <div className="notification-row">
+                <div className="settings-row">
 
                     <div>
 
@@ -227,7 +228,7 @@ function ProfileAccount() {
 
                 </div>
 
-                <div className="notification-row">
+                <div className="settings-row">
 
                     <div>
 
@@ -249,7 +250,7 @@ function ProfileAccount() {
 
                 </div>
 
-                <div className="notification-row">
+                <div className="settings-row">
 
                     <div>
 

@@ -9,7 +9,8 @@ import {
 
 import Sidebar from "../../components/Sidebar/Sidebar";
 import Header from "../../components/Header/Header";
-import ProfileAccount from "../../components/ProfileAccount/ProfileAccount";
+import ProfileAccount from "../../components/Settings/ProfileAccount/ProfileAccount";
+import RepoSettings from "../../components/Settings/RepoSettings/RepoSettings";
 
 import "./Settings.css";
 
@@ -84,9 +85,7 @@ function Settings() {
 
                             {activeTab === "profile" && <ProfileAccount />}
 
-                            {activeTab === "repository" && (
-                                <h2>Repository Settings (Coming Soon)</h2>
-                            )}
+                            {activeTab === "repository" && <RepoSettings/>}
 
                             {activeTab === "graph" && (
                                 <h2>Graph Settings (Coming Soon)</h2>
