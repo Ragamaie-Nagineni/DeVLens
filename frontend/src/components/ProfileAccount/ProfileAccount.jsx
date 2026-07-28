@@ -40,6 +40,37 @@ function ProfileAccount() {
         fetchUser();
     }, []);
 
+    const handleSave = async () => {
+
+        try {
+
+            const token = localStorage.getItem("token");
+
+            const response = await axios.put(
+                "http://localhost:3000/api/auth/me",
+                {
+                    username: user.username,
+                    email: user.email
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            );
+
+            setUser(response.data.user);
+
+            alert("Profile updated!");
+
+        } catch (err) {
+
+            console.error(err);
+
+        }
+
+    };
+
     return (
         <div className="profile-container">
 
@@ -74,7 +105,12 @@ function ProfileAccount() {
                     <input
                         type="text"
                         value={user.username}
-                        readOnly
+                        onChange={(e) =>
+                            setUser({
+                                ...user,
+                                username: e.target.value
+                            })
+                        }
                     />
                 </div>
 
@@ -84,11 +120,16 @@ function ProfileAccount() {
                     <input
                         type="email"
                         value={user.email}
-                        readOnly
+                        onChange={(e) =>
+                            setUser({
+                                ...user,
+                                email: e.target.value
+                            })
+                        }
                     />
                 </div>
 
-                <button className="save-btn">
+                <button className="save-btn" onClick={handleSave}>
                     Save Changes
                 </button>
 

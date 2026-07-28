@@ -107,3 +107,36 @@ export const getCurrentUser = async (req, res) => {
     }
 
 };
+export const updateCurrentUser = async (req, res) => {
+
+    try {
+
+        const { username, email } = req.body;
+
+        const result = await pool.query(
+            `
+            UPDATE users
+            SET username = $1,
+                email = $2
+            WHERE id = $3
+            RETURNING id, username, email
+            `,
+            [username, email, req.user.id]
+        );
+
+        res.json({
+            message: "Profile updated successfully",
+            user: result.rows[0]
+        });
+
+    } catch (err) {
+
+        console.error(err);
+
+        res.status(500).json({
+            message: "Failed to update profile"
+        });
+
+    }
+
+};
