@@ -54,7 +54,10 @@ function Sidebar({ collapsed, setcollapsed }) {
                   onClick={() => navigate("/repository")}
                ><FolderGit2 />{!collapsed && <span>Repositories</span>}</li>
                <li><MessageSquare />{!collapsed && <span>AI Chat</span>}</li>
-               <li><Search />{!collapsed && <span>Search</span>}</li>
+               <li
+                 className={location.pathname === "/impactAnalysis" ? "active" : ""}
+                  onClick={() => navigate("/impactAnalysis")}
+               ><TrendingUp/>{!collapsed && <span>Impact Analysis</span>}</li>
                <li
                   className={location.pathname === "/blogs" ? "active" : ""}
                   onClick={() => navigate("/blogs")}

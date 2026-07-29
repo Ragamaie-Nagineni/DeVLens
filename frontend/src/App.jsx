@@ -7,6 +7,7 @@ import Dashboard from "./pages/Dashboard/Dashboard";
 import Repository from "./pages/Repository/Repository";
 import Blogs from "./pages/Blogs/Blogs";
 import Settings from "./pages/Settings/Settings";
+import ImpactAnalysis from "./pages/ImpactAnalysis/ImpactAnalysis";
 
 
 function App() {
@@ -45,6 +46,11 @@ function App() {
         <Route
           path="/blogs/:id" 
           element={<BlogDetails />} 
+        />
+
+        <Route
+          path="/impactAnalysis" 
+          element={<ImpactAnalysis />} 
         />
 
         <Route

@@ -1,0 +1,59 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.impactAnalysis {
+  display: flex;
+  min-height: 100%;
+  background: #03092d;
+  color: white;
+  width: 100vw;
+}
+
+
+/* Main Content */
+.impactAnalysis-content {
+  flex: 1;
+  margin-top: 4rem; 
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  margin-left: 260px;
+  gap:1rem;
+}
+
+ .impactAnalysis-content.collapsed {
+    margin-left: 80px;
+} 
+
+.impactAnalysis-header{
+    margin-bottom:30px;
+}
+
+.impactAnalysis h1{
+    font-size:1.5rem;
+    margin-bottom:8px;
+}
+
+.impactAnalysis p{
+    color:#9ea7d7;
+    font-size:15px;
+}
+
+
+/* Tablet */
+@media (max-width: 768px) {
+  .impactAnalysis-content {
+    padding: 1rem;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .impactAnalysis-content {
+    padding: 0.75rem;
+  }
+
+}
