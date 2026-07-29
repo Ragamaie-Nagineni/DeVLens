@@ -18,30 +18,7 @@ function Repository() {
     const [selectedFile, setSelectedFile] = useState(null);
     const [code, setCode] = useState("");
 
-    /* useEffect(() => {
-        if (graph) return;
-
-        const fetchGraph = async () => {
-            try {
-                const user = JSON.parse(localStorage.getItem("user"));
-
-                if (!user) return;
-
-                const res = await axios.get(
-                    `http://localhost:3000/api/repository/latest/${user.id}`
-                );
-
-                if (res.data) {
-                    setGraph(res.data.graph);
-                }
-            } catch (err) {
-                console.error(err);
-            }
-        };
-
-        fetchGraph();
-    }, [graph]);
- */
+    
     useEffect(() => {
         if (graph) return;
 
@@ -99,6 +76,16 @@ function Repository() {
 
         fetchRepository();
     }, [repository]);
+   /*  useEffect(() => {
+    if (!repository) return;
+
+    localStorage.setItem(
+        "activeRepository",
+        JSON.stringify(repository)
+    );
+
+}, [repository]); */
+
     const handleFileSelect = async (file) => {
         try {
             setSelectedFile(file);
