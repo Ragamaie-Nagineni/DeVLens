@@ -27,7 +27,11 @@
 }
 
 .impact-card {
-    background: #171d49;
+     background: linear-gradient(
+    180deg,
+    #171d46 0%,
+    #111738 100%
+  );
     border: 1px solid #2d3875;
     border-radius: 18px;
     padding: 20px;

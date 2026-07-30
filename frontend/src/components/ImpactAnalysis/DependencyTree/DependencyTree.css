@@ -1,0 +1,121 @@
+.dependencyTree{
+
+    margin-top:32px;
+      background:#171d49;
+
+    border:1px solid #2f3977;
+
+    border-radius:18px;
+
+    padding:2rem;
+
+}
+
+.dependencyTree-header{
+
+    margin-bottom:20px;
+
+}
+
+.dependencyTree-header h2{
+    font-size: 1.5rem;
+    display:flex;
+    font-weight: 500;
+    align-items:center;
+
+    gap:10px;
+
+    color:white;
+    margin-bottom:8px;
+
+}
+.dependencyTree-header h2 svg{
+  color: #a855f7;
+}
+.dependencyTree-header p{
+
+    color:#9da8dc;
+
+    font-size:15px;
+
+}
+
+.dependencyTree-card{
+
+   padding: 1rem;
+
+}
+
+.dependencyTree-empty{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    min-height:220px;
+
+    text-align:center;
+
+}
+
+.dependencyTree-empty-icon{
+
+    font-size:48px;
+
+    color:#8b5cf6;
+
+    margin-bottom:18px;
+
+}
+
+.dependencyTree-empty h3{
+
+    color:white;
+
+    margin-bottom:10px;
+
+}
+
+.dependencyTree-empty p{
+
+    color:#9fa8d6;
+
+    max-width:420px;
+
+    line-height:1.6;
+
+}
+
+.dependencyTree-list{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:14px;
+
+}
+
+.dependencyTree-node{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    background:#10163e;
+
+    padding:14px 18px;
+
+    border-radius:12px;
+
+    color:white;
+
+    border:1px solid #2d3977;
+
+}

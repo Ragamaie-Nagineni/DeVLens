@@ -6,6 +6,7 @@ import Header from "../../components/Header/Header";
 import { FiSearch, FiActivity, FiFile } from "react-icons/fi";
 import axios from "axios";
 import ImpactOverview from "../../components/ImpactAnalysis/ImpactOverview/ImpactOverview";
+import DependencyTree from "../../components/ImpactAnalysis/DependencyTree/DependencyTree";
 
 function ImpactAnalysis() {
     const [collapsed, setcollapsed] = useState(false);
@@ -87,31 +88,31 @@ function ImpactAnalysis() {
 
     };
 
-    const analyzeImpact = async (filePath = selectedFile?.path) => {
+    const analyzeImpact = async (filePath) => {
 
-    if (!selectedFile) {
-           /*  alert("Please select a file first."); */
-            return;
-        }
+        if (!repository || !filePath) return;
 
-    try {
+        console.log("Repository:", repository.id);
+        console.log("Path:", filePath);
 
-        const response = await axios.get(
-            "http://localhost:3000/api/graph/impactanalysis",
-            {
-                params: {
-                    repositoryId: repository.id,
-                    file: filePath
+        try {
+
+            const response = await axios.get(
+                "http://localhost:3000/api/impact-analysis",
+                {
+                    params: {
+                        repositoryId: repository.id,
+                        path: filePath
+                    }
                 }
-            }
-        );
+            );
 
-        setImpactData(response.data);
+            setImpactData(response.data);
 
-    } catch (err) {
-        console.error(err);
-    }
-};
+        } catch (err) {
+            console.error(err);
+        }
+    };
 
     return (
         <div>
@@ -174,7 +175,7 @@ function ImpactAnalysis() {
                             </div>
                             <button
                                 className="impactAnalysis-btn"
-                                onClick={analyzeImpact}
+                                onClick={analyzeImpact/* (selectedFile?.path) */}
                                 disabled={!selectedFile}
                             >
                                 Analyze
@@ -197,9 +198,9 @@ function ImpactAnalysis() {
                             <>
                                 <ImpactOverview impactData={impactData} />
 
-                                {/* <DependencyTree impactData={impactData} />
+                                <DependencyTree impactData={impactData} />
 
-            <ImpactSummary impactData={impactData} />
+                                {/* <ImpactSummary impactData={impactData} />
 
             <AISuggestions impactData={impactData} /> */}
                             </>

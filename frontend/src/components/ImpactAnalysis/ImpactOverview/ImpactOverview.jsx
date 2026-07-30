@@ -4,7 +4,6 @@ import {
     FiFile,
     FiCode,
     FiLayers,
-    FiGrid
 } from "react-icons/fi";
 
 function ImpactOverview({ impactData }) {
@@ -13,7 +12,7 @@ function ImpactOverview({ impactData }) {
         <div className="impactOverview">
 
             <div className="impactOverview-header">
-                <h2>{/* <FiGrid/> */}Impact Overview</h2>
+                <h2>Impact Overview</h2>
                
             </div>
 
