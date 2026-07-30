@@ -5,6 +5,7 @@ import "./ImpactAnalysis.css"
 import Header from "../../components/Header/Header";
 import { FiSearch, FiActivity, FiFile } from "react-icons/fi";
 import axios from "axios";
+import ImpactOverview from "../../components/ImpactAnalysis/ImpactOverview/ImpactOverview";
 
 function ImpactAnalysis() {
     const [collapsed, setcollapsed] = useState(false);
@@ -12,6 +13,7 @@ function ImpactAnalysis() {
     const [results, setResults] = useState([]);
     const [repository, setRepository] = useState(null);
     const [selectedFile, setSelectedFile] = useState(null);
+    const [impactData, setImpactData] = useState(null);
     useEffect(() => {
         const fetchRepository = async () => {
 
@@ -36,6 +38,25 @@ function ImpactAnalysis() {
         fetchRepository();
 
     }, []);
+
+    useEffect(() => {
+
+        if (!repository) return;
+
+        const file = localStorage.getItem("selectedImpactFile");
+
+        if (!file) return;
+
+        setSelectedFile({
+            path: file
+        });
+
+        setQuery(file);
+
+        analyzeImpact(file);
+
+    }, [repository]);
+
     const searchFiles = async (value) => {
 
         setQuery(value);
@@ -65,34 +86,32 @@ function ImpactAnalysis() {
         }
 
     };
-    const analyzeImpact = async () => {
 
-        if (!selectedFile) {
-            alert("Please select a file first.");
+    const analyzeImpact = async (filePath = selectedFile?.path) => {
+
+    if (!selectedFile) {
+           /*  alert("Please select a file first."); */
             return;
         }
 
-        try {
+    try {
 
-            const response = await axios.get(
-                "http://localhost:3000/api/graph/impactanalysis",
-                {
-                    params: {
-                        repositoryId: repository.id,
-                        file: selectedFile.path
-                    }
+        const response = await axios.get(
+            "http://localhost:3000/api/graph/impactanalysis",
+            {
+                params: {
+                    repositoryId: repository.id,
+                    file: filePath
                 }
-            );
+            }
+        );
 
-            console.log(response.data);
+        setImpactData(response.data);
 
-            // Later:
-            // setImpactData(response.data);
-
-        } catch (err) {
-            console.error(err);
-        }
-    };
+    } catch (err) {
+        console.error(err);
+    }
+};
 
     return (
         <div>
@@ -136,7 +155,12 @@ function ImpactAnalysis() {
                                                             setSelectedFile(file);
                                                             setQuery(file.path);
                                                             setResults([]);
+                                                            localStorage.setItem(
+                                                                "selectedImpactFile",
+                                                                file.path
+                                                            );
                                                         }}
+
                                                     >
                                                         📄 {file.path}
                                                     </div>
@@ -168,6 +192,19 @@ function ImpactAnalysis() {
                             <span> • AuthService</span>
                         </p>
                     </div>
+                    {
+                        impactData && (
+                            <>
+                                <ImpactOverview impactData={impactData} />
+
+                                {/* <DependencyTree impactData={impactData} />
+
+            <ImpactSummary impactData={impactData} />
+
+            <AISuggestions impactData={impactData} /> */}
+                            </>
+                        )
+                    }
                 </div>
             </div>
         </div>
