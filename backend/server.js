@@ -8,6 +8,7 @@ import uploadRoutes from "./routes/uploadRoute.js";
 import repositoryroutes from "./routes/repositoryRoute.js";
 import graphRoutes from "./routes/graphRoutes.js";
 import blogRoutes from "./routes/blogRoutes.js";
+import impactAnalysisRoutes from "./routes/impactAnalysis.js";
 
 const app=express();
 const port = process.env.PORT || 3000;
@@ -19,6 +20,7 @@ app.use("/api/upload",uploadRoutes);
 app.use("/api/repository",repositoryroutes);
 app.use("/api/graph", graphRoutes);
 app.use("/api/blogs", blogRoutes);
+app.use("/api/impact-analysis", impactAnalysisRoutes);
 
 app.get("/",(req,res)=>{
     res.json({message:"hello from backend"});

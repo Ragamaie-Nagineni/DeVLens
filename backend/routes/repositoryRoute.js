@@ -256,4 +256,53 @@ router.get("/:repoId/file", async (req, res) => {
     }
 })
 
+router.get("/:repoId/search", async (req, res) => {
+    try {
+        const { repoId } = req.params;
+        const { q } = req.query;
+
+        if (!q || q.trim() === "") {
+            return res.json([]);
+        }
+
+        const snapshot = await pool.query(
+            `
+            SELECT repository_analysis
+            FROM analysis_snapshots
+            WHERE repository_id = $1
+            ORDER BY created_at DESC
+            LIMIT 1
+            `,
+            [repoId]
+        );
+
+        if (snapshot.rows.length === 0) {
+            return res.json([]);
+        }
+
+        const repositoryAnalysis = snapshot.rows[0].repository_analysis;
+
+        const query = q.toLowerCase();
+
+        const results = repositoryAnalysis
+            .filter(file =>
+                file.file.toLowerCase().includes(query)
+            )
+            .map(file => ({
+                type: "file",
+                name: file.file.split("/").pop(),
+                path: file.file
+            }));
+
+        res.json(results);
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({
+            message: "Search failed"
+        });
+    }
+});
+
+
 export default router;

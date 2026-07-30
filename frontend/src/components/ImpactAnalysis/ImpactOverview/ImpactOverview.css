@@ -1,0 +1,77 @@
+.impactOverview {
+    margin-top: 30px;
+     background: #171d49;
+    border: 1px solid #2b3368;
+    border-radius: 20px;
+    padding: 2rem;
+}
+
+.impactOverview-header {
+    margin-bottom: 20px;
+}
+
+.impactOverview-header h2 {
+    font-size: 1.5rem;
+    color: white;
+    margin-bottom: 6px;
+}
+
+.impactOverview-header h2 svg{
+  color: #a855f7;
+}
+
+.impactOverview-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+}
+
+.impact-card {
+     background: linear-gradient(
+    180deg,
+    #171d46 0%,
+    #111738 100%
+  );
+    border: 1px solid #2d3875;
+    border-radius: 18px;
+    padding: 20px;
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    transition: 0.25s;
+}
+
+.impact-card:hover {
+    border-color: #8b5cf6;
+    transform: translateY(-3px);
+}
+
+.impact-card-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 14px;
+    background: linear-gradient(135deg,#7c3aed,#a855f7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.impact-card-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.impact-card-content span {
+    color: #aeb8eb;
+    font-size: 1rem;
+}
+
+.impact-card-content h3 {
+    color: white;
+    font-size: 1rem;
+    margin-top: 6px;
+    font-weight: 500;
+}

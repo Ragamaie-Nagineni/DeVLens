@@ -1,0 +1,150 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+.settings{
+    display:flex;
+    min-height:100vh;
+    width:100%;
+    background:#03092d;
+    color:white;
+}
+
+.settings-content{
+    flex:1;
+    margin-left:260px;
+    margin-top:40px;
+    padding:30px;
+    transition:.3s;
+}
+
+.settings-content.collapsed{
+    margin-left:80px;
+}
+
+.settings-header{
+    margin-bottom:30px;
+}
+
+.settings-header h1{
+    font-size:1.5rem;
+    margin-bottom:8px;
+}
+
+.settings-header p{
+    color:#9ea7d7;
+    font-size:15px;
+}
+
+.settings-wrapper{
+    /* width:100%;
+    max-width:1100px;
+    margin:0 auto; */
+    width:100%;
+    max-width:1100px;
+    margin:0 auto;
+}
+
+.settings-tabs{
+    display:flex;
+    gap:5px;
+    width:90%;
+    margin-bottom:-1px;
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.tab{
+
+    /* display:flex;
+    align-items:center;
+    gap:10px;
+
+    padding:14px 22px;
+
+    background:#11173d;
+    color:#8d95b8;
+
+    border:1px solid rgba(255,255,255,.08);
+    border-bottom:none;
+
+    border-radius:12px 12px 0 0;
+
+    cursor:pointer;
+
+    font-size:15px;
+    font-weight:500;
+
+    transition:.25s; */
+    flex:1;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:10px;
+    padding:14px 16px;
+
+    background:#11173d;
+    color:#8d95b8;
+
+    border:1px solid rgba(255,255,255,.08);
+    border-bottom:none;
+    border-radius:12px 12px 0 0;
+
+    cursor:pointer;
+}
+
+
+.tab:hover{
+
+    color:white;
+    background:#171f4d;
+
+}
+
+.tab.active{
+    background:#1b214b;
+    color:white;
+
+    border-color:#343d73;
+
+    position:relative;
+
+}
+
+.tab.active::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+    right:0;
+    bottom:-1px;
+
+    height:3px;
+
+    background:#9b4dff;
+
+}
+.settings-panel{
+
+    width:90%; 
+    border-top:none;
+    /*max-width:900px; */
+    background:/* #171d43 */#1b214b;
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:0 0 18px 18px;
+    padding:40px 48px;
+    
+}
+
+
+@media(max-width:768px){
+
+.settings-content{
+    margin-left:80px;
+    padding:20px;
+}
+
+}
