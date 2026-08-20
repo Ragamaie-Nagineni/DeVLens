@@ -129,6 +129,13 @@ node_modules, .git, dist, build, .next, coverage, venv, __pycache__
 
 ---
 
+### 📚 Blogs
+- Admin can upload/publish blog posts
+- Users can browse and read published blogs
+- Read-only for standard users (no user-generated posts)
+
+---
+
 ## 🚧 Partially Implemented
 
 ### 🕸️ Neo4j Graph
@@ -146,9 +153,9 @@ Neo4j is being used to represent repository relationships as a graph.
 
 Neo4j is also used by the Impact Analysis system to query repository dependencies.
 
-### 📊 Impact Analysis
+### 📊 Impact Analysis — Core Complete
 
-Impact Analysis allows developers to understand which parts of a repository may be affected when modifying a particular file.
+Impact Analysis allows developers to understand which parts of a repository may be affected when modifying a particular file. The core flow is complete; only minor polish remains.
 
 **Current implementation:**
 - Select a repository file
@@ -193,21 +200,15 @@ Example response:
 }
 ```
 
-**Planned improvements:**
-- Better dependency tree visualization
-- Interactive dependency graph
+**Remaining polish:**
 - Function-level impact analysis
-- More accurate risk calculation
-- Dependency path visualization
-- Incoming dependency analysis
-- Outgoing dependency analysis
-- Function call impact
-- Class-level impact
+- Function call / class-level impact
 - Change propagation visualization
+- Minor UI refinements to the dependency tree
 
-### ⚙️ Settings
+### ⚙️ Settings — Half Complete
 
-A dedicated Settings page has been implemented and is currently being expanded.
+A dedicated Settings page has been implemented. Roughly half of it is fully working; the rest still needs backend wiring.
 
 The Settings interface contains:
 - Profile & Account
@@ -216,18 +217,18 @@ The Settings interface contains:
 - AI Settings
 - Security & Privacy
 
-**👤 Profile & Account** — Currently includes:
+**👤 Profile & Account** ✅ Working:
 - Profile information (Full Name, Email, Avatar)
 - Change Avatar interface
 - Save Changes interface
 
-**📁 Repository Settings** — Currently includes:
+**📁 Repository Settings** ✅ Working:
 - Analysis Defaults
 - Default Branch
 - Re-analysis Trigger
 - Auto Re-analyze
 
-**🕸️ Graph Settings** — Section created. Planned configuration includes:
+**🕸️ Graph Settings** 🚧 UI created, not yet functional. Planned configuration includes:
 - Default graph layout
 - Graph depth
 - Node visibility
@@ -235,13 +236,13 @@ The Settings interface contains:
 - Default zoom
 - Graph interaction preferences
 
-**🤖 AI Settings** — Section created. Planned options include:
+**🤖 AI Settings** 🚧 UI created, not yet functional. Planned options include:
 - AI model selection
 - Response behavior
 - Repository context settings
 - AI analysis preferences
 
-**🔐 Security & Privacy** — Section created. Planned functionality includes:
+**🔐 Security & Privacy** 🚧 UI created, not yet functional. Planned functionality includes:
 - Account security
 - Session management
 - Repository privacy
@@ -252,20 +253,16 @@ The Settings interface contains:
 
 ## 🚧 Currently In Progress
 
-**Impact Analysis**
-- Advanced dependency tree
-- Function-level analysis
-- More accurate risk scoring
-- Interactive dependency visualization
-- Function call relationships
+**Impact Analysis** (minor polish only)
+- Function-level impact analysis
+- Function call / class-level impact
+- Change propagation visualization
 
-**Settings**
-- Persist settings to database
-- Complete Graph Settings
-- Complete AI Settings
-- Complete Security & Privacy
-- Repository-specific settings
-- User preference management
+**Settings** (half done)
+- Persist Graph/AI/Security settings to database
+- Complete Graph Settings functionality
+- Complete AI Settings functionality
+- Complete Security & Privacy functionality
 
 **Neo4j**
 - Advanced graph queries
@@ -445,17 +442,22 @@ Interactive Dependency Graph, File Explorer, Code Viewer, Hierarchical Tree Layo
 
 **Status: Completed**
 
-### 🚧 Phase 4 — Neo4j & Impact Analysis
+### ✅ Phase 4 — Blogs
+Admin blog upload, published blog listing, read-only blog viewing for users.
+
+**Status: Completed**
+
+### 🚧 Phase 5 — Neo4j & Impact Analysis
 Neo4j graph storage, repository graph queries, file dependency queries, Impact Analysis API, affected file detection, dependency depth calculation, initial risk calculation, Impact Overview UI, Dependency Tree UI.
 
-**Status: In Progress**
+**Status: Core Complete — minor polish left (function-level impact, change propagation view)**
 
-### 🚧 Phase 5 — Settings
+### 🚧 Phase 6 — Settings
 Profile & Account UI, Repository Settings UI, Graph Settings UI, AI Settings UI, Security & Privacy UI.
 
-**Status: Partially Implemented**
+**Status: Half Done — Profile & Repository settings fully working; Graph, AI, and Security settings still need backend wiring**
 
-### 🔮 Phase 6 — Intelligent Repository Understanding
+### 🔮 Phase 7 — Intelligent Repository Understanding
 AI Repository Chat, Semantic Code Search, Function Call Graph, Class Inheritance Graph, Architecture Summarization, Automatic Documentation, Embedding-based Retrieval, RAG-based Repository Question Answering.
 
 **Status: Planned**
